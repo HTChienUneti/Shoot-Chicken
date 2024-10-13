@@ -13,7 +13,7 @@ public class ChickenShooter : ObjectShooter
     protected override Transform GetPrefab()
     {
         Transform prefab = EggSpawner.Instance.Spawn(this.prefabName, this.startPos.position, Quaternion.identity);
-        if (prefab == null) return null;
+      
         prefab.GetComponent<EggCtrl>().SetShooter(this);
         return prefab;
     }
