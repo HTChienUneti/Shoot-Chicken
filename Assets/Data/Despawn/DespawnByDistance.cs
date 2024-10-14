@@ -13,11 +13,10 @@ public abstract class DespawnByDistance : Despawn
         base.Start();
         this.GetTarget();
     }
-    protected override bool TryDespawn()
+    protected override bool TryingDespawn()
     {
         this.distance = Vector3.Distance(transform.parent.position, target.position);
         if (distance < maxDistance) return false;
-        this.DespawnObj();
         return true;    
     }
     protected abstract void GetTarget();

@@ -10,14 +10,19 @@ public abstract class ObjImpact: MyMonoBehaviour
     [SerializeField] protected Rigidbody2D _rigid;
     [SerializeField] protected CircleCollider2D _collider;
     [SerializeField] protected DamageReceiver damageReceiver;
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if(this.CheckShootSelf(collision)) return;
+        this.CreateVFXImpact();
         this.Despawn();
         this.GetDamageReceiver(collision);
         if (this.damageReceiver == null) return;
         this.SendDamage();
         
+    }
+    protected virtual void CreateVFXImpact()
+    {
+        //for override
     }
     protected abstract bool CheckShootSelf(Collider2D collision);
     protected virtual void GetDamageReceiver(Collider2D collision)

@@ -15,6 +15,11 @@ public abstract class DamageReceiver : MyMonoBehaviour
         base.Start();
         this.hp = this.hpMax;
     }
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.hp = this.hpMax; 
+    }
     public virtual void ReduceHp(int hp)
     {
         this.hp -= hp;
@@ -28,7 +33,14 @@ public abstract class DamageReceiver : MyMonoBehaviour
         this.OnDead();
 
     }
-    protected abstract void OnDead();
+    protected virtual void OnDead()
+    {
+        this.CreateVFXDead();
+    }
+    protected virtual void CreateVFXDead()
+    {
+
+    }
     public virtual void AddHp(int hp)
     {
         this.hp += hp;
@@ -44,6 +56,7 @@ public abstract class DamageReceiver : MyMonoBehaviour
         if (this._collider != null) return;
         this._collider = GetComponent<CircleCollider2D>();
         this._collider.radius = .2f;
+        this._collider.isTrigger = true;
         Debug.LogWarning(transform.name + ": LoadCollier", gameObject);
     }
 }

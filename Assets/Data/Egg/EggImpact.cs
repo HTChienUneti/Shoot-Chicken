@@ -9,6 +9,20 @@ public class EggImpact : ObjImpact
     {
         EggSpawner.Instance.Despawn(transform.parent);
     }
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        //To optimize
+        if (collision.transform.CompareTag("Chicken")) return;
+        base.OnTriggerEnter2D(collision);
+    }
+    protected override void CreateVFXImpact()
+    {
+        string impact_1 = VFXSpawner.impact_1;
+        Transform vfx = VFXSpawner.Instance.Spawn(impact_1, transform.position, transform.rotation);
+        if (vfx == null) return;
+        vfx.gameObject.SetActive(true);
+    }
     protected override bool CheckShootSelf(Collider2D collision)
     {
         return this.eggCtrl.Shooter.ChickenCtrl.DamageReceiver.Collider == collision;

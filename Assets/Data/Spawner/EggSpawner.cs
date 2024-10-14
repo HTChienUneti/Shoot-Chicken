@@ -23,15 +23,4 @@ public class EggSpawner : Spawner
         }
         EggSpawner._instance = this;
     }
-    //protected override void LoadComponent()
-    //{
-    //    base.LoadComponent();
-    //    this.LoadEggCtrl();
-    //}
-    //protected virtual void LoadEggCtrl()
-    //{
-    //    if (this.eggCtrl != null) return;
-    //    this.eggCtrl = GetComponentInChildren<EggCtrl>();
-    //    Debug.LogWarning(transform.name + ": LoadEggCtrl", gameObject);
-    //}
 }

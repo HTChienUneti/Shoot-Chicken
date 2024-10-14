@@ -7,9 +7,10 @@ public abstract class Despawn : MyMonoBehaviour
     
     protected virtual void FixedUpdate()
     {
-        this.TryDespawn();
+          if(!this.TryingDespawn())return;
+        this.DespawnObj();
     }
-    protected abstract bool TryDespawn();
+    protected abstract bool TryingDespawn();
     protected virtual void DespawnObj()
     {
 
