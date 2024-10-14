@@ -11,11 +11,21 @@ public class MyMonoBehaviour : MonoBehaviour
     protected virtual void Start()
     {
         this.LoadComponent();
+        this.ResetValue();
+    }
+    protected virtual void OnEnable()
+    {
+
+    }
+    protected virtual void ResetValue()
+    {
+
     }
 
     protected virtual void Reset()
     {
         this.LoadComponent() ;
+        this.ResetValue() ;
     }
     protected virtual void LoadComponent()
     {
