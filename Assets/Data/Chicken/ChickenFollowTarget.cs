@@ -5,12 +5,15 @@ using UnityEngine;
 public class ChickenFollowTarget : ObjMovement
 {
     [Header("Chicken Follow Target")]
-    [SerializeField] protected float boundX = 8f;
-    [SerializeField] protected float boundY = 3f;
     [SerializeField] protected LayerMask layer;
     [SerializeField] protected bool isMoveDown = true;
     [SerializeField] protected CircleCollider2D circleCollider;
-    protected override void GetTargetPos()
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.boundY = 2f;
+    }
+    protected override void GetTargetPos()  
     {
         this.targetPos = PlayerCtrl.Instance.transform.position;
     }

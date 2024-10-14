@@ -23,7 +23,6 @@ public abstract class ObjImpact: MyMonoBehaviour
     protected virtual void GetDamageReceiver(Collider2D collision)
     {
         this.damageReceiver= collision.transform.GetComponent<DamageReceiver>();
-        if (damageReceiver == null) return;
     }
     protected abstract void SendDamage();
     protected abstract void Despawn();

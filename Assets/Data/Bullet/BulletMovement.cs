@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMovement : PlayerMovement
+public class BulletMovement : ObjMovement
 {
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.boundY = float.MaxValue;
+    }
     protected override void FixedUpdate()
     {
         this.GetTargetPos();

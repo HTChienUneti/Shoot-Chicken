@@ -6,6 +6,8 @@ public abstract class ObjMovement : MyMonoBehaviour
 {
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] protected Vector3 targetPos;
+    [SerializeField] protected float boundX = 8f;
+    [SerializeField] protected float boundY = 4f;
     protected virtual void FixedUpdate()
     {
         this.GetTargetPos();
@@ -16,6 +18,14 @@ public abstract class ObjMovement : MyMonoBehaviour
     {
         Vector3 lerp = Vector3.Lerp(transform.parent.position, this.targetPos, this.moveSpeed * Time.fixedDeltaTime);
         transform.parent.position = lerp;
+        this.Bound();
+    }
+    protected virtual void Bound()
+    {
+        if (transform.parent.position.x < -this.boundX) transform.parent.position = new Vector3(-this.boundX, transform.parent.position.y, transform.parent.position.z);
+        if (transform.parent.position.x > this.boundX) transform.parent.position = new Vector3(this.boundX, transform.parent.position.y, transform.parent.position.z);
+        if (transform.parent.position.y < -this.boundY) transform.parent.position = new Vector3(transform.position.x, -boundY, transform.parent.position.z);
+        if (transform.parent.position.y > this.boundY) transform.parent.position = new Vector3(transform.position.x, boundY, transform.parent.position.z);
     }
     protected abstract void GetTargetPos();
 }

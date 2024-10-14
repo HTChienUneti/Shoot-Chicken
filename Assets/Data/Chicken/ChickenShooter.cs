@@ -6,6 +6,11 @@ public class ChickenShooter : ObjectShooter
 {
     [SerializeField] protected ChickenCtrl chickenCtrl;
     public ChickenCtrl ChickenCtrl=> chickenCtrl;
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.shootDelay = Random.Range(0,this.shootDelay);
+    }
     protected override string GetPrefabName()
     {
         return EggSpawner.egg_1;

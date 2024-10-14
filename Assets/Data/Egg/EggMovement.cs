@@ -11,6 +11,12 @@ public class EggMovement : ObjMovement
         this.GetTargetPos();
         this.GetDir();
     }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.GetTargetPos();
+        this.GetDir();
+    }
     protected virtual void GetDir()
     {
         this.dir = this.targetPos - transform.parent.position;

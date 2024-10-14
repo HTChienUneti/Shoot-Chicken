@@ -20,9 +20,10 @@ public abstract class ObjectShooter : MyMonoBehaviour
         this.startPos = transform.Find("StartPos");
         Debug.LogWarning(transform.name + ": LoadStartPos", gameObject);
     }
-    protected override void Start()
+    protected override void ResetValue()
     {
-        this.shootTimer = 0f;
+        base.ResetValue();
+        this.shootTimer = shootDelay;
     }
 
     protected virtual void FixedUpdate()
