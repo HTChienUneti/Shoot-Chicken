@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
+
 using UnityEngine;
 
 public class QuitButton : ButtonAbstract
@@ -11,13 +9,8 @@ public class QuitButton : ButtonAbstract
     }
     protected virtual void QuitGame()
     {
-        if (UnityEditor.EditorApplication.isPlaying)
-        {
-            UnityEditor.EditorApplication.ExitPlaymode();
-        }
-        else
-        {
-            Application.Quit();
-        }
+
+        Application.Quit();
+
     }
 }
