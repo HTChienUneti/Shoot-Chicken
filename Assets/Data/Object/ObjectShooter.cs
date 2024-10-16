@@ -9,6 +9,7 @@ public abstract class ObjectShooter : MyMonoBehaviour
     [SerializeField] protected float shootTimer = 0f;
     [SerializeField] protected Transform startPos;
     protected string prefabName;
+    public int count = 1;
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -34,11 +35,14 @@ public abstract class ObjectShooter : MyMonoBehaviour
     {
         if (!this.CountdownTime()) return;
         this.prefabName = this.GetPrefabName();
-        Transform prefab = this.GetPrefab();
-        if (prefab == null) return;
-        prefab.gameObject.SetActive(true);
+        List<Transform> prefabs = this.GetPrefab(this.count);
+        if (prefabs.Count == 0) return;
+        foreach(Transform prefab in prefabs)
+        {
+            prefab.gameObject.SetActive(true);
+        }
     }
-    protected abstract Transform GetPrefab();  
+    protected abstract List<Transform> GetPrefab(int count);  
     protected abstract string GetPrefabName();
     protected virtual bool CountdownTime()
     {

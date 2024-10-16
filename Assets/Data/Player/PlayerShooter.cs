@@ -8,8 +8,15 @@ public class PlayerShooter : ObjectShooter
     {
         return BulletSpawner.Bullet_1;
     }
-    protected override Transform GetPrefab()
+    protected override List<Transform> GetPrefab(int count)
     {
-        return BulletSpawner.Instance.Spawn(this.prefabName, this.startPos.position, Quaternion.identity);
+        List<Transform> prefabs = new List<Transform>();
+        for(int i = 0; i < count;i++)
+        {
+            Transform newPrefab = BulletSpawner.Instance.Spawn(this.prefabName, this.startPos.position, Quaternion.identity);
+            if (newPrefab == null) break;
+             prefabs.Add(newPrefab);
+        }
+        return prefabs; 
     }
 }

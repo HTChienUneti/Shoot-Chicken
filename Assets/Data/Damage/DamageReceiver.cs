@@ -48,10 +48,10 @@ public abstract class DamageReceiver : MyMonoBehaviour
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadCollier();
+        this.LoadCollider();
 
     }
-    protected virtual void LoadCollier()
+    protected virtual void LoadCollider()
     {
         if (this._collider != null) return;
         this._collider = GetComponent<CircleCollider2D>();
