@@ -8,6 +8,7 @@ public abstract class ObjMovement : MyMonoBehaviour
     [SerializeField] protected Vector3 targetPos;
     [SerializeField] protected float boundX = 8f;
     [SerializeField] protected float boundY = 4f;
+    [SerializeField] protected float distanceLimit = 0f;
     protected virtual void FixedUpdate()
     {
         this.GetTargetPos();
@@ -16,6 +17,7 @@ public abstract class ObjMovement : MyMonoBehaviour
     
     protected virtual void Moving()
     {
+        if (Vector3.Distance(transform.parent.position, targetPos) <= distanceLimit) return;
         Vector3 lerp = Vector3.Lerp(transform.parent.position, this.targetPos, this.moveSpeed * Time.fixedDeltaTime);
         transform.parent.position = lerp;
         this.Bound();

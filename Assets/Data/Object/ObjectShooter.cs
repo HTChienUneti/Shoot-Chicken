@@ -36,7 +36,7 @@ public abstract class ObjectShooter : MyMonoBehaviour
         if (!this.CountdownTime()) return;
         this.prefabName = this.GetPrefabName();
         List<Transform> prefabs = this.GetPrefab(this.count);
-        if (prefabs.Count == 0) return;
+        if (prefabs == null) return;
         foreach(Transform prefab in prefabs)
         {
             prefab.gameObject.SetActive(true);

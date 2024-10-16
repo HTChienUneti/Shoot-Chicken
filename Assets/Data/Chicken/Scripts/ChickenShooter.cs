@@ -9,7 +9,7 @@ public class ChickenShooter : ObjectShooter
 
     protected override void ResetValue()
     {
-        base.ResetValue();
+        this.shootTimer = 0f;
         this.shootDelay = Random.Range(1,this.shootDelay);
     }
     protected override string GetPrefabName()
@@ -39,7 +39,6 @@ public class ChickenShooter : ObjectShooter
     }
     protected override void Shooting()
     {
-        if (this.chickenCtrl.ChickenMovement.IsMovingDown) return;
         base.Shooting();
     }
     protected virtual void LoadChickenCtrl()
