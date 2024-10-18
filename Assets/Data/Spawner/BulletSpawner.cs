@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class BulletSpawner : Spawner
 {
+    
     [Header("BulletSpawner")]
     private static BulletSpawner _instance;
     public static BulletSpawner Instance => _instance;
-    static public string Bullet_1 = "Bullet_1";
+    public enum Bullet
+    {
+        Bullet_blue=1,
+        Bullet_red=2,
+        Bullet_green=3,
+        Bullet_purple=4,
+    }
 
     protected override void Awake()
     {

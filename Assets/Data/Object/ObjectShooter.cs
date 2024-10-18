@@ -7,14 +7,25 @@ public abstract class ObjectShooter : MyMonoBehaviour
     [Header("Obj Shooter")]
     [SerializeField] protected float shootDelay = 2f;
     [SerializeField] protected float shootTimer = 0f;
+    [SerializeField] protected float distance = 0.5f;
     [SerializeField] protected Transform startPos;
     protected string prefabName;
-    public int count = 1;
+    [SerializeField] protected ShooterLevel shooterLevel;
+    public ShooterLevel ShooterLevel => shooterLevel;
+
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadStartPos();
+        this.LoadShooterLevel();
     }
+    protected virtual void LoadShooterLevel()
+    {
+        if (this.shooterLevel != null) return;
+        this.shooterLevel = GetComponentInChildren<ShooterLevel>();
+        Debug.LogWarning(transform.name + ": LoadStartPos", gameObject);
+    }
+
     protected virtual void LoadStartPos()
     {
         if (this.startPos != null) return;
@@ -35,14 +46,45 @@ public abstract class ObjectShooter : MyMonoBehaviour
     {
         if (!this.CountdownTime()) return;
         this.prefabName = this.GetPrefabName();
-        List<Transform> prefabs = this.GetPrefab(this.count);
-        if (prefabs == null) return;
-        foreach(Transform prefab in prefabs)
+        List<Transform> prefabs = new List<Transform>();
+        for (int i = 0; i < this.shooterLevel.CurrentLevel; i++)
         {
+            prefabs.Add(this.GetPrefab());
+        }
+        if (prefabs == null) return;
+        if (prefabs.Count == 0) return;
+        this.SetPrefabPos(prefabs);
+        foreach (Transform prefab in prefabs)
+        {
+            if(prefab == null) continue;
             prefab.gameObject.SetActive(true);
         }
     }
-    protected abstract List<Transform> GetPrefab(int count);  
+    protected virtual void SetPrefabPos(List<Transform> prefabs)
+    {
+        if(prefabs.Count == 0) return;  
+        int count = prefabs.Count;
+        int index = 0;
+        Vector3 left, right;
+        //calculator for the first prefab left and right beside the shooter
+        float dis = this.distance;
+        if (count % 2== 0)
+        {
+            dis = this.distance / 2; 
+        }
+        left = this.startPos.position + new Vector3(-dis, 0, 0);
+        right = this.startPos.position + new Vector3(dis, 0, 0);
+        for (int i= 0;i < count/2;i++)
+        {
+            prefabs[index].position = left;
+            index++;
+            left += new Vector3(-distance, 0, 0);
+            prefabs[index].position = right;
+            index++;
+            right += new Vector3(distance, 0, 0);
+        }
+    }
+    protected abstract Transform GetPrefab();
     protected abstract string GetPrefabName();
     protected virtual bool CountdownTime()
     {

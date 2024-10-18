@@ -9,16 +9,27 @@ public class PlayerCtrl : MyMonoBehaviour
     public static PlayerCtrl Instance => _instance;
     [SerializeField] protected Inventory inventory;
     public Inventory Inventory=> inventory;
+    [SerializeField] protected PlayerShooter shooter;
+    public  PlayerShooter Shooter =>shooter;
+
+
     protected override void Awake()
     {
         base.Awake();
         this.LoadSingleton();
-        this.LoadInventory();
+      
     }
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadInventory();
+      //  this.LoadInventory();
+        this.LoadShooter();
+    }
+      protected virtual void LoadShooter()
+    {
+        if (this.shooter != null) return;
+        this.shooter = GetComponentInChildren<PlayerShooter>();
+        Debug.Log(transform.name + ": LoadShooter", gameObject);
     }
     protected virtual void LoadInventory()
     {

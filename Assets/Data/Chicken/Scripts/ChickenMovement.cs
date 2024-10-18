@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class ChickenMovement : ObjMovement
 {
-    //[Header("Chicken Follow Target")]
-   // [SerializeField] protected LayerMask layer;
-   // [SerializeField] protected bool isMovingDown = true;
-  //  public bool IsMovingDown => isMovingDown;
-  //  [SerializeField] protected CircleCollider2D circleCollider;
+
     protected override void ResetValue()
-    {
-      //  this.isMovingDown = true;
-        this.distanceLimit = 6f;
-        this.boundY = 5f;
+    { 
+        this.distanceLimit = 0f;
+        this.boundY = 10f;
+        this.boundX = 4f;
+        this.moveSpeed = .5f;
     }
     protected override void GetTargetPos()  
     {

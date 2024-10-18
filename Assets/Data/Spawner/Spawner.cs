@@ -17,7 +17,7 @@ public class Spawner : MyMonoBehaviour
         Transform prefab = this.GetPrefabByName(prefabName);
         if(prefab == null)
         {
-            Debug.LogError("Get Prefab By name fail "+ prefabName);
+            Debug.LogError("Get Prefab By name failed "+ prefabName,gameObject);
             return null;
         }
         Transform obj = this.GetObjFromPool(prefab);

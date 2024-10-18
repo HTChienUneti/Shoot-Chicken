@@ -12,7 +12,11 @@ public class PlayerPickupItem : PlayerAbstcract
         ItemPickupAble itemPickupAble = other.GetComponent<ItemPickupAble>();
         if (itemPickupAble == null) return;
         itemPickupAble.Picked();
-        this.playerCtrl.Inventory.AddItem(itemPickupAble.ItemCtrl.ItemDrop);
+       // this.playerCtrl.Inventory.AddItem(itemPickupAble.ItemCtrl.ItemDrop);
+       if(itemPickupAble.ItemCtrl.ItemDrop.itemType == ItemType.Equipment)
+         this.playerCtrl.Shooter.SetBulletPrefab(itemPickupAble.ItemCtrl.ItemDrop.itemName);
+        if (itemPickupAble.ItemCtrl.ItemDrop.itemType == ItemType.Resource)
+            this.playerCtrl.Shooter.ShooterLevel.LevelUp(1);
 
     }
     protected override void LoadComponent()

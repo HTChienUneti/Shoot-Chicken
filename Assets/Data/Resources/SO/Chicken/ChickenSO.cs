@@ -7,5 +7,5 @@ public class ChickenSO : ScriptableObject
 {
     public ChickenCode ChickenCode;
     public string chickenName;
-    public ItemDrop itemDrop;
+    public List<ItemDrop> itemDrop;
 }

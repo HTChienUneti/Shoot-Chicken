@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChickenCode: 1
   chickenName: Chicken_1
-  itemDrop: {fileID: 11400000, guid: a05b4f6ba4016d04a887d43b81490524, type: 2}
+  itemDrop:
+  - {fileID: 11400000, guid: 5da21f0fac180f540b4b8b76b9bea398, type: 2}
+  - {fileID: 11400000, guid: cf33a55a2a87adf4ba10e4009f00786b, type: 2}
+  - {fileID: 11400000, guid: a05b4f6ba4016d04a887d43b81490524, type: 2}

@@ -5,32 +5,24 @@ using UnityEngine;
 public class ChickenShooter : ObjectShooter
 {
     [SerializeField] protected ChickenCtrl chickenCtrl;
-    public ChickenCtrl ChickenCtrl=> chickenCtrl;
+    public ChickenCtrl ChickenCtrl => chickenCtrl;
 
     protected override void ResetValue()
     {
         this.shootTimer = 0f;
-        this.shootDelay = Random.Range(1,this.shootDelay);
+        this.shootDelay = Random.Range(1, this.shootDelay);
     }
     protected override string GetPrefabName()
     {
         return EggSpawner.egg_1;
     }
-    protected override List<Transform> GetPrefab(int count)
+    protected override Transform GetPrefab()
     {
-        List<Transform> prefabs = new List<Transform>();
-        for (int i = 0; i < count; i++)
-        {
-      
-            Transform newPrefab =  EggSpawner.Instance.Spawn(this.prefabName, this.startPos.position , Quaternion.identity);
+        Transform newPrefab = EggSpawner.Instance.Spawn(this.prefabName, this.startPos.position, Quaternion.identity);
+        if (newPrefab == null) return null;
+        newPrefab.GetComponent<EggCtrl>().SetShooter(this);
+        return newPrefab;
 
-            if (newPrefab == null) return null;
-            newPrefab.GetComponent<EggCtrl>().SetShooter(this);
-            prefabs.Add(newPrefab);
-           
-        }
-        return prefabs;
-        
     }
     protected override void LoadComponent()
     {

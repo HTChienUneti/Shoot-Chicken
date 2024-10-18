@@ -20,7 +20,9 @@ public class ChickenDamageReceiver : DamageReceiver
     }
     protected virtual void DropItem()
     {
-        string itemName = this.chickenCtrl.ChickenSO.itemDrop.itemName;
+        //to do
+        int intdex = Random.Range(0, this.chickenCtrl.ChickenSO.itemDrop.Count);
+        string itemName = this.chickenCtrl.ChickenSO.itemDrop[intdex].itemName;
         Transform item = ItemSpawner.Instance.Spawn(itemName, transform.position, transform.rotation);
         if (item == null) return;
         item.gameObject.SetActive(true);

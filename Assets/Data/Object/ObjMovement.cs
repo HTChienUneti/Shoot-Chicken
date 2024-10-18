@@ -6,8 +6,8 @@ public abstract class ObjMovement : MyMonoBehaviour
 {
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] protected Vector3 targetPos;
-    [SerializeField] protected float boundX = 8f;
-    [SerializeField] protected float boundY = 4f;
+    [SerializeField] protected float boundX = 100;
+    [SerializeField] protected float boundY = 100f;
     [SerializeField] protected float distanceLimit = 0f;
     protected virtual void FixedUpdate()
     {
