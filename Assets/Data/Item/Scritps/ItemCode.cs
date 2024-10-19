@@ -11,4 +11,5 @@ public enum ItemCode
     Bullet_blue = 4,
     Bullet_green = 5,
     Bullet_purple = 6,
+    Item_add_1
 }
