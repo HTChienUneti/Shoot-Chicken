@@ -15,9 +15,9 @@ MonoBehaviour:
   ChickenCode: 1
   chickenName: Chicken_1
   itemDrop:
-  - {fileID: 11400000, guid: 5da21f0fac180f540b4b8b76b9bea398, type: 2}
-  - {fileID: 11400000, guid: cf33a55a2a87adf4ba10e4009f00786b, type: 2}
-  - {fileID: 11400000, guid: 5cb6cbd617cccb64496d195592c4f998, type: 2}
-  - {fileID: 11400000, guid: c0b10341d7c923f49b941aedf0e12c8d, type: 2}
   - {fileID: 11400000, guid: a05b4f6ba4016d04a887d43b81490524, type: 2}
   - {fileID: 11400000, guid: 3ae07703f97bd204f85da08c05353cea, type: 2}
+  - {fileID: 11400000, guid: 5cb6cbd617cccb64496d195592c4f998, type: 2}
+  - {fileID: 11400000, guid: cf33a55a2a87adf4ba10e4009f00786b, type: 2}
+  - {fileID: 11400000, guid: c0b10341d7c923f49b941aedf0e12c8d, type: 2}
+  - {fileID: 11400000, guid: 5da21f0fac180f540b4b8b76b9bea398, type: 2}

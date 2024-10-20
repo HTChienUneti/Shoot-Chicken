@@ -8,7 +8,15 @@ public class SpawnChickenRandom : MyMonoBehaviour
     [SerializeField] protected float boundX = 8f;
     [SerializeField] protected float spawnPosY = 5f;
     [SerializeField] protected float timer=0;
-    [SerializeField] protected float timerMax= 2f;
+    [SerializeField] protected float timeMax= 2f;
+    protected override void Start()
+    {
+        InvokeRepeating(nameof(this.ReduceMax), 20f, 20f);
+    }
+    protected virtual void ReduceMax()
+    {
+        this.timeMax -= .2f;
+    }
     protected virtual void FixedUpdate()
     {
         this.Spawning();
@@ -30,7 +38,7 @@ public class SpawnChickenRandom : MyMonoBehaviour
     protected virtual bool CountdownTimer()
     {
         this.timer += Time.fixedDeltaTime;
-        if (this.timer < this.timerMax) return false;
+        if (this.timer < this.timeMax) return false;
         this.timer = 0f;
         return true;
     }

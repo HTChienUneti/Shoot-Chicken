@@ -20,12 +20,20 @@ public class ChickenDamageReceiver : DamageReceiver
     }
     protected virtual void DropItem()
     {
-        //to do
-        int intdex = Random.Range(0, this.chickenCtrl.ChickenSO.itemDrop.Count);
-        string itemName = this.chickenCtrl.ChickenSO.itemDrop[intdex].itemName;
-        Transform item = ItemSpawner.Instance.Spawn(itemName, transform.position, transform.rotation);
-        if (item == null) return;
-        item.gameObject.SetActive(true);
+        List<ItemDrop> itemDrop = this.chickenCtrl.ChickenSO.itemDrop;
+       
+        float  rate = Random.Range(0.0f,1.0f);
+        float dropRate;
+        foreach (ItemDrop drop in itemDrop)
+        {
+            dropRate = drop.dropRate/100000;
+            if (dropRate < rate) continue;
+            Transform item = ItemSpawner.Instance.Spawn(drop.itemName, transform.position, transform.rotation);
+            if (item == null) return;
+            item.gameObject.SetActive(true);
+            break;
+        }
+      
     }
  
     protected override void CreateVFXDead()

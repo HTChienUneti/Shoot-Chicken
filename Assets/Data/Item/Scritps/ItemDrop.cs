@@ -12,4 +12,5 @@ public class ItemDrop : ScriptableObject
     public string itemName;
     public Sprite sprite;
     public int count;
+    public float dropRate;
 }
