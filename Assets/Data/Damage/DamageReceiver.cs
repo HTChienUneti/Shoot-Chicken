@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(SphereCollider))]
 public abstract class DamageReceiver : MyMonoBehaviour
 {
-    [SerializeField] protected CircleCollider2D _collider;
-    public CircleCollider2D Collider=> _collider;
+    [SerializeField] protected SphereCollider _collider;
+    public SphereCollider Collider=> _collider;
     [SerializeField] protected int hp;
     [SerializeField] protected int hpMax = 10;
     [SerializeField] protected bool isDead = false;
@@ -23,7 +23,6 @@ public abstract class DamageReceiver : MyMonoBehaviour
     public virtual void ReduceHp(int hp)
     {
         this.hp -= hp;
-     
         this.CheckDead();
     }
     protected virtual void CheckDead()
@@ -36,7 +35,9 @@ public abstract class DamageReceiver : MyMonoBehaviour
     protected virtual void OnDead()
     {
         this.CreateVFXDead();
+        this.Despawn();
     }
+    protected abstract void Despawn();
     protected virtual void CreateVFXDead()
     {
 
@@ -54,7 +55,7 @@ public abstract class DamageReceiver : MyMonoBehaviour
     protected virtual void LoadCollider()
     {
         if (this._collider != null) return;
-        this._collider = GetComponent<CircleCollider2D>();
+        this._collider = GetComponent<SphereCollider>();
         this._collider.radius = .2f;
         this._collider.isTrigger = true;
         Debug.LogWarning(transform.name + ": LoadCollier", gameObject);

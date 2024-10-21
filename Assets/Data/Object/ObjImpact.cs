@@ -1,35 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(SphereCollider))]
 public abstract class ObjImpact: MyMonoBehaviour
 {
     [Header("Obj Impact")]
-    [SerializeField] protected Rigidbody2D _rigid;
-    [SerializeField] protected CircleCollider2D _collider;
-    [SerializeField] protected DamageReceiver damageReceiver;
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    [SerializeField] protected Rigidbody _rigid;
+    [SerializeField] protected SphereCollider _collider;
+    protected virtual void OnTriggerEnter(Collider collision)
     {
-        if(this.CheckShootSelf(collision)) return;
+        if(this.CheckImpactSelf(collision)) return;
         this.CreateVFXImpact();
         this.Despawn();
         this.GetDamageReceiver(collision);
-        if (this.damageReceiver == null) return;
-        this.SendDamage();
+        DamageReceiver damageReceiver = this.GetDamageReceiver(collision);
+        if (damageReceiver == null) return;
+        this.SendDamage(damageReceiver);
         
     }
     protected virtual void CreateVFXImpact()
     {
-        //for override
+        string impact_1 = VFXSpawner.impact_1;
+        Transform vfx = VFXSpawner.Instance.Spawn(impact_1, transform.position, transform.rotation);
+        if (vfx == null) return;
+        vfx.gameObject.SetActive(true);
     }
-    protected abstract bool CheckShootSelf(Collider2D collision);
-    protected virtual void GetDamageReceiver(Collider2D collision)
+    protected abstract bool CheckImpactSelf(Collider collision);
+    protected virtual DamageReceiver GetDamageReceiver(Collider collision)
     {
-        this.damageReceiver= collision.transform.GetComponent<DamageReceiver>();
+        return collision.transform.GetComponent<DamageReceiver>();
     }
-    protected abstract void SendDamage();
+    protected virtual void SendDamage(DamageReceiver damageReceiver)
+    {
+        
+    }
     protected abstract void Despawn();
 
     protected override void LoadComponent()
@@ -41,15 +48,16 @@ public abstract class ObjImpact: MyMonoBehaviour
     protected virtual void LoadCollier()
     {
         if (this._collider != null) return;
-        this._collider = GetComponent<CircleCollider2D>();
+        this._collider = GetComponent<SphereCollider>();
         this._collider.radius = .2f;
+        this._collider.isTrigger = true;
         Debug.LogWarning(transform.name + ": LoadCollier", gameObject);
     }
     protected virtual void LoadRigid()
     {
         if (this._rigid != null) return;
-        this._rigid = GetComponent<Rigidbody2D>();
-
+        this._rigid = GetComponent<Rigidbody>();
+        this._rigid.useGravity = false;
         Debug.LogWarning(transform.name + ": LoadRigid", gameObject);
     }
 }

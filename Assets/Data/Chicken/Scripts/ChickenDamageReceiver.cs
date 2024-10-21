@@ -7,14 +7,12 @@ public class ChickenDamageReceiver : DamageReceiver
     [SerializeField] protected ChickenCtrl chickenCtrl;
     protected override void ResetValue()
     {
-        this.Collider.radius = .4f;
-        this.hpMax = 1;
+        this.hpMax = this.chickenCtrl.ChickenSO.maxHp;
         base.ResetValue();
 
     }
     protected override void OnDead()
-    {
-        ChickenSpawner.Instance.Despawn(transform.parent);
+    { 
         this.DropItem();
         base.OnDead();
     }
@@ -35,7 +33,12 @@ public class ChickenDamageReceiver : DamageReceiver
         }
       
     }
- 
+    protected override void LoadCollider()
+    {
+        base.LoadCollider();
+        this._collider.radius = .4f;
+    }
+
     protected override void CreateVFXDead()
     {
         string prefabName = VFXSpawner.boom_1;
@@ -53,5 +56,10 @@ public class ChickenDamageReceiver : DamageReceiver
         if (this.chickenCtrl != null) return;
         this.chickenCtrl = transform.parent.GetComponent<ChickenCtrl>();
         Debug.LogWarning(transform.name + ": LoadChickenCtrl", gameObject);
+    }
+
+    protected override void Despawn()
+    {
+        ChickenSpawner.Instance.Despawn(transform.parent);
     }
 }

@@ -9,6 +9,7 @@ public class DamageSender : MyMonoBehaviour
     [SerializeField] protected int damage =1;
     public virtual void Send(DamageReceiver damageReceiver)
     {
+        if (damageReceiver == null) return;
         damageReceiver.ReduceHp(this.damage);
     }
 }

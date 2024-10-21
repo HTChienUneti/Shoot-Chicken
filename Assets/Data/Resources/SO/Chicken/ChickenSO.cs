@@ -8,4 +8,5 @@ public class ChickenSO : ScriptableObject
     public ChickenCode ChickenCode;
     public string chickenName;
     public List<ItemDrop> itemDrop;
+    public int maxHp = 1;
 }

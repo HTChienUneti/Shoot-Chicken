@@ -23,5 +23,9 @@ public class ChickenSpawner : Spawner
         }
         ChickenSpawner._instance = this;
     }
+    public override void Despawn(Transform obj)
+    {
+        base.Despawn(obj);
+    }
 
 }
