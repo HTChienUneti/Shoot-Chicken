@@ -30,5 +30,9 @@ public class BulletSpawner : Spawner
         }
         BulletSpawner._instance = this;
     }
+    public virtual Transform Spawn(DamagingSO damagingSO,Vector3 pos, Quaternion rot)
+    {
+         return base.Spawn(damagingSO.damagingName, pos, rot);  
+    }
 
 }

@@ -5,19 +5,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(SphereCollider))]
-public abstract class ObjImpact: MyMonoBehaviour
+public abstract class DamagingObjImpact: DamagingObjAbstract
 {
-    [Header("Obj Impact")]
+    [Header("Damaging Obj Impact")]
     [SerializeField] protected Rigidbody _rigid;
     [SerializeField] protected SphereCollider _collider;
     protected virtual void OnTriggerEnter(Collider collision)
     {
         if(this.CheckImpactSelf(collision)) return;
-        this.CreateVFXImpact();
-        this.Despawn();
-        this.GetDamageReceiver(collision);
         DamageReceiver damageReceiver = this.GetDamageReceiver(collision);
         if (damageReceiver == null) return;
+        this.CreateVFXImpact();
+        this.Despawn();
+     
         this.SendDamage(damageReceiver);
         
     }
@@ -31,7 +31,7 @@ public abstract class ObjImpact: MyMonoBehaviour
     protected abstract bool CheckImpactSelf(Collider collision);
     protected virtual DamageReceiver GetDamageReceiver(Collider collision)
     {
-        return collision.transform.GetComponent<DamageReceiver>();
+       return collision.GetComponent<DamageReceiver>();
     }
     protected virtual void SendDamage(DamageReceiver damageReceiver)
     {

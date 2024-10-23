@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd62f0ea7df987746a86e45fb89dbbfb, type: 3}
-  m_Name: Bullet_purple
+  m_Name: Bullet_Purple
   m_EditorClassIdentifier: 
   itemCode: 6
   itemType: 1
   ItemTypeAdd: 0
-  itemName: Bullet_purple
+  itemName: Bullet_Purple
   sprite: {fileID: 21300000, guid: 222e758f45ac6854fbfff414a0003ed5, type: 3}
   count: 0
   dropRate: 20000

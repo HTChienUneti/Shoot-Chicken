@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class EggImpact : ObjImpact
+public class EggImpact : DamagingObjImpact
 {
-    [Header("Egg Impact")]
-    [SerializeField] protected EggCtrl eggCtrl;
+    //[Header("Egg Impact")]
     protected override void Despawn()
     {
         EggSpawner.Instance.Despawn(transform.parent);
@@ -23,18 +22,6 @@ public class EggImpact : ObjImpact
     }
     protected override void SendDamage(DamageReceiver damageReceiver)
     {
-        this.eggCtrl.EggDamageSender.Send(  damageReceiver);
-    }
-    protected override void LoadCollier()
-    {
-        base.LoadCollier();
-        this.LoadEggCtrl();
-    }
-    protected virtual void LoadEggCtrl()
-    {
-        if (this.eggCtrl != null) return;
-        this.eggCtrl = transform.parent.GetComponent<EggCtrl>();  
-  
-        Debug.LogWarning(transform.name + ": LoadEggCtrl", gameObject);
+        this.damagingObjCtrl.DamageSender.Send(damageReceiver);
     }
 }

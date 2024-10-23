@@ -13,7 +13,7 @@ public abstract class ShooterLevel: MyMonoBehaviour
     }
     public virtual void LevelUp(ItemTypeAdd itemTypeAdd, int level)
     {
-        if (itemTypeAdd == ItemTypeAdd.Pluss)
+        if (itemTypeAdd == ItemTypeAdd.Plus)
         {
             this.currentLevel += level;
         }

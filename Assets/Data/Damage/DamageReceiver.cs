@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class DamageReceiver : MyMonoBehaviour
 {
     [SerializeField] protected SphereCollider _collider;
-    public SphereCollider Collider=> _collider;
+    public SphereCollider Collider => _collider;
     [SerializeField] protected int hp;
     [SerializeField] protected int hpMax = 10;
     [SerializeField] protected bool isDead = false;
@@ -49,7 +49,7 @@ public abstract class DamageReceiver : MyMonoBehaviour
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadCollider();
+       this.LoadCollider();
 
     }
     protected virtual void LoadCollider()

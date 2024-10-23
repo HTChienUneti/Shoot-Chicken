@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum ItemTypeAdd 
 {
-   Pluss = 0,
-   Time = 1,
+   NoAdd=0,
+   Plus = 1,
+   Time = 2,
 }

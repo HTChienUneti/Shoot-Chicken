@@ -11,6 +11,10 @@ public class ChickenDamageReceiver : DamageReceiver
         base.ResetValue();
 
     }
+    public override void ReduceHp(int hp)
+    {
+        base.ReduceHp(hp);
+    }
     protected override void OnDead()
     { 
         this.DropItem();
@@ -36,7 +40,7 @@ public class ChickenDamageReceiver : DamageReceiver
     protected override void LoadCollider()
     {
         base.LoadCollider();
-        this._collider.radius = .4f;
+        this._collider.radius = .5f;
     }
 
     protected override void CreateVFXDead()

@@ -176,7 +176,7 @@ MonoBehaviour:
   pools: []
   holder: {fileID: 223005305}
   spawnCount: 0
-  spawnLimit: 10
+  spawnLimit: 1000
 --- !u!1 &71009728
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,8 +295,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -54, y: -39}
-  m_SizeDelta: {x: 80, y: 40}
+  m_AnchoredPosition: {x: -31.5, y: -18.9}
+  m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &102248203
 MonoBehaviour:
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 112673092}
   - component: {fileID: 112673093}
   m_Layer: 0
-  m_Name: Bullet_blue
+  m_Name: Bullet_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,7 +532,7 @@ MonoBehaviour:
   pools: []
   holder: {fileID: 1540153271}
   spawnCount: 0
-  spawnLimit: 10
+  spawnLimit: 100
 --- !u!1 &150773858
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,8 +913,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1228,7 +1228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &521274421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,7 +1352,7 @@ GameObject:
   - component: {fileID: 571760111}
   - component: {fileID: 571760112}
   m_Layer: 0
-  m_Name: Bullet_green
+  m_Name: Bullet_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1469,11 +1469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66c8a813499409488d19be97d0ba971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootDelay: 0.5
-  shootTimer: 2
+  shootDelay: 1
+  shootTimer: 1
   distance: 0.5
   startPos: {fileID: 399447219}
   shooterLevel: {fileID: 1937686552}
+  currentDamaging: {fileID: 11400000, guid: ad1a5a154fa0b4f42bb995b77c4f5d1d, type: 2}
 --- !u!1 &650609117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,8 +1935,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1832479112}
   - {fileID: 2107568174}
+  - {fileID: 1832479112}
   - {fileID: 1855518192}
   - {fileID: 919958385}
   m_Father: {fileID: 902955633}
@@ -2005,7 +2006,7 @@ MonoBehaviour:
   pools: []
   holder: {fileID: 678768224}
   spawnCount: 0
-  spawnLimit: 10
+  spawnLimit: 100
 --- !u!1 &902955632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,11 +2090,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fa6bab6d53ce74e8835e85af01fdb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootDelay: 1.3640447
+  shootDelay: 1
   shootTimer: 0
   distance: 0.5
   startPos: {fileID: 805365902}
   shooterLevel: {fileID: 1722082310}
+  currentDamaging: {fileID: 11400000, guid: b3caa05b07bbbc8459dd3cb78f89da41, type: 2}
   chickenCtrl: {fileID: 7844008942643612919}
 --- !u!1 &919958384
 GameObject:
@@ -2239,7 +2241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 937037085}
   hp: 10
-  hpMax: 10
+  hpMax: 100
   isDead: 0
 --- !u!135 &937037085
 SphereCollider:
@@ -2260,7 +2262,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &953625585
 GameObject:
@@ -2308,6 +2310,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   timeMax: 2
+--- !u!1 &1033195956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1033195957}
+  m_Layer: 0
+  m_Name: Impact
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1033195957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033195956}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1848681920}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1073073213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,7 +2352,7 @@ GameObject:
   - component: {fileID: 1073073214}
   - component: {fileID: 1073073215}
   m_Layer: 0
-  m_Name: Bullet_red
+  m_Name: Bullet_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2895,6 +2928,52 @@ MonoBehaviour:
   boundX: 100
   boundY: 100
   distanceLimit: 0
+--- !u!1 &1329723410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1329723411}
+  - component: {fileID: 1329723412}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1329723411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329723410}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1848681920}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1329723412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329723410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4590ed8f82b594ea3ef292aa1a0fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCtrl: {fileID: 0}
+  items: []
 --- !u!1 &1414355552
 GameObject:
   m_ObjectHideFlags: 0
@@ -2983,7 +3062,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1467491169
 Transform:
   m_ObjectHideFlags: 0
@@ -3011,9 +3090,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95d7456cad38a545be5940f6fb1904d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootableObjCtrl: {fileID: 7844008942643612919}
   _rigid: {fileID: 1467491172}
   _collider: {fileID: 1467491171}
-  chickenCtrl: {fileID: 7844008942643612919}
 --- !u!135 &1467491171
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3713,6 +3792,8 @@ Transform:
   - {fileID: 610349576}
   - {fileID: 937037081}
   - {fileID: 1124682986}
+  - {fileID: 1033195957}
+  - {fileID: 1329723411}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1848681921
@@ -3727,6 +3808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462ecc64caca3444fb121cfe21dec3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 1329723412}
   shooter: {fileID: 610349577}
 --- !u!1 &1855518191
 GameObject:
@@ -4301,7 +4383,7 @@ GameObject:
   - component: {fileID: 2080777297}
   - component: {fileID: 2080777298}
   m_Layer: 0
-  m_Name: Bullet_purple
+  m_Name: Bullet_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4367,7 +4449,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2080777297}
@@ -4413,15 +4495,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6c648cb7f7eec0341ade85ea17cd1022, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 222e758f45ac6854fbfff414a0003ed5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2107568173
@@ -4517,8 +4599,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118462364}
-  - component: {fileID: 2118462367}
   - component: {fileID: 2118462366}
+  - component: {fileID: 2118462367}
   m_Layer: 0
   m_Name: DameReceiver
   m_TagString: Chicken
@@ -4577,7 +4659,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.4
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &32794132830652550
 Transform:
@@ -4981,6 +5063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageSender: {fileID: 6368424868344634217}
+  model: {fileID: 277098606679598163}
 --- !u!114 &1859133260521321446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4994,6 +5077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageSender: {fileID: 6368424868209583254}
+  model: {fileID: 277098606814813100}
 --- !u!114 &1859133260714527568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5007,6 +5091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageSender: {fileID: 6368424868540128288}
+  model: {fileID: 277098606606918426}
 --- !u!114 &1859133261508169022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5020,6 +5105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageSender: {fileID: 6368424869366274638}
+  model: {fileID: 277098605821666676}
 --- !u!4 &1973155177039932160
 Transform:
   m_ObjectHideFlags: 0
@@ -15161,7 +15247,7 @@ GameObject:
   - component: {fileID: 5019207588909683114}
   - component: {fileID: 8126425238681648185}
   m_Layer: 0
-  m_Name: Egg_1
+  m_Name: Egg_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20168,7 +20254,7 @@ Transform:
   m_GameObject: {fileID: 7844008942643612917}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49972,7 +50058,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageReceiver: {fileID: 2118462366}
-  damageSender: {fileID: 521274421}
   chickenMovement: {fileID: 6544431862994498895}
   chickenSO: {fileID: 11400000, guid: 453fe3385ec9bcb40add44f6e2b5d37a, type: 2}
 --- !u!199 &7936183218872469297
@@ -50092,7 +50177,7 @@ GameObject:
   - component: {fileID: 6371443291493232641}
   - component: {fileID: 1859133260521321446}
   m_Layer: 0
-  m_Name: Bullet_purple
+  m_Name: Bullet_Purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50109,7 +50194,7 @@ GameObject:
   - component: {fileID: 6371443291357483006}
   - component: {fileID: 1859133260385995801}
   m_Layer: 0
-  m_Name: Bullet_blue
+  m_Name: Bullet_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50126,7 +50211,7 @@ GameObject:
   - component: {fileID: 6371443291686406327}
   - component: {fileID: 1859133260714527568}
   m_Layer: 0
-  m_Name: Bullet_green
+  m_Name: Bullet_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50143,7 +50228,7 @@ GameObject:
   - component: {fileID: 6371443292479786713}
   - component: {fileID: 1859133261508169022}
   m_Layer: 0
-  m_Name: Bullet_red
+  m_Name: Bullet_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50176,9 +50261,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655d04d301d10a948b6b3c8173256523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagingObjCtrl: {fileID: 1859133260714527568}
   _rigid: {fileID: 8253293066827304464}
   _collider: {fileID: 8253293066827304463}
-  bulletCtrl: {fileID: 1859133260714527568}
 --- !u!135 &8253293066827304463
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -50194,7 +50279,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -50254,9 +50339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655d04d301d10a948b6b3c8173256523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagingObjCtrl: {fileID: 1859133260521321446}
   _rigid: {fileID: 8253293067156846270}
   _collider: {fileID: 8253293067156846269}
-  bulletCtrl: {fileID: 1859133260521321446}
 --- !u!135 &8253293067156846269
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -50272,7 +50357,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -50332,9 +50417,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655d04d301d10a948b6b3c8173256523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagingObjCtrl: {fileID: 1859133260385995801}
   _rigid: {fileID: 8253293067290052935}
   _collider: {fileID: 8253293067290052934}
-  bulletCtrl: {fileID: 1859133260385995801}
 --- !u!135 &8253293067290052934
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -50350,7 +50435,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -50410,9 +50495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655d04d301d10a948b6b3c8173256523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagingObjCtrl: {fileID: 1859133261508169022}
   _rigid: {fileID: 8253293068147591270}
   _collider: {fileID: 8253293068147591269}
-  bulletCtrl: {fileID: 1859133261508169022}
 --- !u!135 &8253293068147591269
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -50428,7 +50513,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -50657,9 +50742,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70267dfa5af649742aff87f3d6362ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damagingObjCtrl: {fileID: 8126425238681648185}
   _rigid: {fileID: 8731792408675337647}
   _collider: {fileID: 8731792408675337646}
-  eggCtrl: {fileID: 8126425238681648185}
 --- !u!135 &8731792408675337646
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -50675,7 +50760,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

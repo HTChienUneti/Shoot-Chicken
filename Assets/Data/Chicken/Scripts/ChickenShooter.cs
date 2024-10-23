@@ -12,18 +12,15 @@ public class ChickenShooter : ObjectShooter
         this.shootTimer = 0f;
         this.shootDelay = Random.Range(1, this.shootDelay);
     }
-    protected override string GetPrefabName()
-    {
-        return EggSpawner.egg_1;
-    }
     protected override Transform GetPrefab()
     {
-        Transform newPrefab = EggSpawner.Instance.Spawn(this.prefabName, this.startPos.position, Quaternion.identity);
+        Transform newPrefab = EggSpawner.Instance.Spawn(this.damagingSO, this.startPos.position, Quaternion.identity);
         if (newPrefab == null) return null;
         newPrefab.GetComponent<EggCtrl>().SetShooter(this);
         return newPrefab;
 
-    }
+    }   
+
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -39,5 +36,10 @@ public class ChickenShooter : ObjectShooter
         this.chickenCtrl = transform.parent.GetComponent<ChickenCtrl>();
 
         Debug.LogWarning(transform.name + ": LoadChickenCtrl", gameObject);
+    }
+
+    protected override string GetDamagingName()
+    {
+        return "Egg_Blue";
     }
 }

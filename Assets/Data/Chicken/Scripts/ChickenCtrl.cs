@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenCtrl : MyMonoBehaviour
+public class ChickenCtrl : ShootableObjCtrl
 {
-    [SerializeField] protected ChickenDamageReceiver damageReceiver;
-    public ChickenDamageReceiver DamageReceiver => damageReceiver;
-    [SerializeField] protected DamageSender damageSender;
-    public DamageSender DamageSender => damageSender;
     [SerializeField] protected ChickenMovement chickenMovement;
     public ChickenMovement ChickenMovement => chickenMovement;
     [SerializeField] protected ChickenSO chickenSO;
@@ -16,7 +12,7 @@ public class ChickenCtrl : MyMonoBehaviour
     {
         base.LoadComponent();
         this.LoadDamageReceiver();
-        this.LoadDamageSender();
+        //this.LoadDamageSender();
         this.LoadChickenMovement();
         this.LoadChickenSO();
     }
@@ -33,19 +29,5 @@ public class ChickenCtrl : MyMonoBehaviour
         this.chickenMovement = GetComponentInChildren<ChickenMovement>();
 
         Debug.LogWarning(transform.name + ": LoadChickenMovement", gameObject);
-    }
-    protected virtual void LoadDamageReceiver()
-    {
-        if (this.damageReceiver != null) return;
-        this.damageReceiver = GetComponentInChildren<ChickenDamageReceiver>();
-
-        Debug.LogWarning(transform.name + ": LoadDamageReceiver", gameObject);
-    }
-    protected virtual void LoadDamageSender()
-    {
-        if (this.damageSender != null) return;
-        this.damageSender = GetComponentInChildren<ChickenDamageSender>();
-
-        Debug.LogWarning(transform.name + ": LoadDamageSender", gameObject);
     }
 }

@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletCtrl : MyMonoBehaviour
+public class BulletCtrl : DamagingObjCtrl
 {
-    [SerializeField] protected BulletDamageSender damageSender;
-    public BulletDamageSender BulletDamageSender => damageSender;
+    [SerializeField] protected SpriteRenderer model;
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadDamageSender();
+        this.LoadModel();
     }
-    protected virtual void LoadDamageSender()
+    protected virtual void LoadModel()
     {
-        if (this.damageSender != null) return;
-        this.damageSender = GetComponentInChildren<BulletDamageSender>();
-        Debug.LogWarning(transform.name + ": LoadDamageSender", gameObject);
+        if (this.model != null) return;
+        this.model = GetComponentInChildren<SpriteRenderer>();
+        Debug.LogWarning(transform.name + ": LoadModel", gameObject);
     }
+    public virtual void SetModel(Sprite sprite)
+    {
+        this.model.sprite = sprite;
+    }
+
 }
