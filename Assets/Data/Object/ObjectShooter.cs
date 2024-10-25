@@ -13,7 +13,7 @@ public abstract class ObjectShooter : MyMonoBehaviour
     [SerializeField] protected ShooterLevel shooterLevel;
     public ShooterLevel ShooterLevel => shooterLevel;
 
-    protected DamagingSO damagingSO;
+    [SerializeField]protected DamagingSO damagingSO;
     public DamagingSO DamagingSO => damagingSO;
     // [SerializeField] protected string damagingName;
     [SerializeField] protected DamagingSO currentDamaging;
@@ -110,7 +110,7 @@ public abstract class ObjectShooter : MyMonoBehaviour
         string path = "SO/Damaging/" + damagingName;
         this.damagingSO = Resources.Load<DamagingSO>(path);
         this.currentDamaging = this.damagingSO;
-        Debug.LogWarning(transform.name + ": LoadStartPos", gameObject);
+        Debug.LogWarning(transform.name + ": LoadDamagingSO", gameObject);
     }
     protected virtual void LoadShooterLevel()
     {

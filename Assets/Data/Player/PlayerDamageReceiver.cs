@@ -10,15 +10,16 @@ public class PlayerDamageReceiver : DamageReceiver
     }
     protected override void ResetValue()
     {
-        base.ResetValue();
+        
         this.hpMax = 100;
+        base.ResetValue();
     }
-    //protected override void LoadCollider()
-    //{
-    //    base.LoadCollider();
-    //    this._collider.radius = 1f;
-  
-    //}
+    protected override void LoadCollider()
+    {
+        base.LoadCollider();
+        this._collider.radius = 1f;
+
+    }
 
     protected override void Despawn()
     {
