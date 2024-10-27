@@ -11,7 +11,7 @@ public class PlayerDamageReceiver : DamageReceiver
     protected override void ResetValue()
     {
         
-        this.hpMax = 100;
+        this.hpMax = 50;
         base.ResetValue();
     }
     protected override void LoadCollider()

@@ -9,7 +9,9 @@ public abstract class DamageReceiver : MyMonoBehaviour
     public SphereCollider Collider => _collider;
     [SerializeField] protected int hp;
     [SerializeField] protected int hpMax = 10;
+    public int HpMax => hpMax;
     [SerializeField] protected bool isDead = false;
+    protected List<IUsingCurrentHp> listeners = new List<IUsingCurrentHp>();    
     protected override void Start()
     {
         base.Start();
@@ -23,7 +25,13 @@ public abstract class DamageReceiver : MyMonoBehaviour
     public virtual void ReduceHp(int hp)
     {
         this.hp -= hp;
+        if (this.hp < 0)
+        {
+            this.hp = 0;
+        }
+
         this.CheckDead();
+        this.OnReceivedDamage();
     }
     protected virtual void CheckDead()
     {
@@ -45,6 +53,10 @@ public abstract class DamageReceiver : MyMonoBehaviour
     public virtual void AddHp(int hp)
     {
         this.hp += hp;
+        if(this.hp> this.hpMax)
+        {
+            this.hp = this.hpMax;
+        }
     }
     protected override void LoadComponent()
     {
@@ -59,5 +71,21 @@ public abstract class DamageReceiver : MyMonoBehaviour
         this._collider.radius = .2f;
         this._collider.isTrigger = true;
         Debug.LogWarning(transform.name + ": LoadCollier", gameObject);
+    }
+    public virtual void AddListener(IUsingCurrentHp listener)
+    {
+        this.listeners.Add(listener);   
+    }
+    public virtual void RemoveListener(IUsingCurrentHp listener)
+    {
+        this.listeners.Remove(listener);
+    }
+
+    public void OnReceivedDamage()
+    {
+        foreach(IUsingCurrentHp listener in this.listeners)
+        {
+            listener.OnReceivedDamage(this.hp);    
+        }
     }
 }

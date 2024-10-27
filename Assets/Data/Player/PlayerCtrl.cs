@@ -10,22 +10,33 @@ public class PlayerCtrl : MyMonoBehaviour
     [SerializeField] protected Inventory inventory;
     public Inventory Inventory => inventory;
     [SerializeField] protected PlayerShooter shooter;
-    public  PlayerShooter Shooter =>shooter;
+    public PlayerShooter Shooter => shooter;
 
+    [SerializeField] protected PlayerDamageReceiver damageReceiver;
+    public PlayerDamageReceiver DamageReceiver => damageReceiver;
 
     protected override void Awake()
     {
         base.Awake();
         this.LoadSingleton();
-      
+
     }
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadInventory();
         this.LoadShooter();
+        this.LoadDamageReceiver();
+      
     }
-      protected virtual void LoadShooter()
+
+    protected virtual void LoadDamageReceiver()
+    {
+        if (this.damageReceiver != null) return;
+        this.damageReceiver = GetComponentInChildren<PlayerDamageReceiver>();
+        Debug.Log(transform.name + ": LoadDamageReceiver", gameObject);
+    }
+    protected virtual void LoadShooter()
     {
         if (this.shooter != null) return;
         this.shooter = GetComponentInChildren<PlayerShooter>();

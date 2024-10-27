@@ -17,6 +17,10 @@ public abstract class ObjMovement : MyMonoBehaviour
     
     protected virtual void Moving()
     {
+        if(transform.parent ==  null)
+        {
+            Debug.LogWarning(transform.name + ": have no a parent", gameObject);
+        }
         if (Vector3.Distance(transform.parent.position, targetPos) <= distanceLimit) return;
         Vector3 lerp = Vector3.Lerp(transform.parent.position, this.targetPos, this.moveSpeed * Time.fixedDeltaTime);
         transform.parent.position = lerp;

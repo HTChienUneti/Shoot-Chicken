@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerShooter : ObjectShooter
 {
+    
     protected override Transform GetPrefab()
     {
         Transform newBullet = BulletSpawner.Instance.Spawn(this.damagingSO, this.startPos.position, Quaternion.identity);
