@@ -8,6 +8,12 @@ public class Point:MyMonoBehaviour
 {
     public Vector3 point;
     public bool isUsed;
+
+    protected override void Start()
+    {
+        base.Start();
+        this.point = transform.position;
+    }
     protected override void LoadComponent()
     {
         base.LoadComponent();

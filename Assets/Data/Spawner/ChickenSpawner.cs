@@ -8,6 +8,7 @@ public class ChickenSpawner : Spawner
     private static ChickenSpawner _instance;
     public static ChickenSpawner Instance => _instance;
     static public string chicken_1 = "Chicken_1";
+    protected List<IUsingAllChickenDead> listeners = new List<IUsingAllChickenDead>();
 
     protected override void Awake()
     {
@@ -26,6 +27,29 @@ public class ChickenSpawner : Spawner
     public override void Despawn(Transform obj)
     {
         base.Despawn(obj);
+        this.CheckAllChickenDead();
     }
+    protected virtual void CheckAllChickenDead()
+    {
+        if (this.spawnCount> 0) return;
 
+        Debug.Log("All chicken dead");
+        OnAllChickenDead();
+
+    }
+    public virtual void AddListener(IUsingAllChickenDead listener)
+    {
+        this.listeners.Add(listener);
+    }
+    public virtual void RemoveListener(IUsingAllChickenDead listener)
+    {
+        this.listeners.Remove(listener);
+    }
+    public virtual void OnAllChickenDead()
+    {
+        foreach (IUsingAllChickenDead listener in this.listeners)
+        {
+            listener.OnAllChickenDead();
+        }
+    }
 }

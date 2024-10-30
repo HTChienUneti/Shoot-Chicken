@@ -18,4 +18,4 @@ MonoBehaviour:
   itemName: Bullet_Red
   sprite: {fileID: 21300000, guid: f7652b957da6fca43a6260aad7247a99, type: 3}
   count: 0
-  dropRate: 30000
+  dropRate: 10000

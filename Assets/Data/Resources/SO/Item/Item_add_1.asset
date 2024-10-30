@@ -18,4 +18,4 @@ MonoBehaviour:
   itemName: Item_add_1
   sprite: {fileID: 21300000, guid: a422b430911342b44b3a65939ec939aa, type: 3}
   count: 1
-  dropRate: 10000
+  dropRate: 5000

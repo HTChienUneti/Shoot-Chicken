@@ -35,7 +35,6 @@ public class ChickenPoint : MyMonoBehaviour
         if (poins.Count > 0) return;
         foreach(Transform child in transform)
         {
-
             this.poins.Add(child.GetComponent<Point>());
         }
         Debug.LogWarning(transform.name + ": LoadPoint", gameObject);

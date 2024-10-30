@@ -16,6 +16,7 @@ public class ChickenMovement : MyMonoBehaviour
             if (point.isUsed) continue;
             this.targetPoint = point;
             point.isUsed = true;
+            Debug.Log(point.name);
             break;
         }
     }

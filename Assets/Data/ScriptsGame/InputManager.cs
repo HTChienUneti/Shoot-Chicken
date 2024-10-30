@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance=>_instance;
     [SerializeField]protected  Vector3 mouseWorldPos;
     public Vector3 MouseWorldPos=>mouseWorldPos;
+    [SerializeField] protected float fire_1;
+    public float Fire_1=> fire_1;
     protected virtual void Awake()
     {
         if(InputManager._instance != null)
@@ -21,6 +23,11 @@ public class InputManager : MonoBehaviour
     protected void FixedUpdate()
     {
         this.GetMousePos();
+        this.GetMouseDown();
+    }
+    protected virtual void GetMouseDown()
+    {
+        this.fire_1 = Input.GetAxis("Fire1");
     }
     protected virtual void GetMousePos()
     {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InventoryUI : MyMonoBehaviour
 {
-    [SerializeField] protected Image _sprite;
+    [SerializeField] protected Image image;
     [SerializeField] protected TextMeshProUGUI countText;
     protected override void LoadComponent()
     {
@@ -17,8 +17,8 @@ public class InventoryUI : MyMonoBehaviour
     }
     protected virtual void LoadSprite()
     {
-        if (this._sprite != null) return;
-        this._sprite = GetComponentInChildren<Image>();
+        if (this.image != null) return;
+        this.image = GetComponentInChildren<Image>();
         Debug.Log(transform.name + ": LoadSprite", gameObject);
     }
     protected virtual void LoadCountText()

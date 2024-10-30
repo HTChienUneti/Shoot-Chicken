@@ -2,32 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ObjectShooter : MyMonoBehaviour
+public abstract class ObjectShooter : ObjectShooterAbstract
 {
     [Header("Obj Shooter")]
     [SerializeField] protected float shootDelay = 1f;
     [SerializeField] protected float shootTimer = 0f;
     [SerializeField] protected float distance = 0.5f;
-    [SerializeField] protected Transform startPos;
-
-    [SerializeField] protected ShooterLevel shooterLevel;
-    public ShooterLevel ShooterLevel => shooterLevel;
-
-    [SerializeField]protected DamagingSO damagingSO;
-    public DamagingSO DamagingSO => damagingSO;
-    // [SerializeField] protected string damagingName;
-    [SerializeField] protected DamagingSO currentDamaging;
-    public DamagingSO CurrentDamaging => currentDamaging;
+    [SerializeField] protected bool isShooting = false;
+    protected List<IUsingObjDamaging> listeners = new List<IUsingObjDamaging>();
 
     public virtual void SetDamaging(DamagingSO damagingSO)
     {
         this.damagingSO = damagingSO;
         this.currentDamaging = this.damagingSO;
+        this.OnChangedObjDamaging();
     }
     public virtual void SetDamaging(string damagingName)
     {
         string name = damagingName;
         this.GetDamagingSOByName(name);
+        this.OnChangedObjDamaging();
     }
     public virtual void GetDamagingSOByName(string name)
     {
@@ -35,7 +29,6 @@ public abstract class ObjectShooter : MyMonoBehaviour
         this.damagingSO = Resources.Load<DamagingSO>(path);
         this.currentDamaging = this.damagingSO;
     }
-    protected abstract string GetDamagingName();
 
     protected override void ResetValue()
     {
@@ -49,7 +42,9 @@ public abstract class ObjectShooter : MyMonoBehaviour
     }
     protected virtual void Shooting()
     {
+      
         if (!this.CountdownTime()) return;
+
         List<Transform> prefabs = new List<Transform>();
         for (int i = 0; i < this.shooterLevel.CurrentLevel; i++)
         {
@@ -63,6 +58,7 @@ public abstract class ObjectShooter : MyMonoBehaviour
             if (prefab == null) continue;
             prefab.gameObject.SetActive(true);
         }
+        
     }
     protected virtual void SetPrefabPos(List<Transform> prefabs)
     {
@@ -96,34 +92,22 @@ public abstract class ObjectShooter : MyMonoBehaviour
         this.shootTimer = 0f;
         return true;
     }
-    protected override void LoadComponent()
+
+    public virtual void AddListener(IUsingObjDamaging listener)
     {
-        base.LoadComponent();
-        this.LoadStartPos();
-        this.LoadShooterLevel();
-        this.LoadDamagingSO();
+        this.listeners.Add(listener);
     }
-    protected virtual void LoadDamagingSO()
+    public virtual void RemoveListener(IUsingObjDamaging listener)
     {
-        if (this.damagingSO != null) return;
-        string damagingName = this.GetDamagingName();
-        string path = "SO/Damaging/" + damagingName;
-        this.damagingSO = Resources.Load<DamagingSO>(path);
-        this.currentDamaging = this.damagingSO;
-        Debug.LogWarning(transform.name + ": LoadDamagingSO", gameObject);
-    }
-    protected virtual void LoadShooterLevel()
-    {
-        if (this.shooterLevel != null) return;
-        this.shooterLevel = GetComponentInChildren<ShooterLevel>();
-        Debug.LogWarning(transform.name + ": LoadStartPos", gameObject);
+        this.listeners.Remove(listener);
     }
 
-    protected virtual void LoadStartPos()
+    public void OnChangedObjDamaging()
     {
-        if (this.startPos != null) return;
-        this.startPos = transform.Find("StartPos");
-        Debug.LogWarning(transform.name + ": LoadStartPos", gameObject);
+        foreach (IUsingObjDamaging listener in this.listeners)
+        {
+            listener.OnChangedObjDamaging(this.currentDamaging);
+        }
     }
 
 }
