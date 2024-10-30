@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseUI : MonoBehaviour, IPauseGame, IActiveGame
+public class GamePauseUI : UIAbstract, IPauseGame, IActiveGame
 {
-    protected virtual void Start()
+    protected override void Start()
     {
-        this.Hide();
+       base.Start();
         GameManager.Instance.AddPauseListener(this);
         GameManager.Instance.AddActiveListener(this);
     }
@@ -18,14 +18,4 @@ public class PauseUI : MonoBehaviour, IPauseGame, IActiveGame
     {
         this.Hide();
     }
-    protected virtual void Hide()
-    {
-        gameObject.SetActive(false);
-    }
-    protected virtual void Show()
-    {
-        gameObject.SetActive(true);
-    }
-
-
 }

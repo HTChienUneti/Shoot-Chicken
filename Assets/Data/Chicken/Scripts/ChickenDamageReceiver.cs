@@ -9,7 +9,6 @@ public class ChickenDamageReceiver : DamageReceiver
     {
         this.hpMax = this.chickenCtrl.ChickenSO.maxHp;
         base.ResetValue();
-
     }
     public override void ReduceHp(int hp)
     {

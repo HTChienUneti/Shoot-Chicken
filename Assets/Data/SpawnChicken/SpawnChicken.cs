@@ -54,5 +54,9 @@ public class SpawnChicken : MyMonoBehaviour,IUsingAllChickenDead
         this.spawnCount = 0;
 
         this.wave++;
+        if(this.wave % 2 == 0)
+        {
+            ChickenSO.Instance.AddHp(1);
+        }
     }
 }

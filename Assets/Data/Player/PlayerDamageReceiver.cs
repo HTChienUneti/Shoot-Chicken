@@ -7,11 +7,12 @@ public class PlayerDamageReceiver : DamageReceiver
     protected override void OnDead()
     {
         Debug.LogError("GAME OVER");
+        GameManager.Instance.OverGame();
     }
     protected override void ResetValue()
     {
         
-        this.hpMax = 50;
+        this.hpMax = 10;
         base.ResetValue();
     }
     protected override void LoadCollider()

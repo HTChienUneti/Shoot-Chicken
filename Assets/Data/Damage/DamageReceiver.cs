@@ -11,15 +11,9 @@ public abstract class DamageReceiver : MyMonoBehaviour
     [SerializeField] protected int hpMax = 10;
     public int HpMax => hpMax;
     [SerializeField] protected bool isDead = false;
-    protected List<IUsingCurrentHp> listeners = new List<IUsingCurrentHp>();    
-    protected override void Start()
-    {
-        base.Start();
-        this.hp = this.hpMax;
-    }
+    protected List<IUsingCurrentHp> listeners = new List<IUsingCurrentHp>();   
     protected override void ResetValue()
     {
-        base.ResetValue();
         this.hp = this.hpMax; 
     }
     public virtual void ReduceHp(int hp)
