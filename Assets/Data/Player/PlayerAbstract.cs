@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAbstcract : MyMonoBehaviour
+public abstract class PlayerAbstract : MyMonoBehaviour
 {
     [Header("Player Abstcract")]
     [SerializeField]protected  PlayerCtrl playerCtrl;

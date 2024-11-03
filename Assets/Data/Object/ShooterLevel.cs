@@ -12,13 +12,13 @@ public abstract class ShooterLevel : MyMonoBehaviour
         set { currentLevel = value; }
         get { return currentLevel; }
     }
-    public virtual void LevelUp(ItemTypeAdd itemTypeAdd, int level)
+    public virtual void LevelUp(ItemTypePowerup itemTypeAdd, int level)
     {
-        if (itemTypeAdd == ItemTypeAdd.Plus)
+        if (itemTypeAdd == ItemTypePowerup.Plus)
         {
             this.currentLevel += level;
         }
-        if (itemTypeAdd == ItemTypeAdd.Time)
+        if (itemTypeAdd == ItemTypePowerup.Time)
         {
             this.currentLevel *= level;
         }

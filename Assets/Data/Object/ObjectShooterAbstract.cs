@@ -15,6 +15,7 @@ public abstract class ObjectShooterAbstract : MyMonoBehaviour
     // [SerializeField] protected string damagingName;
     [SerializeField] protected DamagingSO currentDamaging;
     public DamagingSO CurrentDamaging => currentDamaging;
+
     protected override void LoadComponent()
     {
         base.LoadComponent();

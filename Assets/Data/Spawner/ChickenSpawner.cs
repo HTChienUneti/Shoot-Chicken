@@ -31,9 +31,7 @@ public class ChickenSpawner : Spawner
     }
     protected virtual void CheckAllChickenDead()
     {
-        if (this.spawnCount> 0) return;
-
-        Debug.Log("All chicken dead");
+        if (this.spawnCount > 0) return;
         OnAllChickenDead();
 
     }

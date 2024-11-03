@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wave_1 : SpawnChicken
+public class Wave_1 : SpawnChickenManager
 {
  
     protected override void Spawning()

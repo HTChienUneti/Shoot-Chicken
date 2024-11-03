@@ -9,11 +9,11 @@ public class Spawner : MyMonoBehaviour
     [SerializeField] protected List<Transform> pools;
     [SerializeField] protected Transform holder;
     [SerializeField] protected int spawnCount = 0;
-    [SerializeField] protected int spawnLimit = 10;
+  // [SerializeField] protected int spawnLimit = 10;
 
     public virtual Transform Spawn(string prefabName, Vector3 pos, Quaternion rot)
     {
-        if (this.spawnCount >= this.spawnLimit) return null;
+     //   if (this.spawnCount >= this.spawnLimit) return null;
         Transform prefab = this.GetPrefabByName(prefabName);
         if(prefab == null)
         {

@@ -15,10 +15,18 @@ MonoBehaviour:
   ChickenCode: 1
   chickenName: Chicken_1
   itemDrop:
-  - {fileID: 11400000, guid: a05b4f6ba4016d04a887d43b81490524, type: 2}
-  - {fileID: 11400000, guid: 3ae07703f97bd204f85da08c05353cea, type: 2}
-  - {fileID: 11400000, guid: 5cb6cbd617cccb64496d195592c4f998, type: 2}
-  - {fileID: 11400000, guid: cf33a55a2a87adf4ba10e4009f00786b, type: 2}
-  - {fileID: 11400000, guid: c0b10341d7c923f49b941aedf0e12c8d, type: 2}
-  - {fileID: 11400000, guid: 5da21f0fac180f540b4b8b76b9bea398, type: 2}
-  maxHp: 3
+  - itemDrop: {fileID: 11400000, guid: a05b4f6ba4016d04a887d43b81490524, type: 2}
+    rate: 2000
+  - itemDrop: {fileID: 11400000, guid: 3ae07703f97bd204f85da08c05353cea, type: 2}
+    rate: 3000
+  - itemDrop: {fileID: 11400000, guid: cf33a55a2a87adf4ba10e4009f00786b, type: 2}
+    rate: 5000
+  - itemDrop: {fileID: 11400000, guid: d7e312245b14aa34a82adbb32b163a8b, type: 2}
+    rate: 7000
+  - itemDrop: {fileID: 11400000, guid: f1aa1fc664d2d7f468b37f8204e339f8, type: 2}
+    rate: 10000
+  - itemDrop: {fileID: 11400000, guid: a2256907f0ff0e14da2df97355c562e9, type: 2}
+    rate: 12000
+  - itemDrop: {fileID: 11400000, guid: 6fa441c83afb6114c9a95abaf9cfdd35, type: 2}
+    rate: 50000
+  maxHp: 1

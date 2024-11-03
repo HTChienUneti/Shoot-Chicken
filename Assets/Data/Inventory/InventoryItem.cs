@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class ItemDropRate
+public class InventoryItem
 {
     public ItemDrop itemDrop;
-    public float rate;
+    public int stack;
+    public int stackMax = 10;
+
 }

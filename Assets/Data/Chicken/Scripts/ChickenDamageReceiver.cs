@@ -21,15 +21,15 @@ public class ChickenDamageReceiver : DamageReceiver
     }
     protected virtual void DropItem()
     {
-        List<ItemDrop> itemDrop = this.chickenCtrl.ChickenSO.itemDrop;
+        List<ItemDropRate> itemDrop = this.chickenCtrl.ChickenSO.itemDrop;
        
         float  rate = Random.Range(0.0f,1.0f);
         float dropRate;
-        foreach (ItemDrop drop in itemDrop)
+        foreach (ItemDropRate drop in itemDrop)
         {
-            dropRate = drop.dropRate/100000;
+            dropRate = drop.rate/100000;
             if (dropRate < rate) continue;
-            Transform item = ItemSpawner.Instance.Spawn(drop.itemName, transform.position, transform.rotation);
+            Transform item = ItemSpawner.Instance.Spawn(drop.itemDrop.itemCode.ToString(), transform.position, transform.rotation);
             if (item == null) return;
             item.gameObject.SetActive(true);
             break;

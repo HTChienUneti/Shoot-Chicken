@@ -10,7 +10,7 @@ public class ItemPickupAble : ItemAbstract
     [SerializeField] protected Rigidbody _rigid;
     public virtual void Picked()
     {
-        Debug.Log("picked");
+     
         ItemSpawner.Instance.Despawn(transform.parent);
 
     }

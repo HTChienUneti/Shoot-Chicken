@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class PlayerPickupItem : PlayerAbstcract
+public class PlayerPickupItem : PlayerAbstract
 {
     [Header("Player Pickup Item")]
     [SerializeField] protected SphereCollider _collider;
@@ -12,13 +12,7 @@ public class PlayerPickupItem : PlayerAbstcract
         ItemPickupAble itemPickupAble = other.GetComponent<ItemPickupAble>();
         if (itemPickupAble == null) return;
         itemPickupAble.Picked();
-         this.playerCtrl.Inventory.AddItem(itemPickupAble.ItemCtrl.ItemDrop);
-       // ItemDrop itemDrop = itemPickupAble.ItemCtrl.ItemDrop;
-       //if (itemDrop.itemType == ItemType.Equipment)
-       //  this.playerCtrl.Shooter.SetBulletPrefab(itemDrop.itemName);
-       // if (itemDrop.itemType == ItemType.Resource)
-       //     this.playerCtrl.Shooter.ShooterLevel.LevelUp(itemDrop.ItemTypeAdd,itemDrop.count);
-
+        this.playerCtrl.Inventory.AddItem(itemPickupAble.ItemCtrl.ItemDrop,1);
     }
     protected override void LoadComponent()
     {

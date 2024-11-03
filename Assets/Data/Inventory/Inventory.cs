@@ -1,26 +1,109 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using static UnityEditor.Progress;
 
-public class Inventory : PlayerAbstcract
+public class Inventory : PlayerAbstract
 {
-    [SerializeField] protected List<ItemDrop> items;
-    public virtual void AddItem(ItemDrop item)
+    [SerializeField] protected List<InventoryItem> items;
+    protected List<IUsingInventory> listeners = new List<IUsingInventory>();
+    protected override void Start()
     {
-        if (this.playerCtrl.Shooter.CurrentDamaging.damagingName == item.name)
+        base.Start();
+        // InvokeRepeating(nameof(this.Test),5,5);
+    }
+    protected virtual void Test()
+    {
+        this.RemoveItem(ItemCode.ChickenWing, 1);
+    }
+    public virtual void AddItem(ItemCode itemCode, int count)
+    {
+        InventoryItem inventoryItem = this.GetItemFormListByCode(itemCode);
+        this.AddItem(inventoryItem, count);
+    }
+    public virtual void AddItem(InventoryItem inventoryItem, int count)
+    {
+        this.AddItem(inventoryItem.itemDrop, count);    
+    }
+    public virtual void AddItem(ItemDrop item, int count)
+    {
+        InventoryItem inventoryItem = this.GetItemFromList(item);
+        if (inventoryItem == null)
         {
-            this.playerCtrl.Shooter.ShooterLevel.LevelUp(ItemTypeAdd.Plus, 1);
+            inventoryItem = this.CreateInventoryItem(item, count);
+            this.items.Add(inventoryItem);
         }
         else
         {
-            this.items.Add(item);
-            if (item.itemType == ItemType.Equipment)
-                this.playerCtrl.Shooter.SetDamaging(item.itemName);
-            if (item.itemType == ItemType.Resource)
-                this.playerCtrl.Shooter.ShooterLevel.LevelUp(item.ItemTypeAdd, item.count);
+            inventoryItem.itemDrop = item;
+            inventoryItem.stack += count;
         }
-     
 
+        if (inventoryItem.stack > inventoryItem.stackMax)
+        {
+            inventoryItem.stack = inventoryItem.stackMax;
+        }
+
+        this.OnInventoryChanged();
+    }
+    protected virtual InventoryItem GetItemFromList(ItemDrop item)
+    {
+        foreach (InventoryItem itemInv in this.items)
+        {
+            if (itemInv.itemDrop != item) continue;
+            return itemInv;
+        }
+        return null;
+    }
+    protected virtual InventoryItem CreateInventoryItem(ItemDrop item, int count)
+    {
+        InventoryItem inventoryItem = new InventoryItem()
+        {
+            itemDrop = item,
+            stack = count
+        };
+
+        return inventoryItem;
+    }
+    public virtual void RemoveItem(ItemCode itemCode, int count)
+    {
+       InventoryItem inventoryItem = this.GetItemFormListByCode(itemCode);
+        if (inventoryItem == null) return;
+       this.RemoveItem(inventoryItem, count);
+    }
+    public virtual void RemoveItem(InventoryItem item, int count)
+    {
+        item.stack -= count;
+        if (item.stack > 0) return;
+        this.items.Remove(item);
+    }
+    protected virtual InventoryItem GetItemFormListByCode(ItemCode itemCode)
+    {
+        foreach (InventoryItem itemInv in this.items)
+        {
+            if (itemInv.itemDrop.itemCode != itemCode) continue;
+            return itemInv;
+        }
+        return null;
+    }
+  
+    public virtual void AddListener(IUsingInventory listener)
+    {
+        this.listeners.Add(listener);
+    }
+    public virtual void RemoveListener(IUsingInventory listener)
+    {
+        this.listeners.Remove(listener);
     }
 
+    public void OnInventoryChanged()
+    {
+
+        foreach (IUsingInventory listener in this.listeners)
+        {
+            listener.OnInventoryChanged(this.items);
+        }
+       
+    }
 }

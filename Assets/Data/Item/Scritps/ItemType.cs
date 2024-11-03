@@ -5,7 +5,7 @@ using UnityEngine;
 public enum ItemType
 { 
     NoType =0,
-    Equipment = 1,
-    Resource = 2,
-    
+    Resource = 1,
+    PowerUp =2,
+    Damaging = 3
 }

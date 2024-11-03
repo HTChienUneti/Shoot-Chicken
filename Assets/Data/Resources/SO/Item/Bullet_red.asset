@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Bullet_Red
   m_EditorClassIdentifier: 
   itemCode: 3
-  itemType: 1
   ItemTypeAdd: 0
-  itemName: Bullet_Red
+  itemType: 3
   sprite: {fileID: 21300000, guid: f7652b957da6fca43a6260aad7247a99, type: 3}
   count: 0
-  dropRate: 10000

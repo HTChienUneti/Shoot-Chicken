@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bullet_Purple
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: 222e758f45ac6854fbfff414a0003ed5, type: 3}
-  damagingCode: 0
+  damagingCode: 4
   damage: 1
   damagingName: Bullet_Purple

@@ -11,25 +11,24 @@ public abstract class ObjectShooter : ObjectShooterAbstract
     [SerializeField] protected bool isShooting = false;
     protected List<IUsingObjDamaging> listeners = new List<IUsingObjDamaging>();
 
+    public virtual void SetDamaging(string damagingName)
+    {
+        this.GetDamagingSOByName(damagingName);
+    }
+
+    public virtual void GetDamagingSOByName(string name)
+    {
+        string path = "SO/Damaging/" + name;
+        this.damagingSO = Resources.Load<DamagingSO>(path);
+        this.SetDamaging(damagingSO);
+    }
+
     public virtual void SetDamaging(DamagingSO damagingSO)
     {
         this.damagingSO = damagingSO;
         this.currentDamaging = this.damagingSO;
         this.OnChangedObjDamaging();
     }
-    public virtual void SetDamaging(string damagingName)
-    {
-        string name = damagingName;
-        this.GetDamagingSOByName(name);
-        this.OnChangedObjDamaging();
-    }
-    public virtual void GetDamagingSOByName(string name)
-    {
-        string path = "SO/Damaging/" + name;
-        this.damagingSO = Resources.Load<DamagingSO>(path);
-        this.currentDamaging = this.damagingSO;
-    }
-
     protected override void ResetValue()
     {
         base.ResetValue();

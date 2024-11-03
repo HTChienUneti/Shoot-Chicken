@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpawnChicken : MyMonoBehaviour,IUsingAllChickenDead
+public class SpawnChickenManager : MyMonoBehaviour,IUsingAllChickenDead
 {
     [SerializeField] protected float boundX = 8f;
     [SerializeField] protected float spawnPosY = 5f;
@@ -56,7 +56,11 @@ public class SpawnChicken : MyMonoBehaviour,IUsingAllChickenDead
         this.wave++;
         if(this.wave % 2 == 0)
         {
-            ChickenSO.Instance.AddHp(1);
+            //ChickenSO.Instance.AddHp(1);
+        }
+        if(this.wave % 5 ==0)
+        {
+            this.spawnMax+=6;
         }
     }
 }

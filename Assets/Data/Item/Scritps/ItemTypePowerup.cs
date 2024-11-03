@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemTypeAdd 
+public enum ItemTypePowerup 
 {
-   NoAdd=0,
+   NoPowerup=0,
    Plus = 1,
    Time = 2,
 }
