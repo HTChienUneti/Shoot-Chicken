@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChickenDamageReceiver : DamageReceiver
 {
     [SerializeField] protected ChickenCtrl chickenCtrl;
+    [SerializeField] protected float gameDropRate =1;
     protected override void ResetValue()
     {
         this.hpMax = this.chickenCtrl.ChickenSO.maxHp;
@@ -23,11 +24,11 @@ public class ChickenDamageReceiver : DamageReceiver
     {
         List<ItemDropRate> itemDrop = this.chickenCtrl.ChickenSO.itemDrop;
        
-        float  rate = Random.Range(0.0f,1.0f);
+        float  rate = Random.Range(0.0f,1.0f) ;
         float dropRate;
         foreach (ItemDropRate drop in itemDrop)
         {
-            dropRate = drop.rate/100000;
+            dropRate = (drop.rate/100000) * this.gameDropRate;
             if (dropRate < rate) continue;
             Transform item = ItemSpawner.Instance.Spawn(drop.itemDrop.itemCode.ToString(), transform.position, transform.rotation);
             if (item == null) return;

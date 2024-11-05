@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenWingUI : InventoryUI
+public interface IUsingInputAlpha3
 {
- 
+    public void OnKeyDown();
 }

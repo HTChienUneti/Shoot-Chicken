@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Inventory : PlayerAbstract
 {
@@ -13,13 +12,22 @@ public class Inventory : PlayerAbstract
         base.Start();
         // InvokeRepeating(nameof(this.Test),5,5);
     }
+    public virtual bool Contains(string itemName )
+    {
+        foreach( InventoryItem item in items )
+        {
+            if (item.itemDrop.itemCode.ToString() != itemName) continue;
+            return true;
+        }
+        return false;
+    }
     protected virtual void Test()
     {
         this.RemoveItem(ItemCode.ChickenWing, 1);
     }
     public virtual void AddItem(ItemCode itemCode, int count)
     {
-        InventoryItem inventoryItem = this.GetItemFormListByCode(itemCode);
+        InventoryItem inventoryItem = this.GetItemFromListByCode(itemCode);
         this.AddItem(inventoryItem, count);
     }
     public virtual void AddItem(InventoryItem inventoryItem, int count)
@@ -66,19 +74,26 @@ public class Inventory : PlayerAbstract
 
         return inventoryItem;
     }
+    public virtual void RemoveItem(string itemName, int count)
+    {
+        ItemCode itemCode = Parse.StringToItemCode(itemName);
+        this.RemoveItem(itemCode, count);
+    }
     public virtual void RemoveItem(ItemCode itemCode, int count)
     {
-       InventoryItem inventoryItem = this.GetItemFormListByCode(itemCode);
+       InventoryItem inventoryItem = this.GetItemFromListByCode(itemCode);
         if (inventoryItem == null) return;
        this.RemoveItem(inventoryItem, count);
     }
     public virtual void RemoveItem(InventoryItem item, int count)
     {
+   
         item.stack -= count;
+        this.OnInventoryChanged();
         if (item.stack > 0) return;
         this.items.Remove(item);
     }
-    protected virtual InventoryItem GetItemFormListByCode(ItemCode itemCode)
+    protected virtual InventoryItem GetItemFromListByCode(ItemCode itemCode)
     {
         foreach (InventoryItem itemInv in this.items)
         {

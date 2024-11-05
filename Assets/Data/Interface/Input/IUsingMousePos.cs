@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenWingUI : InventoryUI
+public interface IUsingMousePos
 {
- 
+    public void OnMouseMove(Vector3 mousePos);
 }

@@ -9,12 +9,7 @@ public class PlayerDamageReceiver : DamageReceiver
         Debug.LogError("GAME OVER");
         GameManager.Instance.OverGame();
     }
-    protected override void ResetValue()
-    {
-        
-        this.hpMax = 10;
-        base.ResetValue();
-    }
+  
     protected override void LoadCollider()
     {
         base.LoadCollider();

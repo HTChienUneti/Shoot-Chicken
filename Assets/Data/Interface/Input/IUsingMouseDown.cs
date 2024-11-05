@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenWingUI : InventoryUI
+public interface IUsingMouseDown
 {
- 
+    public void OnMouseLeftDown(float fire);
 }

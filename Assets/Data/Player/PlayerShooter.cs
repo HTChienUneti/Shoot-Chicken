@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class PlayerShooter : ObjectShooter//, IUsingInventory
+public class PlayerShooter : ObjectShooter,IUsingMouseDown
 {
     [SerializeField] protected bool autoShoot = false;
     [SerializeField] protected PlayerCtrl playerCtrl;
@@ -12,11 +12,12 @@ public class PlayerShooter : ObjectShooter//, IUsingInventory
     {
         base.Start();
         //this.playerCtrl.Inventory.AddListener(this);
+        InputManager.Instance.AddMousedownListener(this);
     }
     protected override void Shooting()
     {
         if (!this.autoShoot)
-            if (InputManager.Instance.Fire_1 == 0) return;
+            if (!this.isShooting) return;
         base.Shooting();
     }
     protected override Transform GetPrefab()
@@ -63,5 +64,13 @@ public class PlayerShooter : ObjectShooter//, IUsingInventory
     public virtual void SetRerouce(ItemDrop item)
     {
 
+    }
+
+    public void OnMouseLeftDown(float fire)
+    {
+        if(fire ==1 )
+            this.isShooting = true;
+        else
+            this.isShooting = false;
     }
 }

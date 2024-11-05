@@ -12,5 +12,12 @@ public enum ItemCode
     Bullet_Green = 5,
     Bullet_Purple = 6,
     ChickenWing = 7
-   
 }
+public static class Parse
+{
+    public static ItemCode StringToItemCode(string str)
+    {
+        return System.Enum.Parse<ItemCode>(str);
+    }   
+}
+

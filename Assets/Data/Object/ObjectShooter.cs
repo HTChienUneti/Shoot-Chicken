@@ -29,6 +29,10 @@ public abstract class ObjectShooter : ObjectShooterAbstract
         this.currentDamaging = this.damagingSO;
         this.OnChangedObjDamaging();
     }
+    public virtual DamagingSO GetDamaging()
+    {
+        return this.damagingSO;
+    }
     protected override void ResetValue()
     {
         base.ResetValue();
