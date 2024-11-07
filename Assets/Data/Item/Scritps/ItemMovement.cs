@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemMovement : ObjMovement
+public class ItemMovement : ObjFollowTarget
 {
-    protected override void GetTargetPos()
+    protected override Vector3 GetTargetPos()
     {
-        this.targetPos = transform.position + new Vector3(0, -1, 0);
+        return transform.position + new Vector3(0, -1, 0);
     }
 }

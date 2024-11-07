@@ -21,13 +21,13 @@ public class BulletPurpleAbility : ChangeBulletAbility,IUsingInputAlpha3
     }
     protected override void SetCountdown()
     {
-        base.SetCountdown();
+        //se.SetCountdown();
         foreach (IUsingBulletPurpleAbility listener in this.listeners)
         {
             listener.Countdown(this.timeCountdown, this.timeDelay);
         }
     }
-    protected override void SetUsing()
+    protected override void OnUsing()
     {
         foreach (IUsingBulletPurpleAbility listener in this.listeners)
         {

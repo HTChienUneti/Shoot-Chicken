@@ -8,11 +8,12 @@ public abstract class BulletAbility : MyMonoBehaviour
 {
     [Header("Bullet Ability")]
     [SerializeField] protected float timeRemaining;
-    [SerializeField] protected float timeDelay = 10;
+    [SerializeField] protected float timeDelay = 5;
     [SerializeField] protected float timeCountdown;
     [SerializeField] protected bool isUsed = false;
-    [SerializeField] static private bool isUsing = false;
-    [SerializeField] protected float timeUse = 10f;
+  //  [SerializeField]static  protected bool anotherUsed = false;
+  
+    [SerializeField] protected float timeUse = 5;
     protected List<IUsingBulletAbility> listeners = new List<IUsingBulletAbility>();
     public virtual void AddListener(IUsingBulletAbility listener)
     {
@@ -20,13 +21,11 @@ public abstract class BulletAbility : MyMonoBehaviour
     }
     public virtual void OnKeyDown()
     {
-        if (!PlayerCtrl.Instance.Inventory.Contains(transform.name)) return;
-        if (this.isUsed || ChangeBulletAbility.isUsing) return;
-        this.OnUse();
+       if (!PlayerCtrl.Instance.Inventory.Contains(transform.name)) return;
+        this.OnStartUse();
     }
-    protected virtual void OnUse()
+    protected virtual void OnStartUse()
     {
-        BulletAbility.isUsing = true;
         StartCoroutine(this.UsingAbility());
         Debug.Log("On use");
     }
@@ -37,21 +36,20 @@ public abstract class BulletAbility : MyMonoBehaviour
 
         while (this.timeRemaining > 0)
         {
-            this.timeRemaining -= Time.fixedDeltaTime;
-            AbilityBulletManager.Instance.SetUsing(this.timeRemaining, this.timeUse);
-            this.SetUsing();
-            yield return new WaitForSeconds(0.02f);
+            this.timeRemaining -= Time.deltaTime;
+           // if (BulletAbility.anotherUsed) yield break;
+            this.OnUsing();
+            yield return new WaitForSeconds(Time.deltaTime);
         }
-        ChangeBulletAbility.isUsing = false;
         this.isUsed = true;
-        this.Used();
+        this.OnUsed();
         StartCoroutine(this.Countdown());
     }
-    protected virtual void Used()
+    protected abstract void OnUsed();
+    protected virtual void OnUsing()
     {
 
     }
-    protected abstract void SetUsing();
     protected virtual void SetCountdown()
     {
 

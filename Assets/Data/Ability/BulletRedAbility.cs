@@ -7,6 +7,7 @@ public class BulletRedAbility : ChangeBulletAbility, IUsingInputAlpha4
 {
     static private BulletRedAbility _instance;
     static public BulletRedAbility Instance => _instance;
+
     protected override void Awake()
     {
         base.Awake();
@@ -19,13 +20,13 @@ public class BulletRedAbility : ChangeBulletAbility, IUsingInputAlpha4
     }
     protected override void SetCountdown()
     {
-        base.SetCountdown();
+      //base.SetCountdown();
         foreach (IUsingBulletRedAbility listener in this.listeners)
         {
             listener.Countdown(this.timeCountdown, this.timeDelay);
         }
     }
-    protected override void SetUsing()
+    protected override void OnUsing()
     {
         foreach (IUsingBulletRedAbility listener in this.listeners)
         {

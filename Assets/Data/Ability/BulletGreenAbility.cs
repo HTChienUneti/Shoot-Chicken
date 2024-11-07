@@ -19,13 +19,12 @@ public class BulletGreenAbility : ChangeBulletAbility,IUsingInputAlpha2
     }
     protected override void SetCountdown()
     {
-        base.SetCountdown();
         foreach (IUsingBulletGreenAbility listener in this.listeners)
         {
             listener.Countdown(this.timeCountdown, this.timeDelay);
         }
     }
-    protected override void SetUsing()
+    protected override void OnUsing()
     {
     
         foreach (IUsingBulletGreenAbility listener in this.listeners)

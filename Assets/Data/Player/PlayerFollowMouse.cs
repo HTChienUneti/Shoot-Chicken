@@ -2,12 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFollowMouse : ObjMovement,IUsingMousePos
+public class PlayerFollowMouse : ObjFollowTarget,IUsingMousePos
 {
+    [SerializeField] protected Vector3 mousePos;
+    [SerializeField] protected bool isFirstEnable = true;
+    protected override void OnEnable()
+    {
+        if (isFirstEnable) return;
+        InputManager.Instance.AddMousePosListener(this);
+    }
     protected override void Start()
     {
         base.Start();
         InputManager.Instance.AddMousePosListener(this);
+        this.isFirstEnable = false;
+    }
+    protected virtual void OnDisable()
+    {
+        InputManager.Instance.RemoveMousePosListener(this);
     }
     protected override void ResetValue()
     {
@@ -20,14 +32,14 @@ public class PlayerFollowMouse : ObjMovement,IUsingMousePos
         this.GetTargetPos();
         base.FixedUpdate();
     }
-   
-    protected override void GetTargetPos()
-    {
-      //  this.targetPos = InputManager.Instance.MouseWorldPos;
-    }
 
     public void OnMouseMove(Vector3 mousePos)
     {
-        this.targetPos = mousePos;
+        this.mousePos = mousePos;
+    }
+
+    protected override Vector3 GetTargetPos()
+    {
+        return this.mousePos;
     }
 }

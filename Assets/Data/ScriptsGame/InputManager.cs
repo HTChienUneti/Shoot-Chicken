@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : MyMonoBehaviour
 {
     [Header("InputManager")]
     private static InputManager _instance;   
@@ -10,15 +10,19 @@ public class InputManager : MonoBehaviour
     [SerializeField]protected  Vector3 mouseWorldPos;
     //public Vector3 MouseWorldPos=>mouseWorldPos;
     [SerializeField] protected float fire_1;
+    [SerializeField] protected float horizontal;
+    [SerializeField] protected float vertical;
     //public float Fire_1=> fire_1;
     protected List<IUsingInputAlpha1> Alpha1listeners = new List<IUsingInputAlpha1>();   
     protected List<IUsingInputAlpha2> Alpha2listeners = new List<IUsingInputAlpha2>();   
     protected List<IUsingInputAlpha3> Alpha3listeners = new List<IUsingInputAlpha3>();   
     protected List<IUsingInputAlpha4> Alpha4listeners = new List<IUsingInputAlpha4>();   
     protected List<IUsingInputKeyE> keyElisteners = new List<IUsingInputKeyE>();   
+    protected List<IUsingInputKeyR> keyRlisteners = new List<IUsingInputKeyR>();   
     protected List<IUsingMousePos> MousePoslisteners = new List<IUsingMousePos>();   
     protected List<IUsingMouseDown> MouseDownlisteners= new List<IUsingMouseDown>();   
-    protected virtual void Awake()
+    protected List<IUsingHoriVertiKey> horizontalListeners= new List<IUsingHoriVertiKey>();   
+    protected override void Awake()
     {
         if(InputManager._instance != null)
         {
@@ -27,12 +31,24 @@ public class InputManager : MonoBehaviour
         }
         InputManager._instance = this;   
     }
+    protected override void Start()
+    {
+        base.Start();
+       // InvokeRepeating("OnAlpha2Down",2f,0.2f);
+    }
+
     protected void Update()
     {
         this.GetMousePos();
         this.GetMouseLeftDown();
+        this.GetHoriVerti();
         this.GetKeyDown();
     }
+    public virtual void AddKeyRListener(IUsingInputKeyR listener)
+    {
+        this.keyRlisteners.Add(listener);
+    }
+  
     public virtual void AddKeyEListener(IUsingInputKeyE listener)
     {
         this.keyElisteners.Add(listener);
@@ -57,9 +73,21 @@ public class InputManager : MonoBehaviour
     {
         this.MouseDownlisteners.Add(listener);
     }
+    public virtual void AddHoriVertiListener(IUsingHoriVertiKey listener)
+    {
+        this.horizontalListeners.Add(listener);
+    }
+    public virtual void RemoveHoriVertiListener(IUsingHoriVertiKey listener)
+    {
+        this.horizontalListeners.Remove(listener);
+    }
     public virtual void AddMousePosListener(IUsingMousePos listener)
     {
         this.MousePoslisteners.Add(listener);
+    }
+    public virtual void RemoveMousePosListener(IUsingMousePos listener)
+    {
+        this.MousePoslisteners.Remove(listener);
     }
     protected virtual void GetKeyDown()
     {
@@ -84,11 +112,21 @@ public class InputManager : MonoBehaviour
         {
             this.OnKeyEDown();
         }
-
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            this.OnKeyRDown();
+        }
     }
     protected virtual void OnKeyEDown()
     {
         foreach (IUsingInputKeyE listener in this.keyElisteners)
+        {
+            listener.OnKeyDown();
+        }
+    }
+    protected virtual void OnKeyRDown()
+    {
+        foreach (IUsingInputKeyR listener in this.keyRlisteners)
         {
             listener.OnKeyDown();
         }
@@ -135,10 +173,24 @@ public class InputManager : MonoBehaviour
             listener.OnMouseMove(this.mouseWorldPos);
         }
     }
+    protected virtual void OnHoriVertizontal()
+    {
+        foreach (IUsingHoriVertiKey listener in this.horizontalListeners)
+        {
+            listener.OnValueChanged(this.horizontal,this.vertical);
+        }
+    }
     protected virtual void GetMouseLeftDown()
     {
         this.fire_1 = Input.GetAxis("Fire1");
         this.OnMouseLeftDown();
+    }
+    protected virtual void GetHoriVerti()
+    {
+        this.horizontal = Input.GetAxis("Horizontal");
+        this.vertical = Input.GetAxis("Vertical");
+        if (this.vertical == 0 && this.horizontal == 0) return;
+        this.OnHoriVertizontal();
     }
     protected virtual void GetMousePos()
     {

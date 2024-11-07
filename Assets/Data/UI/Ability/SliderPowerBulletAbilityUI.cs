@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderUsingBulletAbilityUI : MyMonoBehaviour, IUsingBulletAbility
+public class SliderPowerBulletAbilityUI : MyMonoBehaviour, IUsingBulletAbility
 {
     [SerializeField] protected Slider slider;
     protected override void Start()

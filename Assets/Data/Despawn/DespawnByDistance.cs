@@ -7,7 +7,7 @@ public abstract class DespawnByDistance : Despawn
     [Header("DespawnByDistance")]
     [SerializeField] protected Transform target;
     [SerializeField] private float distance;
-    [SerializeField] private float maxDistance=20f;
+    [SerializeField] private float maxDistance=100;
     protected override void Start()
     {
         base.Start();

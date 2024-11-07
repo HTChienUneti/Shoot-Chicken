@@ -2,32 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EggMovement : ObjMovement
+public class EggMovement : ObjMoveForward
 {
-    protected Vector3 dir;
-    protected override void Start()
-    {
-        base.Start();
-        this.GetTargetPos();
-        this.GetDir();
-    }
     protected override void OnEnable()
     {
         base.OnEnable();
-        this.GetTargetPos();
         this.GetDir();
     }
-    protected virtual void GetDir()
+    protected override void GetDir()
     {
-        this.dir = this.targetPos - transform.parent.position;
-        dir.Normalize();
-    }
-    protected override void GetTargetPos()
-    {
-        this.targetPos = PlayerCtrl.Instance.transform.position;
-    }
-    protected override void Moving()
-    {
-        transform.parent.Translate(this.dir * this.moveSpeed * Time.fixedDeltaTime);
+        Vector3 playerPos = PlayerCtrl.Instance.transform.position;
+        this.direction = playerPos - transform.position;
+        this.direction .Normalize();    
     }
 }

@@ -12,7 +12,8 @@ public abstract class AbilityUIAbstract : MyMonoBehaviour,IUsingInventory
     {
         base.Start();
         PlayerCtrl.Instance.Inventory.AddListener(this);
-    
+        this.image.color = new Color(1, 1, 1, 0.2f);
+
     }
     protected override void LoadComponent()
     {
@@ -40,6 +41,15 @@ public abstract class AbilityUIAbstract : MyMonoBehaviour,IUsingInventory
         {
             if (item.itemDrop.itemCode.ToString() != transform.name) continue;
             this.countText.text = item.stack.ToString();
+            if (item.stack == 0)
+            {
+                this.image.color = new Color(1, 1, 1, 0.2f);
+            }
+            else
+            {
+                this.image.color = new Color(1, 1, 1, 1);
+            }
+           
         }
     }
     public void Countdown(float countdown, float timeDelay)

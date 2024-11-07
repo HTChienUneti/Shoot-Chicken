@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class ChangeBulletAbility :BulletAbility
 {
-    [Header("Bullet Ability")]
+    [Header("Change Bullet Ability")]
     [SerializeField]static private bool isUsing = false;
     [SerializeField] protected DamagingSO damagingSO;
     [SerializeField] protected DamagingSO currentDamaging;
@@ -15,10 +15,16 @@ public abstract class ChangeBulletAbility :BulletAbility
         this.LoadDamagingSO();
 
     }
-    protected override void OnUse()
+    public override void OnKeyDown()
     {
+        if (ChangeBulletAbility.isUsing) return;
+        base.OnKeyDown();
+    }
+    protected override void OnStartUse()
+    {
+        ChangeBulletAbility.isUsing = true;
         this.currentDamaging = PlayerCtrl.Instance.Shooter.GetDamaging();
-        base.OnUse();
+        base.OnStartUse();
         
     }
     protected override IEnumerator UsingAbility()
@@ -26,14 +32,10 @@ public abstract class ChangeBulletAbility :BulletAbility
         PlayerCtrl.Instance.Shooter.SetDamaging(this.damagingSO);
         return base.UsingAbility();
     }
-    protected override void Used()
+    protected override void OnUsed()
     {
-        base.Used();
-        PlayerCtrl.Instance.Shooter.SetDamaging(currentDamaging);
-    }
-    protected override void SetCountdown()
-    {
-     
+        ChangeBulletAbility.isUsing = false;
+        PlayerCtrl.Instance.Shooter.SetDamaging("Bullet_Blue");
     }
     protected virtual void LoadDamagingSO()
     {

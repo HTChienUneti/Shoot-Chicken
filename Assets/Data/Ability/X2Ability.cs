@@ -4,19 +4,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 
-public class Add1Ability : PowerAbility,IUsingInputKeyE
+public class X2Ability : PowerAbility,IUsingInputKeyR
 {
-  
     protected override void Start()
     {
         base.Start();
-        InputManager.Instance.AddKeyEListener(this);    
-
+        InputManager.Instance.AddKeyRListener(this);
     }
     protected override void OnStartUse()
     {
         base.OnStartUse();
-        PlayerCtrl.Instance.Shooter.ShooterLevel.LevelUp(ItemTypePowerup.Plus, this.powwer);
-     
+        PlayerCtrl.Instance.Shooter.ShooterLevel.LevelUp(ItemTypePowerup.Time, 2);
+      
     }
+  
 }

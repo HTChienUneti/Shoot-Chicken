@@ -14,6 +14,10 @@ public class PlayerCtrl : MyMonoBehaviour
 
     [SerializeField] protected PlayerDamageReceiver damageReceiver;
     public PlayerDamageReceiver DamageReceiver => damageReceiver;
+    [SerializeField] protected PlayerMoveByKey playerMoveByKey;
+    public PlayerMoveByKey PlayerMoveByKey=> playerMoveByKey;
+    [SerializeField] protected PlayerFollowMouse playerFollowMouse;
+    public PlayerFollowMouse PlayerFollowMouse => playerFollowMouse;
 
     protected override void Awake()
     {
@@ -27,9 +31,22 @@ public class PlayerCtrl : MyMonoBehaviour
         this.LoadInventory();
         this.LoadShooter();
         this.LoadDamageReceiver();
+        this.LoadPlayerMoveByKey();
+        this.LoadPlayerFollowMouse();
       
     }
-
+    protected virtual void LoadPlayerFollowMouse()
+    {
+        if (this.playerFollowMouse != null) return;
+        this.playerFollowMouse = GetComponentInChildren<PlayerFollowMouse>();
+        Debug.Log(transform.name + ": LoadPlayerFollowMouse", gameObject);
+    }
+    protected virtual void LoadPlayerMoveByKey()
+    {
+        if (this.playerMoveByKey != null) return;
+        this.playerMoveByKey = GetComponentInChildren<PlayerMoveByKey>();
+        Debug.Log(transform.name + ": LoadPlayerMoveByKey", gameObject);
+    }
     protected virtual void LoadDamageReceiver()
     {
         if (this.damageReceiver != null) return;
