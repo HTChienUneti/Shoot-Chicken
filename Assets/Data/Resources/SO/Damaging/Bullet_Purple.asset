@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc5bb7e5b0e411459c3c8d364fd4d9f, type: 3}
   m_Name: Bullet_Purple
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: 222e758f45ac6854fbfff414a0003ed5, type: 3}
+  _sprite: {fileID: 21300000, guid: 60216561b2ca84940a9f1d716aabfc32, type: 3}
   damagingCode: 4
+  ingredients:
+  - profile: {fileID: 11400000, guid: d047f34dbffd6314ea75ed5ff204bfd2, type: 2}
+    count: 1
   damage: 1
   damagingName: Bullet_Purple

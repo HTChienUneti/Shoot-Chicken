@@ -14,6 +14,7 @@ public class BulletCtrl : DamagingObjCtrl
     {
         if (this.model != null) return;
         this.model = GetComponentInChildren<SpriteRenderer>();
+        this.model.sprite = this.damagingSO._sprite;
         Debug.LogWarning(transform.name + ": LoadModel", gameObject);
     }
     public virtual void SetModel(Sprite sprite)

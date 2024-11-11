@@ -5,74 +5,95 @@ using UnityEngine;
 
 public class Inventory : PlayerAbstract
 {
-    [SerializeField] protected List<InventoryItem> items;
+    [SerializeField] protected List<ItemInventory> items;
+    public List<ItemInventory> Items=>items;
     protected List<IUsingInventory> listeners = new List<IUsingInventory>();
     protected override void Start()
     {
         base.Start();
         // InvokeRepeating(nameof(this.Test),5,5);
     }
-    public virtual bool Contains(string itemName )
+    //public virtual bool Contains(string itemName )
+    //{
+    //    foreach( InventoryItem item in items )
+    //    {
+    //        if (item.itemDrop.itemCode.ToString() != itemName) continue;
+    //        return true;
+    //    }
+    //    return false;
+    //}
+    public virtual ItemInventory GetItemInventory(ItemProfile itemProfile)
     {
-        foreach( InventoryItem item in items )
+        foreach (ItemInventory item in items)
         {
-            if (item.itemDrop.itemCode.ToString() != itemName) continue;
-            return true;
+            if (item.itemProfile != itemProfile) continue;
+            return item;
         }
-        return false;
+        return null;
+    }
+    public virtual ItemInventory GetItemInventory(ItemInventory itemInventory)
+    {
+        foreach (ItemInventory item in items)
+        {
+            if (item != itemInventory) continue;
+            return item;
+        }
+        return null;
     }
     protected virtual void Test()
     {
-        this.RemoveItem(ItemCode.ChickenWing, 1);
+        //this.RemoveItem(ItemCode.ChickenWing, 1);
     }
-    public virtual void AddItem(ItemCode itemCode, int count)
+    //public virtual void AddItem(ItemCode itemCode, int count)
+    //{
+    //    ItemInventory inventoryItem = this.GetItemFromListByCode(itemCode);
+    //    this.AddItem(inventoryItem, count);
+    //}
+    public virtual void AddItem(ItemProfile itemProfile, int count)
     {
-        InventoryItem inventoryItem = this.GetItemFromListByCode(itemCode);
-        this.AddItem(inventoryItem, count);
-    }
-    public virtual void AddItem(InventoryItem inventoryItem, int count)
-    {
-        this.AddItem(inventoryItem.itemDrop, count);    
-    }
-    public virtual void AddItem(ItemDrop item, int count)
-    {
-        InventoryItem inventoryItem = this.GetItemFromList(item);
-        if (inventoryItem == null)
+        ItemInventory inventoryItem = this.GetItemFromListByProfile(itemProfile);
+        if(inventoryItem == null)
         {
-            inventoryItem = this.CreateInventoryItem(item, count);
+            inventoryItem= this.CreateItemInventory(itemProfile,count);
+            inventoryItem.stack = 0;
+            inventoryItem.stackMax = itemProfile.defaultMaxStack;
             this.items.Add(inventoryItem);
         }
-        else
+        this.AddItem(inventoryItem, count);
+    }
+    //public virtual void AddItem(InventoryItem inventoryItem, int count)
+    //{
+    //    this.AddItem(inventoryItem, count);    
+    //}
+    public virtual void AddItem(ItemInventory itemInventory, int count)
+    {
+        itemInventory.stack += count;
+        if (itemInventory.stack > itemInventory.stackMax)
         {
-            inventoryItem.itemDrop = item;
-            inventoryItem.stack += count;
+            itemInventory.stack = itemInventory.stackMax;
         }
-
-        if (inventoryItem.stack > inventoryItem.stackMax)
-        {
-            inventoryItem.stack = inventoryItem.stackMax;
-        }
-
+     
         this.OnInventoryChanged();
     }
-    protected virtual InventoryItem GetItemFromList(ItemDrop item)
+    protected virtual ItemInventory GetItemFromList(ItemInventory itemInventory)
     {
-        foreach (InventoryItem itemInv in this.items)
+        foreach (ItemInventory itemInv in this.items)
         {
-            if (itemInv.itemDrop != item) continue;
+            if (itemInv != itemInventory) continue;
             return itemInv;
         }
         return null;
     }
-    protected virtual InventoryItem CreateInventoryItem(ItemDrop item, int count)
+    protected virtual ItemInventory CreateItemInventory(ItemProfile itemProfile, int count)
     {
-        InventoryItem inventoryItem = new InventoryItem()
+
+        ItemInventory newItem = new ItemInventory()
         {
-            itemDrop = item,
+            itemProfile = itemProfile,
             stack = count
         };
 
-        return inventoryItem;
+        return newItem;
     }
     public virtual void RemoveItem(string itemName, int count)
     {
@@ -81,28 +102,42 @@ public class Inventory : PlayerAbstract
     }
     public virtual void RemoveItem(ItemCode itemCode, int count)
     {
-       InventoryItem inventoryItem = this.GetItemFromListByCode(itemCode);
+       ItemInventory inventoryItem = this.GetItemFromListByCode(itemCode);
         if (inventoryItem == null) return;
        this.RemoveItem(inventoryItem, count);
     }
-    public virtual void RemoveItem(InventoryItem item, int count)
+    public virtual void RemoveItem(ItemProfile itemProfile, int count)
     {
-   
+        ItemInventory inventoryItem = this.GetItemFromListByProfile(itemProfile);
+        if (inventoryItem == null) return;
+        this.RemoveItem(inventoryItem, count);  
+    }
+    public virtual void RemoveItem(ItemInventory item, int count)
+    {
         item.stack -= count;
         this.OnInventoryChanged();
         if (item.stack > 0) return;
         this.items.Remove(item);
     }
-    protected virtual InventoryItem GetItemFromListByCode(ItemCode itemCode)
+    protected virtual ItemInventory GetItemFromListByCode(ItemCode itemCode)
     {
-        foreach (InventoryItem itemInv in this.items)
+        foreach (ItemInventory itemInv in this.items)
         {
-            if (itemInv.itemDrop.itemCode != itemCode) continue;
+            if (itemInv.itemProfile.itemCode != itemCode) continue;
             return itemInv;
         }
         return null;
     }
-  
+    protected virtual ItemInventory GetItemFromListByProfile(ItemProfile itemProfile)
+    {
+        foreach (ItemInventory itemInv in this.items)
+        {
+            if (itemInv.itemProfile != itemProfile) continue;
+            return itemInv;
+        }
+        return null;
+    }
+
     public virtual void AddListener(IUsingInventory listener)
     {
         this.listeners.Add(listener);

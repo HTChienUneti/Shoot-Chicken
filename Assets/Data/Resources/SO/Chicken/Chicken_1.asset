@@ -25,8 +25,6 @@ MonoBehaviour:
     rate: 7000
   - itemDrop: {fileID: 11400000, guid: f1aa1fc664d2d7f468b37f8204e339f8, type: 2}
     rate: 10000
-  - itemDrop: {fileID: 11400000, guid: a2256907f0ff0e14da2df97355c562e9, type: 2}
-    rate: 12000
   - itemDrop: {fileID: 11400000, guid: 6fa441c83afb6114c9a95abaf9cfdd35, type: 2}
     rate: 50000
   maxHp: 1

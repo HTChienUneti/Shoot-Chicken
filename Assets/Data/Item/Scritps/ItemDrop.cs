@@ -6,10 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="ItemDrop",menuName ="SO/ItemDrop")]
 public class ItemDrop : ScriptableObject
 {
-    public ItemCode itemCode;
+    public ItemProfile itemProfile;
     public ItemTypePowerup ItemTypePowerup;
     public ItemType itemType;
-    public Sprite sprite;
     public int count;
     public int defaultMaxStack = 10;
 }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IUsingInventory
 {
-    public void OnInventoryChanged(List<InventoryItem >inventoryItem);
+    public void OnInventoryChanged(List<ItemInventory >inventoryItem);
 }

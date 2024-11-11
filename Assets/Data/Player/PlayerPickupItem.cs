@@ -12,7 +12,7 @@ public class PlayerPickupItem : PlayerAbstract
         ItemPickupAble itemPickupAble = other.GetComponent<ItemPickupAble>();
         if (itemPickupAble == null) return;
         itemPickupAble.Picked();
-        this.playerCtrl.Inventory.AddItem(itemPickupAble.ItemCtrl.ItemDrop,1);
+        this.playerCtrl.Inventory.AddItem(itemPickupAble.ItemCtrl.ItemDrop.itemProfile,1);
     }
     protected override void LoadComponent()
     {

@@ -3,23 +3,14 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class PlayerShooter : ObjectShooter,IUsingMouseDown
+public class PlayerShooter : ObjectShooter
 {
-    [SerializeField] protected bool autoShoot = false;
     [SerializeField] protected PlayerCtrl playerCtrl;
     public PlayerCtrl PlayerCtrl => playerCtrl;
-    protected override void Start()
-    {
-        base.Start();
-        //this.playerCtrl.Inventory.AddListener(this);
-        InputManager.Instance.AddMousedownListener(this);
-    }
-    protected override void Shooting()
-    {
-        if (!this.autoShoot)
-            if (!this.isShooting) return;
-        base.Shooting();
-    }
+    [SerializeField] protected PlayerShootByMouse shooterByMouse;
+    public PlayerShootByMouse ShooterByMouse => shooterByMouse;
+    [SerializeField] protected PlayerShootByKey shooterByKey;
+    public PlayerShootByKey PlayerShooterByKey => shooterByKey;
     protected override Transform GetPrefab()
     {
         Transform newBullet = BulletSpawner.Instance.Spawn(this.damagingSO, this.startPos.position, Quaternion.identity);
@@ -35,6 +26,11 @@ public class PlayerShooter : ObjectShooter,IUsingMouseDown
         base.LoadComponent();
         this.LoadPlayerCtrl();
     }
+    protected override void Shooting()
+    {
+        base.Shooting();
+        this.isShooting = false;
+    }
     protected virtual void LoadPlayerCtrl()
     {
         if (this.playerCtrl != null) return;
@@ -42,35 +38,14 @@ public class PlayerShooter : ObjectShooter,IUsingMouseDown
         Debug.LogWarning(transform.name + ": LoadPlayerCtrl", gameObject);
     }
 
-    public void OnInventoryChanged(ItemDrop item)
+    public void SetShooting(bool isShooting)
     {
-        ItemType itemType = item.itemType;
-        switch (itemType)
-        {
-            case ItemType.Damaging:
-                this.SetDamaging(item.itemCode.ToString());
-               // this.playerCtrl.Inventory.RemoveItem(item);
-                break;
-            case ItemType.Resource:
-                this.SetRerouce(item);
-                break;
-            case ItemType.PowerUp:
-                this.shooterLevel.LevelUp(item.ItemTypePowerup,item.count);
-           //     this.playerCtrl.Inventory.RemoveItem(item);
-                break;
-
-        }
+        this.isShooting = isShooting;
     }
-    public virtual void SetRerouce(ItemDrop item)
+    protected virtual void LoadShooterByKey()
     {
-
-    }
-
-    public void OnMouseLeftDown(float fire)
-    {
-        if(fire ==1 )
-            this.isShooting = true;
-        else
-            this.isShooting = false;
+        if (this.shooterByKey != null) return;
+        this.shooterByKey = GetComponentInChildren<PlayerShootByKey>();
+        Debug.Log(transform.name + ": LoadShooterByKey", gameObject);
     }
 }

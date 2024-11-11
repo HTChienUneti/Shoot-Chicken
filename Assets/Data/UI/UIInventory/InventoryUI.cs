@@ -13,12 +13,12 @@ public class InventoryUI : MyMonoBehaviour, IUsingInventory
         base.Start();
         PlayerCtrl.Instance.Inventory.AddListener(this);
     }   
-    public void OnInventoryChanged(List<InventoryItem> items)
+    public void OnInventoryChanged(List<ItemInventory> items)
     {
-        foreach (InventoryItem item in items)
+        foreach (ItemInventory item in items)
         {
 
-            if (item.itemDrop.itemCode.ToString() !=transform.name) continue;
+            if (item.itemProfile.itemName !=transform.name) continue;
             this.countText.text = item.stack.ToString();
             break;
 

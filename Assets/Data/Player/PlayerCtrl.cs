@@ -10,9 +10,8 @@ public class PlayerCtrl : MyMonoBehaviour
     [SerializeField] protected Inventory inventory;
     public Inventory Inventory => inventory;
     [SerializeField] protected PlayerShooter shooter;
-    public PlayerShooter Shooter => shooter;
-
-    [SerializeField] protected PlayerDamageReceiver damageReceiver;
+    public PlayerShooter Shooter=>shooter;
+    [SerializeField]protected PlayerDamageReceiver damageReceiver;
     public PlayerDamageReceiver DamageReceiver => damageReceiver;
     [SerializeField] protected PlayerMoveByKey playerMoveByKey;
     public PlayerMoveByKey PlayerMoveByKey=> playerMoveByKey;

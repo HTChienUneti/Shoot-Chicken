@@ -9,6 +9,7 @@ public abstract class ObjectShooter : ObjectShooterAbstract
     [SerializeField] protected float shootTimer = 0f;
     [SerializeField] protected float distance = 0.5f;
     [SerializeField] protected bool isShooting = false;
+    [SerializeField] protected bool autoShoot = false;
     protected List<IUsingObjDamaging> listeners = new List<IUsingObjDamaging>();
 
     public virtual void SetDamaging(string damagingName)
@@ -45,7 +46,9 @@ public abstract class ObjectShooter : ObjectShooterAbstract
     }
     protected virtual void Shooting()
     {
-      
+        if (!this.autoShoot)
+            if (!this.isShooting) return;
+
         if (!this.CountdownTime()) return;
 
         List<Transform> prefabs = new List<Transform>();
@@ -112,5 +115,9 @@ public abstract class ObjectShooter : ObjectShooterAbstract
             listener.OnChangedObjDamaging(this.currentDamaging);
         }
     }
-
+    public virtual void Shoot(DamagingSO damaging)
+    {
+        Transform bullet = BulletSpawner.Instance.Spawn(damaging, this.startPos.position, Quaternion.identity);
+        bullet.gameObject.SetActive(true);
+    }
 }

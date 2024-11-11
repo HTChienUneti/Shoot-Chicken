@@ -18,13 +18,13 @@ public class ItemCtrl : MyMonoBehaviour
         if (this.model != null) return;
 
         this.model = transform.Find("Model");
-        this.model.GetComponent<SpriteRenderer>().sprite = this.itemDrop.sprite;
+        this.model.GetComponent<SpriteRenderer>().sprite = this.itemDrop.itemProfile.sprite;
         Debug.LogWarning(transform.name + ":  LoadModel", gameObject);
     }
     protected virtual void LoadItemSO()
     {
         if (this.itemDrop != null) return;
-        string path = "SO/Item/" + transform.name;
+        string path = "SO/ItemDrop/" + transform.name;
         this.itemDrop = Resources.Load<ItemDrop>(path);
         Debug.LogWarning(transform.name + ":  LoadItemSO", gameObject);
     }

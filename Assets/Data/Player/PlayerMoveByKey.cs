@@ -2,36 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveByKey : ObjParentMovement,IUsingHoriVertiKey
+public class PlayerMoveByKey : ObjParentMovement
 {
-    [SerializeField] protected bool isFirstEnable = true;
+    [SerializeField] protected float horizontal;
+    [SerializeField] protected float vertical;
     protected override void ResetValue()
     {
         this.boundX = 8;
         this.boundY = 4;
         base.ResetValue();
     }
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        if (isFirstEnable) return;
-        InputManager.Instance.AddHoriVertiListener(this);
-    }
     protected override void Start()
     {
-        base.Start();
-        InputManager.Instance.AddHoriVertiListener(this);
-        this.isFirstEnable = false;  
         gameObject.SetActive(false);
     }
-    public void OnValueChanged(float horizontal, float vertical)
+    public void SetKeyValue(float horizontal, float vertical)
     {
-        transform.parent.position += new Vector3(horizontal, vertical, 0) * this.moveSpeed * Time.deltaTime;
-        this.Bound();
-
+        this.horizontal = horizontal;
+        this.vertical = vertical;
     }
-    protected virtual void OnDisable()
+    protected override void Moving()
     {
-        InputManager.Instance.RemoveHoriVertiListener(this);
+        transform.parent.position += new Vector3(this.horizontal, this.vertical, 0) * this.moveSpeed * Time.deltaTime;
+        base.Moving();
     }
 }

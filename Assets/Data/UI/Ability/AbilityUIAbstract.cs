@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
-public abstract class AbilityUIAbstract : MyMonoBehaviour,IUsingInventory
+public abstract class AbilityUIAbstract : MyMonoBehaviour, IUsingInventory
 {
     [SerializeField] protected Image image;
     [SerializeField] protected Image highlightImage;
     [SerializeField] protected TextMeshProUGUI countText;
+    [SerializeField] protected DamagingSO damagingSO;
     protected override void Start()
     {
         base.Start();
@@ -18,14 +20,24 @@ public abstract class AbilityUIAbstract : MyMonoBehaviour,IUsingInventory
     protected override void LoadComponent()
     {
         base.LoadComponent();
+        this.LoadDamagingSO();
         this.LoadSprite();
         this.LoadCountText();
+
+    }
+    protected virtual void LoadDamagingSO()
+    {
+        if (this.damagingSO != null) return;
+        string path = "SO/Damaging/" + transform.name;
+        this.damagingSO = Resources.Load<DamagingSO>(path);
+        Debug.LogWarning(transform.name + " :LoadDamagingSO", gameObject);
     }
     protected virtual void LoadSprite()
     {
         if (this.image != null) return;
         this.image = transform.Find("Sprite").GetComponent<Image>();
         this.highlightImage = transform.Find("HightlightImage").GetComponent<Image>();
+        this.image.sprite = this.damagingSO._sprite;
         Debug.Log(transform.name + ": LoadSprite", gameObject);
     }
     protected virtual void LoadCountText()
@@ -35,22 +47,34 @@ public abstract class AbilityUIAbstract : MyMonoBehaviour,IUsingInventory
         Debug.Log(transform.name + ": LoadCountText", gameObject);
     }
 
-    public void OnInventoryChanged(List<InventoryItem> inventoryItem)
+    public void OnInventoryChanged(List<ItemInventory> inventoryItem)
     {
-        foreach (InventoryItem item in inventoryItem)
+        if (this.HaveEnoughItem(inventoryItem))
         {
-            if (item.itemDrop.itemCode.ToString() != transform.name) continue;
-            this.countText.text = item.stack.ToString();
-            if (item.stack == 0)
-            {
-                this.image.color = new Color(1, 1, 1, 0.2f);
-            }
-            else
-            {
-                this.image.color = new Color(1, 1, 1, 1);
-            }
-           
+            //    this.countText.text = (item.stack / this.damagingSO.requireCount).ToString();
+            this.image.color = new Color(1, 1, 1, 1);
         }
+        else
+        {
+            this.image.color = new Color(1, 1, 1, 0.2f);
+        }
+
+    }
+    protected virtual bool HaveEnoughItem(List<ItemInventory> inventoryItem)
+    {
+        
+        foreach (Ingredient ingredient in this.damagingSO.ingredients)
+        {
+            bool isContain = false;
+            foreach (ItemInventory itemInventory in inventoryItem)
+            {
+                if (itemInventory.itemProfile != ingredient.profile) continue;
+                if (itemInventory.stack < ingredient.count) continue;
+                isContain = true;
+            }
+            if (!isContain) return false;
+        }
+        return true;
     }
     public void Countdown(float countdown, float timeDelay)
     {

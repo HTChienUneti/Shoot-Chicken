@@ -10,6 +10,7 @@ public class ChickenShooter : ObjectShooter
     protected override void ResetValue()
     {
         this.shootTimer = 0f;
+        this.autoShoot = true;
         this.shootDelay = Random.Range(5, this.shootDelay);
     }
     protected override Transform GetPrefab()
