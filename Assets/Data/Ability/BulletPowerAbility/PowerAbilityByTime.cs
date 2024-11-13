@@ -33,10 +33,6 @@ public abstract class PowerAbilityByTime : BulletAbilityByTime
         PowerAbilityByTime.isUsing = false;
         PlayerCtrl.Instance.Shooter.ShooterLevel.CurrentLevel =this.currentPower;
     }
-    protected override List<Ingredient> GetIngredient()
-    {
-        return this.itemPower.ingredients;
-    }
     protected override void LoadComponent()
     {
         base.LoadComponent();

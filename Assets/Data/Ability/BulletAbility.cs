@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BulletAbility : MyMonoBehaviour, IUsingInput
+public abstract class BulletAbility : MyMonoBehaviour, IUsingKeyDown
 {
     //----------------Properties----------------------//
     [Header("Bullet Ability")]
     [SerializeField] protected float timeDelay = 5;
     [SerializeField] protected float timeCountdown = 5;
+    [SerializeField] protected Ability ability;
+    [SerializeField] protected KeyCode keyCode;
     protected List<IUsingBulletAbility> listeners = new List<IUsingBulletAbility>();
 
 
@@ -16,9 +18,8 @@ public abstract class BulletAbility : MyMonoBehaviour, IUsingInput
     {
         base.Start();
         this.timeCountdown = this.timeDelay;
-        InputManager.Instance.AddKeyListener(this.GetKeyCode(), this);
+        InputManager.Instance.AddKeyDownListener(this.keyCode, this);
     }
-    protected abstract KeyCode GetKeyCode();
     public virtual void AddListener(IUsingBulletAbility listener)
     {
         this.listeners.Add(listener);
@@ -30,26 +31,25 @@ public abstract class BulletAbility : MyMonoBehaviour, IUsingInput
     }
     protected virtual bool HaveEnoughItem()
     {
-        foreach (Ingredient ingredient in this.GetIngredient()) 
+        foreach (ItemRequire item in this.ability.requires) 
         {
             bool isContain = false;
             foreach (ItemInventory itemInventory in PlayerCtrl.Instance.Inventory.Items)
             {
-                if (itemInventory.itemProfile != ingredient.profile) continue;
-                if (itemInventory.stack < ingredient.count) continue;
+                if (itemInventory.item.itemProfile != item.item.itemProfile) continue;
+                if (itemInventory.stack < item.count) continue;
                 isContain = true;
             }
             if (!isContain) return false;
         }
         return true;
     }
-    protected abstract List<Ingredient> GetIngredient();
     protected virtual void OnStartUse()
     {
       //  PlayerCtrl.Instance.Inventory.RemoveItem(this.itemRequire, this.require);
         //this.OnUsing();
     }
-    protected virtual void OnUsing()
+    protected virtual void OnUsing()    
     {
         this.OnUsed();
     }
@@ -72,7 +72,18 @@ public abstract class BulletAbility : MyMonoBehaviour, IUsingInput
     }
     protected virtual void Countdowning()
     {
-        Debug.Log("countdowning");
+       // Debug.Log("countdowning");
+    }
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        this.LoadAbility();
+    }
+    protected virtual void LoadAbility()
+    {
+        if (this.ability != null) return;
+        string path = "SO/Ability/" + transform.name;
+        this.ability = Resources.Load<Ability>(path);
     }
 } 
  

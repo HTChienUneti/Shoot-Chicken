@@ -13,6 +13,11 @@ public class BulletRedAbility : ChangeBulletAbilityByTime
         base.Awake();
         this.LoadSingleton();
     }
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.keyCode = KeyCode.Alpha4 ;
+    }
     protected override void Countdowning()
     {
       //base.SetCountdown();
@@ -38,8 +43,4 @@ public class BulletRedAbility : ChangeBulletAbilityByTime
         BulletRedAbility._instance = this;
     }
 
-    protected override KeyCode GetKeyCode()
-    {
-        return KeyCode.Alpha4;
-    }
 }

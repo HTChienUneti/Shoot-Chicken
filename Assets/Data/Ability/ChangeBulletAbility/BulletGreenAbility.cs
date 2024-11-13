@@ -12,7 +12,11 @@ public class BulletGreenAbility : ChangeBulletAbilityByTime
         base.Awake();
         this.LoadSingleton();
     }
-
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.keyCode = KeyCode.Alpha2;
+    }
     protected override void Countdowning()
     {
         foreach (IUsingBulletGreenAbility listener in this.listeners)
@@ -36,10 +40,5 @@ public class BulletGreenAbility : ChangeBulletAbilityByTime
             return;
         }
         BulletGreenAbility._instance = this;
-    }
-
-    protected override KeyCode GetKeyCode()
-    {
-        return KeyCode.Alpha2;
     }
 }

@@ -26,7 +26,7 @@ public class Inventory : PlayerAbstract
     {
         foreach (ItemInventory item in items)
         {
-            if (item.itemProfile != itemProfile) continue;
+            if (item.item.itemProfile != itemProfile) continue;
             return item;
         }
         return null;
@@ -56,7 +56,6 @@ public class Inventory : PlayerAbstract
         {
             inventoryItem= this.CreateItemInventory(itemProfile,count);
             inventoryItem.stack = 0;
-            inventoryItem.stackMax = itemProfile.defaultMaxStack;
             this.items.Add(inventoryItem);
         }
         this.AddItem(inventoryItem, count);
@@ -68,9 +67,9 @@ public class Inventory : PlayerAbstract
     public virtual void AddItem(ItemInventory itemInventory, int count)
     {
         itemInventory.stack += count;
-        if (itemInventory.stack > itemInventory.stackMax)
+        if (itemInventory.stack > itemInventory.item.maxStack)
         {
-            itemInventory.stack = itemInventory.stackMax;
+            itemInventory.stack = itemInventory.item.maxStack;
         }
      
         this.OnInventoryChanged();
@@ -86,14 +85,27 @@ public class Inventory : PlayerAbstract
     }
     protected virtual ItemInventory CreateItemInventory(ItemProfile itemProfile, int count)
     {
+        ItemInventorySO itemInventorySO = this.GetItemInventorySOByProfile(itemProfile);
 
         ItemInventory newItem = new ItemInventory()
         {
-            itemProfile = itemProfile,
-            stack = count
+            item = itemInventorySO,
+            stack = count,
+            maxStack = itemInventorySO.maxStack,    
         };
 
         return newItem;
+    }
+    protected virtual ItemInventorySO GetItemInventorySOByProfile(ItemProfile itemProfile)
+    {
+        string path = "SO/ItemInventory/";
+        ItemInventorySO[] itemSO = Resources.LoadAll<ItemInventorySO>(path);    
+        foreach(ItemInventorySO itemInventorySO in itemSO)
+        {
+            if(itemInventorySO.itemProfile != itemProfile) continue;
+            return itemInventorySO;
+        }
+        return null;    
     }
     public virtual void RemoveItem(string itemName, int count)
     {
@@ -123,7 +135,7 @@ public class Inventory : PlayerAbstract
     {
         foreach (ItemInventory itemInv in this.items)
         {
-            if (itemInv.itemProfile.itemCode != itemCode) continue;
+            if (itemInv.item.itemProfile.itemCode != itemCode) continue;
             return itemInv;
         }
         return null;
@@ -132,7 +144,7 @@ public class Inventory : PlayerAbstract
     {
         foreach (ItemInventory itemInv in this.items)
         {
-            if (itemInv.itemProfile != itemProfile) continue;
+            if (itemInv.item.itemProfile != itemProfile) continue;
             return itemInv;
         }
         return null;

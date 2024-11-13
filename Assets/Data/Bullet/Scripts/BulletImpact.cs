@@ -7,7 +7,7 @@ public class BulletImpact : DamagingObjImpact
     {
         base.ResetValue();
         this._collider.radius = 0.4f;
-        this._collider.center= new Vector3(0,1,0);
+     //   this._collider.center= new Vector3(0,1,0);
     }
     protected override void Despawn()
     {

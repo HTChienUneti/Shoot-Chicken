@@ -19,6 +19,7 @@ public class ChickenDamageReceiver : DamageReceiver
     { 
         this.DropItem();
         base.OnDead();
+       
     }
     protected virtual void DropItem()
     {

@@ -8,6 +8,5 @@ public class ItemProfile : ScriptableObject
     public ItemCode itemCode;
     public Sprite sprite;
     public string itemName;
-    public int defaultMaxStack = 10;
 
 }

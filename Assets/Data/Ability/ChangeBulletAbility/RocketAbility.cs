@@ -8,6 +8,11 @@ public class RocketAbility :SpecialAbility
     static public RocketAbility Instance => _instance;
 
 
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.keyCode = KeyCode.Alpha1;
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -16,7 +21,7 @@ public class RocketAbility :SpecialAbility
     protected override void Start()
     {
         base.Start();
-        InputManager.Instance.AddKeyListener(KeyCode.Alpha1, this);
+        InputManager.Instance.AddKeyDownListener(KeyCode.Alpha1, this);
     }
     private void LoadSingleton()
     {
@@ -36,14 +41,5 @@ public class RocketAbility :SpecialAbility
             listener.Countdown(this.timeCountdown, this.timeDelay);
         }
     }
-
-    protected override KeyCode GetKeyCode()
-    {
-        return KeyCode.Alpha1;
-    }
-
-    protected override List<Ingredient> GetIngredient()
-    {
-        return this.damagingSO.ingredients;
-    }
+ 
 }

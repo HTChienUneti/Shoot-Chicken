@@ -6,14 +6,14 @@ using UnityEngine.Diagnostics;
 
 public class X2Ability : PowerAbilityByTime
 {
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.keyCode = KeyCode.R;
+    }
     protected override void OnStartUse()
     {
         base.OnStartUse();
         PlayerCtrl.Instance.Shooter.ShooterLevel.LevelUp(ItemTypePowerup.Time, 2);
-    }
-
-    protected override KeyCode GetKeyCode()
-    {
-        return KeyCode.R;
     }
 }

@@ -8,7 +8,7 @@ public class RocketAbilityUI : AbilityUIAbstract, IUsingRocketAbility
     protected override void Start()
     {
         base.Start();
-       // RocketAbility.Instance.AddListener(this);
+        RocketAbility.Instance.AddListener(this);
     }
  
 }

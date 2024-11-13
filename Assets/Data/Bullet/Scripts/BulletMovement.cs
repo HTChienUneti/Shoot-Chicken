@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMovement : ObjFollowTarget
+public class BulletMovement : ObjMoveForward
 {
     protected override void ResetValue()
     {
@@ -10,8 +10,9 @@ public class BulletMovement : ObjFollowTarget
         this.boundX = 100;
         this.boundY = 100;
     }
-    protected override Vector3 GetTargetPos()
+
+    protected override void GetDir()
     {
-        return transform.parent.position + Vector3.up;
+        this.direction = Vector3.up;
     }
 }

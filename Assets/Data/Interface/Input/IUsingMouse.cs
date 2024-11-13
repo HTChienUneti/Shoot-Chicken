@@ -5,5 +5,4 @@ using UnityEngine;
 public interface IUsingMouse
 {
     public void OnMouseLeftDown();
-    public void OnMouseLeftUp();
 }

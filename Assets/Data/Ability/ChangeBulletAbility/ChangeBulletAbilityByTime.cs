@@ -33,8 +33,4 @@ public abstract class ChangeBulletAbilityByTime : AbilityWeapon
         PlayerCtrl.Instance.Shooter.SetDamaging("Bullet_Blue");
         base.OnUsed();
     }
-    protected override List<Ingredient> GetIngredient()
-    {
-        return this.damagingSO.ingredients;
-    }
 }

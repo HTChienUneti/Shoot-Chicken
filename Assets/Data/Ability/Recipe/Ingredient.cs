@@ -6,6 +6,6 @@ using UnityEngine;
 [Serializable]
 public class Ingredient : Recipe
 {
-    public ItemProfile profile;
+    public ItemInventorySO profile;
     public int count;
 }

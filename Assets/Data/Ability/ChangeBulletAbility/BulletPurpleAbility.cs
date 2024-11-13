@@ -14,7 +14,12 @@ public class BulletPurpleAbility : ChangeBulletAbilityByTime
         base.Awake();
         this.LoadSingleton();
     }
-  
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.keyCode  = KeyCode.Alpha3; ;
+    }
+
     protected override void Countdowning()
     {
         //se.SetCountdown();
@@ -42,10 +47,5 @@ public class BulletPurpleAbility : ChangeBulletAbilityByTime
             return;
         }
         BulletPurpleAbility._instance = this;
-    }
-
-    protected override KeyCode GetKeyCode()
-    {
-        return KeyCode.Alpha3;
     }
 }

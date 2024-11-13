@@ -62,5 +62,6 @@ public class SpawnChickenManager : MyMonoBehaviour,IUsingAllChickenDead
         {
             this.spawnMax+=6;
         }
+        ChickenPointSpawner.Instance.ClearPoint();
     }
 }

@@ -14,8 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: e2bbad9185f495c438efd8653ef6128d, type: 3}
   damagingCode: 2
-  ingredients:
-  - profile: {fileID: 11400000, guid: 7b1c8bba9c44ab1408a03c28ba40059e, type: 2}
-    count: 1
   damage: 1
   damagingName: Bullet_Green

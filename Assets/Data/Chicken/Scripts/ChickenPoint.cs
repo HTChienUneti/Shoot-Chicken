@@ -39,5 +39,9 @@ public class ChickenPoint : MyMonoBehaviour
         }
         Debug.LogWarning(transform.name + ": LoadPoint", gameObject);
     }
+    public void CreatePoint()
+    {
+
+    }
  
 }

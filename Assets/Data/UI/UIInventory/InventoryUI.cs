@@ -18,7 +18,7 @@ public class InventoryUI : MyMonoBehaviour, IUsingInventory
         foreach (ItemInventory item in items)
         {
 
-            if (item.itemProfile.itemName !=transform.name) continue;
+            if (item.item.itemProfile.itemName !=transform.name) continue;
             this.countText.text = item.stack.ToString();
             break;
 
