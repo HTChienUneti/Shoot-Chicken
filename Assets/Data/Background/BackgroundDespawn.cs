@@ -12,7 +12,7 @@ public class BackgroundDespawn : DespawnByDistance
     protected override void DespawnObj()
     {
         BackgroundSpawner.Instance.Despawn(transform.parent);
-        base.DespawnObj();
+    
     }
 
 }

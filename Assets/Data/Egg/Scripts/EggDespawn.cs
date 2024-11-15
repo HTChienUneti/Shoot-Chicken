@@ -6,7 +6,6 @@ public class EggDespawn : DespawnByDistance
 {
     protected override void DespawnObj()
     {
-        base.DespawnObj();
         EggSpawner.Instance.Despawn(transform.parent);
     }
     protected override void GetTarget()

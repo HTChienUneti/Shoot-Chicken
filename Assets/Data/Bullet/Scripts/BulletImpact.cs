@@ -9,6 +9,10 @@ public class BulletImpact : DamagingObjImpact
         this._collider.radius = 0.4f;
      //   this._collider.center= new Vector3(0,1,0);
     }
+    protected override void OnImpact()
+    {
+        BulletImpactManager.Instance.SetImpact();
+    }
     protected override void Despawn()
     {
         BulletSpawner.Instance.Despawn(transform.parent);

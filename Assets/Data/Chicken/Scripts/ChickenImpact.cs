@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenImpact : ShootableObjImpact
+public class ChickenImpact : ShootedableObjImpact
 {
   
 }

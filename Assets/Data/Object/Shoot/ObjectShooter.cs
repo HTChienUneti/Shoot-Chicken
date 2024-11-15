@@ -45,27 +45,27 @@ public abstract class ObjectShooter : ObjectShooterAbstract
         this.Shooting();
     //    this.CountdownTime();
     }
-    protected virtual void Shooting()
+    protected virtual bool Shooting()
     {
         if (!this.autoShoot)
-            if (!this.isShooting) return;
+            if (!this.isShooting) return false;
 
-        if (!this.CountdownTime()) return;
+        if (!this.CountdownTime()) return false;
 
         List<Transform> prefabs = new List<Transform>();
         for (int i = 0; i < this.shooterLevel.CurrentLevel; i++)
         {
             prefabs.Add(this.GetPrefab());
         }
-        if (prefabs == null) return;
-        if (prefabs.Count == 0) return;
+        if (prefabs == null) return false;
+        if (prefabs.Count == 0) return false;
         this.SetPrefabPos(prefabs);
         foreach (Transform prefab in prefabs)
         {
             if (prefab == null) continue;
             prefab.gameObject.SetActive(true);
         }
-        
+        return true;
     }
     protected virtual void SetPrefabPos(List<Transform> prefabs)
     {

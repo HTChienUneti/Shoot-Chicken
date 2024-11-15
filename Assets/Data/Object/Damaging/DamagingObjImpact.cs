@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.MPE;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -19,7 +20,12 @@ public abstract class DamagingObjImpact: DamagingObjAbstract
         this.Despawn();
      
         this.SendDamage(damageReceiver);
+        this.OnImpact();
         
+    }
+    protected virtual void OnImpact()
+    {
+
     }
     protected virtual void CreateVFXImpact()
     {

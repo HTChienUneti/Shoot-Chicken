@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenCtrl : ShootableObjCtrl
+public class ChickenCtrl : ShootedableObjCtrl
 {
     [SerializeField] protected ChickenMovement chickenMovement;
     public ChickenMovement ChickenMovement => chickenMovement;

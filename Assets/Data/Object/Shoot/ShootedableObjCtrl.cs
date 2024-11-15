@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootableObjCtrl : MyMonoBehaviour
+public class ShootedableObjCtrl : MyMonoBehaviour
 {
     [SerializeField] protected DamageReceiver damageReceiver;
   //  [SerializeField] protected DamageSender damageSender;

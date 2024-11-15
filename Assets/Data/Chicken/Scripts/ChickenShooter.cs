@@ -27,9 +27,9 @@ public class ChickenShooter : ObjectShooter
         base.LoadComponent();
         this.LoadChickenCtrl();
     }
-    protected override void Shooting()
+    protected override bool Shooting()
     {
-        base.Shooting();
+        return base.Shooting();
     }
     protected virtual void LoadChickenCtrl()
     {

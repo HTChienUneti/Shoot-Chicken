@@ -11,11 +11,6 @@ public abstract class Despawn : MyMonoBehaviour
         this.DespawnObj();
     }
     protected abstract bool TryingDespawn();
-    protected virtual void DespawnObj()
-    {
-        
-    }
-  
-
+    protected abstract void DespawnObj();
 
 }
