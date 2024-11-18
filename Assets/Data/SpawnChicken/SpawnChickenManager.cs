@@ -5,21 +5,19 @@ using UnityEngine;
 
 public class SpawnChickenManager : MyMonoBehaviour,IUsingAllChickenDead
 {
+    [SerializeField] protected List<Wave> waves;
+    [SerializeField] protected int currentWave = 0;
+    [SerializeField] protected int spawnCount = 0; 
+    [SerializeField] protected int currentRespawn = 0; 
+
     [SerializeField] protected float boundX = 8f;
     [SerializeField] protected float spawnPosY = 5f;
     [SerializeField] protected float timer=0;
-    [SerializeField] protected float timeMax= .1f;
-    [SerializeField] protected int spawnCount = 0;
-    [SerializeField] protected int spawnMax = 6;
+    [SerializeField] protected float delaySpawn= .1f;
     [SerializeField] protected bool isAllChickenDead = false;
-    [SerializeField] protected int wave = 1;
     protected override void Start()
     {
         ChickenSpawner.Instance.AddListener(this);
-    }
-    protected virtual void ReduceMax()
-    {
-        this.timeMax -= .2f;
     }
     protected virtual void FixedUpdate()
     {
@@ -27,10 +25,11 @@ public class SpawnChickenManager : MyMonoBehaviour,IUsingAllChickenDead
     }
     protected virtual void Spawning()
     {
-        if (!this.CountdownTimer() || this.spawnCount >= this.spawnMax) return;
+        int index = Random.Range(0, this.waves[currentWave].chickens.Count);
+        ChickenSO chickenSO = this.waves[currentWave].chickens[index];
+        if (!this.CountdownTimer() || this.spawnCount >= this.waves[currentWave].respawn[currentRespawn]) return;
         Vector3 spawnPos = this.RandomPos();
-        string prefabName = ChickenSpawner.chicken_1;
-        Transform obj = ChickenSpawner.Instance.Spawn(prefabName, spawnPos, Quaternion.identity);
+        Transform obj = ChickenSpawner.Instance.Spawn(chickenSO, spawnPos, Quaternion.identity);
         if (obj == null) return;
         obj.gameObject.SetActive(true);
         this.spawnCount++;
@@ -43,7 +42,7 @@ public class SpawnChickenManager : MyMonoBehaviour,IUsingAllChickenDead
     protected virtual bool CountdownTimer()
     {
         this.timer += Time.fixedDeltaTime;
-        if (this.timer < this.timeMax) return false;
+        if (this.timer < this.delaySpawn) return false;
         this.timer = 0f;
         return true;
     }
@@ -53,15 +52,12 @@ public class SpawnChickenManager : MyMonoBehaviour,IUsingAllChickenDead
         this.isAllChickenDead = true;
         this.spawnCount = 0;
 
-        this.wave++;
-        if(this.wave % 2 == 0)
+        this.currentRespawn++;
+        if (this.currentRespawn >= this.waves[this.currentWave].respawn.Count)
         {
-            //ChickenSO.Instance.AddHp(1);
+            this.currentRespawn = 0;
+            this.currentWave++;
         }
-        if(this.wave % 5 ==0)
-        {
-            this.spawnMax+=6;
-        }
-        ChickenPointSpawner.Instance.ClearPoint();
+            ChickenPointSpawner.Instance.ClearPoint();
     }
 }

@@ -7,5 +7,6 @@ using UnityEngine;
 public enum ChickenCode
 {
     NoCode = 0,
-    Chicken_1 = 1
+    Chicken_1 = 1,  
+    Chicken_2 = 2
 }

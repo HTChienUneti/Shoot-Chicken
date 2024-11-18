@@ -6,6 +6,6 @@ using UnityEngine;
 [Serializable]
 public class ItemRequire
 {
-    public ItemInventorySO item;
+    public ItemInventorySO itemSO;
     public int count;
 }

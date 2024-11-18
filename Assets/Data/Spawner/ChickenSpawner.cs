@@ -15,7 +15,11 @@ public class ChickenSpawner : Spawner
         base.Awake();
         this.LoadSingleton();
     }
-    protected virtual void LoadSingleton()
+    public virtual Transform Spawn(ChickenSO chickenSO,Vector3 pos,Quaternion rot)
+    {
+       return base.Spawn(chickenSO.chickenName, pos, rot);
+    }
+protected virtual void LoadSingleton()
     {
         if (ChickenSpawner._instance != null)
         {

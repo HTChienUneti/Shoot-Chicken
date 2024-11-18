@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rocket
   m_EditorClassIdentifier: 
   requires:
-  - item: {fileID: 11400000, guid: 1ea284fc8a2403b4f9f9502a168d069b, type: 2}
+  - itemSO: {fileID: 11400000, guid: 1ea284fc8a2403b4f9f9502a168d069b, type: 2}
     count: 5
   sprite: {fileID: 21300000, guid: da6c7edd82e69db49a27f3aaa22871ef, type: 3}

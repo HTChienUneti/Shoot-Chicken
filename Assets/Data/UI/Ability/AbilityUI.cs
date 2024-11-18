@@ -1,27 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
-public abstract class AbilityUIAbstract : MyMonoBehaviour, IUsingInventory
+
+public abstract class AbilityUI : ButtonAbstract//, IUsingInventory
 {
-    [SerializeField] protected Image image;
     [SerializeField] protected Image highlightImage;
     [SerializeField] protected TextMeshProUGUI countText;
     [SerializeField] protected Ability ability;
+    [SerializeField] protected Color buttonOnColor = new Color(1, 1, 1, 1);
+    [SerializeField] protected Color buttonOffColor = new Color(1, 1, 1, .2f);
     protected override void Start()
     {
         base.Start();
-        PlayerCtrl.Instance.Inventory.AddListener(this);
-        this.image.color = new Color(1, 1, 1, 0.2f);
-
+        //   PlayerCtrl.Instance.Inventory.AddListener(this);
+        this.button.image.color = buttonOffColor;
     }
     protected override void LoadComponent()
     {
-        base.LoadComponent();
         this.LoadAbility();
-        this.LoadSprite();
+        base.LoadComponent();
+        this.LoadHighlightImage();
         this.LoadCountText();
 
     }
@@ -32,13 +32,19 @@ public abstract class AbilityUIAbstract : MyMonoBehaviour, IUsingInventory
         this.ability = Resources.Load<Ability>(path);
         Debug.LogWarning(transform.name + " :LoadAbility", gameObject);
     }
-    protected virtual void LoadSprite()
+    protected override void LoadButton()
     {
-        if (this.image != null) return;
-        this.image = transform.Find("Sprite").GetComponent<Image>();
-        this.highlightImage = transform.Find("HightlightImage").GetComponent<Image>();
-        this.image.sprite = this.ability.sprite;
-        Debug.Log(transform.name + ": LoadSprite", gameObject);
+        if(this.button != null) return;
+        this.button  = GetComponentInChildren<Button>();
+        this.button.image.sprite = this.ability.sprite;
+        Debug.LogWarning(transform.name + ": LoadButton", gameObject);
+    }
+    protected virtual void LoadHighlightImage()
+    {
+        if(this.highlightImage != null) return;
+        this.highlightImage = transform.Find("HighlightImage").GetComponent<Image>();
+        this.highlightImage.gameObject.SetActive(false);
+        Debug.LogWarning(transform.name + ": LoadSprite", gameObject);
     }
     protected virtual void LoadCountText()
     {
@@ -49,41 +55,45 @@ public abstract class AbilityUIAbstract : MyMonoBehaviour, IUsingInventory
 
     public void OnInventoryChanged(List<ItemInventory> inventoryItem)
     {
-        if (this.HaveEnoughItem(inventoryItem))
+
+        if (this.AvailableCount(inventoryItem) >0)
         {
-            //    this.countText.text = (item.stack / this.damagingSO.requireCount).ToString();
-            this.image.color = new Color(1, 1, 1, 1);
+            this.countText.text = this.AvailableCount(inventoryItem).ToString();
+            this.button.image.color = this.buttonOnColor;
         }
         else
         {
-            this.image.color = new Color(1, 1, 1, 0.2f);
+            this.button.image.color = this.buttonOffColor;
         }
 
     }
-    protected virtual bool HaveEnoughItem(List<ItemInventory> inventoryItem)
+    protected virtual int AvailableCount(List<ItemInventory> inventoryItem)
     {
-        
+        int cnt = 0;
         foreach (ItemRequire item in this.ability.requires)
         {
             bool isContain = false;
             foreach (ItemInventory itemInventory in inventoryItem)
             {
-                if (itemInventory.item.itemProfile != item.item.itemProfile) continue;
+                if (itemInventory.itemSO.itemProfile != item.itemSO.itemProfile) continue;
                 if (itemInventory.stack < item.count) continue;
                 isContain = true;
+                cnt = itemInventory.stack / item.count;
             }
-            if (!isContain) return false;
+            if (!isContain) return 0;
+            
         }
-        return true;
+        return cnt;
     }
     public void Countdown(float countdown, float timeDelay)
     {
         this.highlightImage.gameObject.SetActive(false);
-        this.image.fillAmount = countdown / timeDelay;
+        this.button.image.fillAmount = countdown / timeDelay;
     }
 
     public void Using(float time, float TimeUse)
     {
         this.highlightImage.gameObject.SetActive(true);
     }
+   
 }

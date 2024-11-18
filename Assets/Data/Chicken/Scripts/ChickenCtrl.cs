@@ -8,6 +8,7 @@ public class ChickenCtrl : ShootedableObjCtrl
     public ChickenMovement ChickenMovement => chickenMovement;
     [SerializeField] protected ChickenSO chickenSO;
     public ChickenSO ChickenSO=> chickenSO;
+    [SerializeField] protected SpriteRenderer model;
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -15,6 +16,7 @@ public class ChickenCtrl : ShootedableObjCtrl
         //this.LoadDamageSender();
         this.LoadChickenMovement();
         this.LoadChickenSO();
+        this.LoadModel();
     }
     protected virtual void LoadChickenSO()
     {
@@ -22,6 +24,13 @@ public class ChickenCtrl : ShootedableObjCtrl
         string path = "SO/Chicken/" + transform.name;
         this.chickenSO = Resources.Load<ChickenSO>(path);   
         Debug.LogWarning(transform.name + ":  LoadChickenSO", gameObject);
+    }
+    protected virtual void LoadModel()
+    {
+        if (this.model != null) return;
+        this.model = GetComponentInChildren<SpriteRenderer>();
+        this.model.sprite = this.chickenSO._sprite;
+        Debug.LogWarning(transform.name + ":  LoadModel", gameObject);
     }
     protected virtual void LoadChickenMovement()
     {

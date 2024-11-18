@@ -10,5 +10,6 @@ public enum DamagingCode
     Bullet_Blue,
     Bullet_Purple,
     Rocket,
-    Egg_Blue
+    Egg_Blue,
+    Egg_Red,
 }

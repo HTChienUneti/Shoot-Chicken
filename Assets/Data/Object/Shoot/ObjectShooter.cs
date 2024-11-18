@@ -52,15 +52,16 @@ public abstract class ObjectShooter : ObjectShooterAbstract
 
         if (!this.CountdownTime()) return false;
 
-        List<Transform> prefabs = new List<Transform>();
+        List<Transform> damagings = new List<Transform>();
         for (int i = 0; i < this.shooterLevel.CurrentLevel; i++)
         {
-            prefabs.Add(this.GetPrefab());
+            Transform damaging = this.GetPrefab();
+            if(damaging == null) continue;
+            damagings.Add(this.GetPrefab());
         }
-        if (prefabs == null) return false;
-        if (prefabs.Count == 0) return false;
-        this.SetPrefabPos(prefabs);
-        foreach (Transform prefab in prefabs)
+        if (damagings == null || damagings.Count == 0) return false;
+        this.SetPrefabPos(damagings);
+        foreach (Transform prefab in damagings)
         {
             if (prefab == null) continue;
             prefab.gameObject.SetActive(true);

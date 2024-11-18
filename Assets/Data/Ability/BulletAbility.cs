@@ -36,7 +36,7 @@ public abstract class BulletAbility : MyMonoBehaviour, IUsingKeyDown
             bool isContain = false;
             foreach (ItemInventory itemInventory in PlayerCtrl.Instance.Inventory.Items)
             {
-                if (itemInventory.item.itemProfile != item.item.itemProfile) continue;
+                if (itemInventory.itemSO.itemProfile != item.itemSO.itemProfile) continue;
                 if (itemInventory.stack < item.count) continue;
                 isContain = true;
             }
@@ -46,8 +46,12 @@ public abstract class BulletAbility : MyMonoBehaviour, IUsingKeyDown
     }
     protected virtual void OnStartUse()
     {
-      //  PlayerCtrl.Instance.Inventory.RemoveItem(this.itemRequire, this.require);
-        //this.OnUsing();
+        Inventory inventory = PlayerCtrl.Instance.Inventory;
+        List<ItemInventory> items = inventory.Items;
+        foreach (ItemRequire itemRequire in this.ability.requires)
+        {
+            inventory.RemoveItem(itemRequire.itemSO, itemRequire.count);
+        }
     }
     protected virtual void OnUsing()    
     {

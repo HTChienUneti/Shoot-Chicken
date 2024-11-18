@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class BulletRedAbilityUI : AbilityUIAbstract, IUsingBulletRedAbility
+public class BulletRedAbilityUI : AbilityUI, IUsingBulletRedAbility
 {
+    protected override void OnClick()
+    {
+        Debug.Log("ON click");
+        BulletRedAbility.Instance.OnKeyDown();
+    }
+
     protected override void Start()
     {
         base.Start();

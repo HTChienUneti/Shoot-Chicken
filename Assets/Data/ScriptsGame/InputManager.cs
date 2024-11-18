@@ -66,7 +66,6 @@ public sealed class InputManager : MySingleton<InputManager>
         {
             if (Input.GetKeyDown(key))
             {
-                  Debug.Log(key);
                 this.OnKeyDown(key);
             }
             
@@ -79,7 +78,7 @@ public sealed class InputManager : MySingleton<InputManager>
         {
             if (Input.GetKey(key))
             {
-                Debug.Log(key);
+                
                 this.OnKeyHold(key);
             }
 

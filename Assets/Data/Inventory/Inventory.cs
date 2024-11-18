@@ -26,7 +26,7 @@ public class Inventory : PlayerAbstract
     {
         foreach (ItemInventory item in items)
         {
-            if (item.item.itemProfile != itemProfile) continue;
+            if (item.itemSO.itemProfile != itemProfile) continue;
             return item;
         }
         return null;
@@ -67,9 +67,9 @@ public class Inventory : PlayerAbstract
     public virtual void AddItem(ItemInventory itemInventory, int count)
     {
         itemInventory.stack += count;
-        if (itemInventory.stack > itemInventory.item.maxStack)
+        if (itemInventory.stack > itemInventory.itemSO.maxStack)
         {
-            itemInventory.stack = itemInventory.item.maxStack;
+            itemInventory.stack = itemInventory.itemSO.maxStack;
         }
      
         this.OnInventoryChanged();
@@ -89,7 +89,7 @@ public class Inventory : PlayerAbstract
 
         ItemInventory newItem = new ItemInventory()
         {
-            item = itemInventorySO,
+            itemSO = itemInventorySO,
             stack = count,
             maxStack = itemInventorySO.maxStack,    
         };
@@ -124,6 +124,13 @@ public class Inventory : PlayerAbstract
         if (inventoryItem == null) return;
         this.RemoveItem(inventoryItem, count);  
     }
+
+    public virtual void RemoveItem(ItemInventorySO itemSO, int count)
+    {
+        ItemInventory itemInventory = this.GetItemFromListBySO(itemSO);
+        this.RemoveItem(itemInventory, count);
+    }
+
     public virtual void RemoveItem(ItemInventory item, int count)
     {
         item.stack -= count;
@@ -131,11 +138,20 @@ public class Inventory : PlayerAbstract
         if (item.stack > 0) return;
         this.items.Remove(item);
     }
+    protected virtual ItemInventory GetItemFromListBySO(ItemInventorySO itemSO)
+    {
+        foreach (ItemInventory item in this.items)
+        {
+            if (item.itemSO != itemSO) continue;
+            return item;
+        }
+        return null;
+    }
     protected virtual ItemInventory GetItemFromListByCode(ItemCode itemCode)
     {
         foreach (ItemInventory itemInv in this.items)
         {
-            if (itemInv.item.itemProfile.itemCode != itemCode) continue;
+            if (itemInv.itemSO.itemProfile.itemCode != itemCode) continue;
             return itemInv;
         }
         return null;
@@ -144,7 +160,7 @@ public class Inventory : PlayerAbstract
     {
         foreach (ItemInventory itemInv in this.items)
         {
-            if (itemInv.item.itemProfile != itemProfile) continue;
+            if (itemInv.itemSO.itemProfile != itemProfile) continue;
             return itemInv;
         }
         return null;
@@ -161,9 +177,11 @@ public class Inventory : PlayerAbstract
 
     public void OnInventoryChanged()
     {
+        
 
         foreach (IUsingInventory listener in this.listeners)
         {
+          
             listener.OnInventoryChanged(this.items);
         }
        

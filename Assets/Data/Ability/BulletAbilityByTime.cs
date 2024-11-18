@@ -11,6 +11,7 @@ public abstract class BulletAbilityByTime : BulletAbility
     {
         StartCoroutine(this.UsingAbility());
         Debug.Log("On use");
+        base.OnStartUse();
     }
     protected virtual IEnumerator UsingAbility()
     {

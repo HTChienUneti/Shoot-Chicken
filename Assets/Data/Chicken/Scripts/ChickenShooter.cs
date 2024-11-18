@@ -17,15 +17,16 @@ public class ChickenShooter : ObjectShooter
     {
         Transform newPrefab = EggSpawner.Instance.Spawn(this.damagingSO, this.startPos.position, Quaternion.identity);
         if (newPrefab == null) return null;
-        newPrefab.GetComponent<EggCtrl>().SetShooter(this);
+        newPrefab.GetComponent<EggCtrl>().SetShooter(transform.parent);
         return newPrefab;
 
     }   
 
     protected override void LoadComponent()
     {
-        base.LoadComponent();
         this.LoadChickenCtrl();
+        base.LoadComponent();
+       
     }
     protected override bool Shooting()
     {
@@ -41,6 +42,6 @@ public class ChickenShooter : ObjectShooter
 
     protected override string GetDamagingName()
     {
-        return "Egg_Blue";
+        return this.chickenCtrl.ChickenSO.damaging.damagingName;
     }
 }

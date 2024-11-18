@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bullet_Green
   m_EditorClassIdentifier: 
   requires:
-  - item: {fileID: 11400000, guid: 3b531d03c4d3c8d49897e2e35d86f266, type: 2}
+  - itemSO: {fileID: 11400000, guid: 3b531d03c4d3c8d49897e2e35d86f266, type: 2}
     count: 1
   sprite: {fileID: 21300000, guid: 87642133867f6f2439db7f5da85dd1de, type: 3}

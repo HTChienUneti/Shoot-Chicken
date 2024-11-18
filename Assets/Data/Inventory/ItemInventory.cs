@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class ItemInventory 
 {
-    public ItemInventorySO item;
+    public ItemInventorySO itemSO;
     public int stack;
     public int maxStack;
 }

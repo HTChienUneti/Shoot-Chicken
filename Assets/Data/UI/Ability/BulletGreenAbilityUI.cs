@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class BulletGreenAbilityUI : AbilityUIAbstract, IUsingBulletGreenAbility
+public class BulletGreenAbilityUI : AbilityUI, IUsingBulletGreenAbility
 {
+  
+
     protected override void Start()
     {
         base.Start();
         BulletGreenAbility.Instance.AddListener(this); 
+    }
+    protected override void OnClick()
+    {
+        Debug.Log("ON click");
+        BulletGreenAbility.Instance.OnKeyDown();
     }
 }

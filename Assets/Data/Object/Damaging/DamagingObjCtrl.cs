@@ -8,12 +8,26 @@ public class DamagingObjCtrl : MyMonoBehaviour
     public DamageSender DamageSender=>damageSender;
      [SerializeField] protected DamagingSO damagingSO;
     public DamagingSO DamagingSO => damagingSO;
-
+    [SerializeField] protected Transform shooter;
+    [SerializeField] protected SpriteRenderer model;
+    public Transform Shooter => shooter; 
+    public virtual void SetShooter(Transform shooter)
+    {
+        this.shooter = shooter;
+    }
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadDamageSender();
         this.LoadDamagingSO();
+        this.LoadModel();
+    }
+    protected virtual void LoadModel()
+    {
+        if (this.model != null) return;
+        this.model = GetComponentInChildren<SpriteRenderer>();
+        this.model.sprite = this.damagingSO._sprite;
+        Debug.LogWarning(transform.name + ": LoadModel", gameObject);
     }
     protected virtual void LoadDamageSender()
     {

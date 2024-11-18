@@ -8,6 +8,7 @@ public class InventoryUI : MyMonoBehaviour, IUsingInventory
 {
     [SerializeField] protected Image image;
     [SerializeField] protected TextMeshProUGUI countText;
+    [SerializeField] protected ItemInventorySO itemInventory;
     protected override void Start()
     {
         base.Start();
@@ -17,11 +18,9 @@ public class InventoryUI : MyMonoBehaviour, IUsingInventory
     {
         foreach (ItemInventory item in items)
         {
-
-            if (item.item.itemProfile.itemName !=transform.name) continue;
+            if (item.itemSO != itemInventory) continue;
             this.countText.text = item.stack.ToString();
             break;
-
         }
 
     }
@@ -30,7 +29,17 @@ public class InventoryUI : MyMonoBehaviour, IUsingInventory
         base.LoadComponent();
         this.LoadSprite();
         this.LoadCountText();
+        this.LoadItemInventory();
 
+    }
+
+    protected virtual void LoadItemInventory()
+    {
+        if (this.itemInventory != null) return;
+        string path = "SO/ItemInventory/" + transform.name;
+        Debug.Log(path);
+        this.itemInventory = Resources.Load<ItemInventorySO>(path);
+        Debug.Log(transform.name + ": LoadItemInventory", gameObject);
     }
     protected virtual void LoadSprite()
     {
