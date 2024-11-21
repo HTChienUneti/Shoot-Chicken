@@ -12,7 +12,6 @@ public class RocketAbilityUI : AbilityUI, IUsingRocketAbility
     }
     protected override void OnClick()
     {
-        Debug.Log("ON click");
         RocketAbility.Instance.OnKeyDown();
     }
 }

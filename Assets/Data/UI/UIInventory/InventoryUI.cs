@@ -4,10 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUI : MyMonoBehaviour, IUsingInventory
+public class InventoryUI : ImageTextBase, IUsingInventory
 {
-    [SerializeField] protected Image image;
-    [SerializeField] protected TextMeshProUGUI countText;
     [SerializeField] protected ItemInventorySO itemInventory;
     protected override void Start()
     {
@@ -27,8 +25,6 @@ public class InventoryUI : MyMonoBehaviour, IUsingInventory
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadSprite();
-        this.LoadCountText();
         this.LoadItemInventory();
 
     }
@@ -40,18 +36,6 @@ public class InventoryUI : MyMonoBehaviour, IUsingInventory
         Debug.Log(path);
         this.itemInventory = Resources.Load<ItemInventorySO>(path);
         Debug.Log(transform.name + ": LoadItemInventory", gameObject);
-    }
-    protected virtual void LoadSprite()
-    {
-        if (this.image != null) return;
-        this.image = GetComponentInChildren<Image>();
-        Debug.Log(transform.name + ": LoadSprite", gameObject);
-    }
-    protected virtual void LoadCountText()
-    {
-        if (this.countText != null) return;
-        this.countText = GetComponentInChildren<TextMeshProUGUI>();
-        Debug.Log(transform.name + ": LoadCountText", gameObject);
     }
 }
 

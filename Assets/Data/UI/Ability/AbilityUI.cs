@@ -55,33 +55,29 @@ public abstract class AbilityUI : ButtonAbstract//, IUsingInventory
 
     public void OnInventoryChanged(List<ItemInventory> inventoryItem)
     {
-
-        if (this.AvailableCount(inventoryItem) >0)
+        int avaiableCnt = this.AvailableCount(inventoryItem);
+        if (avaiableCnt >0)
         {
-            this.countText.text = this.AvailableCount(inventoryItem).ToString();
             this.button.image.color = this.buttonOnColor;
         }
         else
         {
             this.button.image.color = this.buttonOffColor;
         }
-
+        this.countText.text = this.AvailableCount(inventoryItem).ToString();
     }
     protected virtual int AvailableCount(List<ItemInventory> inventoryItem)
     {
         int cnt = 0;
         foreach (ItemRequire item in this.ability.requires)
         {
-            bool isContain = false;
             foreach (ItemInventory itemInventory in inventoryItem)
             {
-                if (itemInventory.itemSO.itemProfile != item.itemSO.itemProfile) continue;
-                if (itemInventory.stack < item.count) continue;
-                isContain = true;
+                if (itemInventory.itemSO != item.itemSO) continue;
+                if (itemInventory.stack < item.count) return 0;
                 cnt = itemInventory.stack / item.count;
-            }
-            if (!isContain) return 0;
-            
+                break;
+            }            
         }
         return cnt;
     }

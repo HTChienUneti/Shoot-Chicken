@@ -12,7 +12,6 @@ public class BulletPurpleAbilityUI : AbilityUI, IUsingBulletPurpleAbility
     }
     protected override void OnClick()
     {
-        Debug.Log("ON click");
         BulletPurpleAbility.Instance.OnKeyDown();
     }
 }

@@ -12,4 +12,6 @@ public enum DamagingCode
     Rocket,
     Egg_Blue,
     Egg_Red,
+    Chicken_1,
+    Chicken_2,
 }

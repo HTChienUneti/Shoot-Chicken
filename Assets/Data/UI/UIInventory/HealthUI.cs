@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthUI : InventoryUI, IUsingCurrentHp
+public class HealthUI : ImageTextBase, IUsingCurrentHp
 {
     protected override void Start()
     {

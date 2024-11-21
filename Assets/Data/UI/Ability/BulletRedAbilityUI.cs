@@ -7,7 +7,7 @@ public class BulletRedAbilityUI : AbilityUI, IUsingBulletRedAbility
 {
     protected override void OnClick()
     {
-        Debug.Log("ON click");
+     
         BulletRedAbility.Instance.OnKeyDown();
     }
 

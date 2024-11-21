@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCtrl : MyMonoBehaviour
+public class PlayerCtrl : HittableObjCtrl
 {
     [Header("PlayerCtrl")]
     private static PlayerCtrl _instance;
@@ -11,8 +11,6 @@ public class PlayerCtrl : MyMonoBehaviour
     public Inventory Inventory => inventory;
     [SerializeField] protected PlayerShooter shooter;
     public PlayerShooter Shooter=>shooter;
-    [SerializeField]protected PlayerDamageReceiver damageReceiver;
-    public PlayerDamageReceiver DamageReceiver => damageReceiver;
     [SerializeField] protected PlayerMoveByKey playerMoveByKey;
     public PlayerMoveByKey PlayerMoveByKey=> playerMoveByKey;
     [SerializeField] protected PlayerFollowMouse playerFollowMouse;
@@ -29,7 +27,6 @@ public class PlayerCtrl : MyMonoBehaviour
         base.LoadComponent();
         this.LoadInventory();
         this.LoadShooter();
-        this.LoadDamageReceiver();
         this.LoadPlayerMoveByKey();
         this.LoadPlayerFollowMouse();
       
@@ -45,12 +42,6 @@ public class PlayerCtrl : MyMonoBehaviour
         if (this.playerMoveByKey != null) return;
         this.playerMoveByKey = GetComponentInChildren<PlayerMoveByKey>();
         Debug.Log(transform.name + ": LoadPlayerMoveByKey", gameObject);
-    }
-    protected virtual void LoadDamageReceiver()
-    {
-        if (this.damageReceiver != null) return;
-        this.damageReceiver = GetComponentInChildren<PlayerDamageReceiver>();
-        Debug.Log(transform.name + ": LoadDamageReceiver", gameObject);
     }
     protected virtual void LoadShooter()
     {

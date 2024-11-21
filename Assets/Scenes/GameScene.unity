@@ -3083,7 +3083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigid: {fileID: 585710435}
   _collider: {fileID: 585710434}
-  shootableObjCtrl: {fileID: 1738078616}
+  damagingObjCtrl: {fileID: 1738078616}
 --- !u!135 &585710434
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3341,7 +3341,7 @@ MonoBehaviour:
   shootTimer: 1
   distance: 0.5
   isShooting: 0
-  autoShoot: 0
+  autoShoot: 1
   playerCtrl: {fileID: 1848681921}
   shooterByMouse: {fileID: 0}
   shooterByKey: {fileID: 0}
@@ -3682,7 +3682,7 @@ MonoBehaviour:
   currentWave: 0
   spawnCount: 0
   currentRespawn: 0
-  boundX: 10
+  boundX: 8
   spawnPosY: 5
   timer: 0
   delaySpawn: 0.1
@@ -4785,7 +4785,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1458152689}
   countText: {fileID: 1341918842}
-  itemInventory: {fileID: 0}
 --- !u!1 &895207157
 GameObject:
   m_ObjectHideFlags: 0
@@ -7959,7 +7958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50.1, y: -15}
+  m_AnchoredPosition: {x: 42.3, y: -15}
   m_SizeDelta: {x: 29, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1341918842
@@ -8015,9 +8014,9 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -8865,7 +8864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigid: {fileID: 1467491172}
   _collider: {fileID: 1467491171}
-  shootableObjCtrl: {fileID: 7844008942643612919}
+  damagingObjCtrl: {fileID: 7844008942643612919}
 --- !u!135 &1467491171
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10408,11 +10407,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1d6e569fe6b1345934fc3cbcc35107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageReceiver: {fileID: 820381107}
   damageSender: {fileID: 378878368}
+  damagingSO: {fileID: 11400000, guid: dfa03b6723e005041a432e861c2491bd, type: 2}
+  shooter: {fileID: 0}
+  model: {fileID: 1980038880}
   chickenMovement: {fileID: 1566528391}
   chickenSO: {fileID: 11400000, guid: 808b546f9e50b8c44a953a5a21df0b69, type: 2}
-  model: {fileID: 1980038880}
 --- !u!222 &1738078617
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11371,9 +11371,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462ecc64caca3444fb121cfe21dec3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageReceiver: {fileID: 937037084}
   inventory: {fileID: 1329723412}
   shooter: {fileID: 610349577}
-  damageReceiver: {fileID: 937037084}
   playerMoveByKey: {fileID: 491680184}
   playerFollowMouse: {fileID: 701776355}
 --- !u!1 &1855518191
@@ -59429,11 +59429,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1d6e569fe6b1345934fc3cbcc35107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageReceiver: {fileID: 2118462366}
   damageSender: {fileID: 521274421}
+  damagingSO: {fileID: 11400000, guid: 17557f7c85e5d4f4caae66a19f76fbea, type: 2}
+  shooter: {fileID: 0}
+  model: {fileID: 1127613971}
   chickenMovement: {fileID: 6544431862994498895}
   chickenSO: {fileID: 11400000, guid: 453fe3385ec9bcb40add44f6e2b5d37a, type: 2}
-  model: {fileID: 1127613971}
 --- !u!199 &7936183218872469297
 ParticleSystemRenderer:
   serializedVersion: 6

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenImpact : HittableObjectImpact
+public class ChickenImpact : DamagingObjImpact
 {
     protected override void Despawn()
     {
@@ -11,7 +11,7 @@ public class ChickenImpact : HittableObjectImpact
 
     protected override bool ImpactTeammates(Collider collider)
     {
-        if (collider.transform.parent.GetComponent<ChickenCtrl>()) return true;
+        if(collider.transform.parent.GetComponent<ChickenCtrl>()) return true;
         return false;
     }
 }

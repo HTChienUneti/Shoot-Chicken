@@ -13,39 +13,34 @@ public abstract class DamagingObjImpact: ObjImpact
   
     protected override bool ImpactExcluded(Collider collision)
     {
-        base.ImpactExcluded(collision);
-        if (this.ImpactShooter(collision)) return true; 
+        if(base.ImpactExcluded(collision) || this.ImpactShooter(collision)) return true;
+
         return false;
     }
     protected virtual bool ImpactShooter(Collider collision)
     {
+        if (this.damagingObjCtrl.Shooter == null) return false;
         if(collision.transform.parent == this.damagingObjCtrl.Shooter) return true;
         return false;   
     }
-    protected override  void  OnImpact(DamageReceiver damageReceiver)
+    protected override void OnImpact(DamageReceiver damageReceiver)
     {
         this.Despawn();
-        Debug.Log(damageReceiver);
+
         this.SendDamage(damageReceiver);
-    }
-    protected override void CreateVFXImpact()
-    {
-        string impact_1 = VFXSpawner.impact_1;
-        Transform vfx = VFXSpawner.Instance.Spawn(impact_1, transform.position, transform.rotation);
-        if (vfx == null) return;
-        vfx.gameObject.SetActive(true);
     }
     protected virtual void SendDamage(DamageReceiver damageReceiver)
     {
+        if (!damageReceiver) return;
         this.damagingObjCtrl.DamageSender.Send(damageReceiver);        
     }
     protected abstract void Despawn();
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.DamagingObjCtrl();
+        this.LoadDamagingObjCtrl();
     }
-    protected virtual void DamagingObjCtrl()
+    protected virtual void LoadDamagingObjCtrl()
     {
         if (this.damagingObjCtrl != null) return;
         this.damagingObjCtrl = transform.parent.GetComponent<DamagingObjCtrl>();

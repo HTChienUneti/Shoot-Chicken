@@ -6,15 +6,10 @@ using UnityEngine;
 public abstract class HittableObjectImpact : ObjImpact
 {
     [Header("Shootedable Obj Impact")]
-    [SerializeField] protected ShootedableObjCtrl shootableObjCtrl;
-    protected virtual void SendDamage(DamageReceiver damageReceiver)
-    {
-        this.shootableObjCtrl.DamageSender.Send(damageReceiver);
-    }
+    [SerializeField] protected HittableObjCtrl shootableObjCtrl;
     protected override void OnImpact(DamageReceiver damageReceiver)
     {
         this.Despawn();
-        this.SendDamage(damageReceiver);
     }
     protected override bool ImpactExcluded(Collider collision)
     {
@@ -35,7 +30,7 @@ public abstract class HittableObjectImpact : ObjImpact
     protected virtual void LoadShootableObjCtrl()
     {
         if (this.shootableObjCtrl != null) return;
-        this.shootableObjCtrl = transform.parent.GetComponent<ShootedableObjCtrl>();
+        this.shootableObjCtrl = transform.parent.GetComponent<HittableObjCtrl>();
         Debug.Log(transform.name + " :LoadShootableObjCtrl", gameObject);
     }
 }

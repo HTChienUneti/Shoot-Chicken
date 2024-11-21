@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootableObjAbstract : MyMonoBehaviour
 {
-    [SerializeField] protected ShootedableObjCtrl shootableObjCtrl;
+    [SerializeField] protected HittableObjCtrl shootableObjCtrl;
 
     protected override void LoadComponent()
     {
@@ -15,7 +15,7 @@ public class ShootableObjAbstract : MyMonoBehaviour
     protected virtual void LoadShootableObjCtrl()
     {
         if (this.shootableObjCtrl != null) return;
-        this.shootableObjCtrl = transform.parent.GetComponent<ShootedableObjCtrl>();
+        this.shootableObjCtrl = transform.parent.GetComponent<HittableObjCtrl>();
         Debug.Log(transform.name + " :LoadShootableObjCtrl", gameObject);
     }
 }

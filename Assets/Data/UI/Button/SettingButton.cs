@@ -1,15 +1,40 @@
 
 using UnityEngine;
 
-public class SettingButton : ButtonAbstract
+public class SettingButton : ButtonAbstract,IHomeUI
 {
+    [SerializeField] protected Animator animator;
+    protected override void Start()
+    {
+        base.Start();
+        HomeUIState.Instance.AddHomeUI(this);
+    }
+
     protected override void OnClick()
     {
-        this.OnSetting();
+        UIStateManager.Instance.SetState(SettingUIState.Instance);
+
     }
-    protected virtual void OnSetting()
+
+    protected override void LoadComponent()
     {
-        transform.parent.gameObject.SetActive(false);
-        SettingUI.Instance.Show();
+        base.LoadComponent();
+        this.LoadAnim();
+    }
+    protected virtual void LoadAnim()
+    {
+        if (this.animator != null) return;
+        this.animator = GetComponent<Animator>();
+        Debug.LogWarning(transform.name + ": LoadAnim", gameObject);
+    }
+
+    public void Close()
+    {
+        this.animator.SetTrigger("Close");
+    }
+
+    public void Open()
+    {
+        this.animator.SetTrigger("Open");
     }
 }
