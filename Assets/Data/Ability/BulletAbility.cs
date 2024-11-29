@@ -59,7 +59,7 @@ public abstract class BulletAbility : MyMonoBehaviour, IUsingKeyDown
     }
     protected virtual void OnUsed()
     {
-        Debug.Log("Used");
+   //     Debug.Log("Used");
         StartCoroutine(this.Countdown());
     }
     protected virtual IEnumerator Countdown()

@@ -15,7 +15,9 @@ public class MySingleton<T> : MyMonoBehaviour where T : MyMonoBehaviour
     {
         if(_instance != null)
         {
-            Debug.LogError("There are already have a "+typeof(T).Name, gameObject);
+            Debug.LogWarning("There are already have a "+typeof(T).Name, gameObject);
+            Destroy(gameObject);
+            Debug.LogWarning("Deleted new "+typeof (T).Name, gameObject);
             return;
         }
         _instance = this as T;

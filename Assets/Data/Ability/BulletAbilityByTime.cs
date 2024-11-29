@@ -10,7 +10,7 @@ public abstract class BulletAbilityByTime : BulletAbility
     protected override void OnStartUse()
     {
         StartCoroutine(this.UsingAbility());
-        Debug.Log("On use");
+    //    Debug.Log("On use");
         base.OnStartUse();
     }
     protected virtual IEnumerator UsingAbility()

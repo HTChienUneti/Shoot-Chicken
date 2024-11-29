@@ -1,20 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpawnChickenManager : MyMonoBehaviour,IUsingAllChickenDead
+public class SpawnChickenManager : MySingleton<SpawnChickenManager>,IUsingAllChickenDead
 {
     [SerializeField] protected List<Wave> waves;
+    public List<Wave> Waves => waves;
+    [SerializeField] protected List<RowSO> rows = new List<RowSO>();
+    public List<RowSO> Rows => rows;
+    [SerializeField] int currentRow = 0;
+
     [SerializeField] protected int currentWave = 0;
     [SerializeField] protected int spawnCount = 0; 
-    [SerializeField] protected int currentRespawn = 0; 
-
-    [SerializeField] protected float boundX = 8f;
-    [SerializeField] protected float spawnPosY = 5f;
+    [SerializeField] protected int spawnRowCount = 0; 
     [SerializeField] protected float timer=0;
     [SerializeField] protected float delaySpawn= .1f;
     [SerializeField] protected bool isAllChickenDead = false;
+ 
+    protected override void Awake()
+    {
+        base.Awake();
+        this.waves = DataManager.Instance.Mission.waves;
+        ChickenPoint.Instance.AddPoint(this.rows[0].points);
+    }
     protected override void Start()
     {
         ChickenSpawner.Instance.AddListener(this);
@@ -25,19 +35,21 @@ public class SpawnChickenManager : MyMonoBehaviour,IUsingAllChickenDead
     }
     protected virtual void Spawning()
     {
-        int index = Random.Range(0, this.waves[currentWave].chickens.Count);
-        ChickenSO chickenSO = this.waves[currentWave].chickens[index];
-        if (!this.CountdownTimer() || this.spawnCount >= this.waves[currentWave].respawn[currentRespawn]) return;
-        Vector3 spawnPos = this.RandomPos();
+        if (this.currentWave > this.waves.Count - 1) return;
+        if (!this.CountdownTimer() || this.spawnCount >= this.waves[this.currentWave].count) return;
+        ChickenSO chickenSO = this.waves[this.currentWave].chickens[0];
+   
+        Vector3 spawnPos = this.GetFirstPoint();
         Transform obj = ChickenSpawner.Instance.Spawn(chickenSO, spawnPos, Quaternion.identity);
         if (obj == null) return;
         obj.gameObject.SetActive(true);
         this.spawnCount++;
+
+
     }
-    protected virtual Vector3 RandomPos()
+    protected virtual Vector3 GetFirstPoint()
     {
-        float randomX = Random.Range(-this.boundX, this.boundX);
-        return new Vector3(randomX, this.spawnPosY, 0);
+        return this.waves[this.currentWave].rows[currentRow].points[0].point;
     }
     protected virtual bool CountdownTimer()
     {
@@ -46,18 +58,41 @@ public class SpawnChickenManager : MyMonoBehaviour,IUsingAllChickenDead
         this.timer = 0f;
         return true;
     }
+    public virtual void RowUp(int up)
+    {
+        this.currentRow += up;
+    }
 
     public void OnAllChickenDead()
     {
         this.isAllChickenDead = true;
         this.spawnCount = 0;
-
-        this.currentRespawn++;
-        if (this.currentRespawn >= this.waves[this.currentWave].respawn.Count)
+        this.currentWave++;
+        this.currentRow = 0;
+        ChickenPoint.Instance.Row = 0;
+        ChickenPoint.Instance.AddPoint(this.rows[this.currentRow].points);
+     //   ChickenPointSpawner.Instance.ClearPoint();
+    }
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        this.LoadWaves();
+        this.LoadRow();
+    }
+    protected virtual void LoadWaves()
+    {
+        if (this.waves.Count > 0) return;
+        string path = "Wave/Wave_1";
+        this.waves.Add(Resources.Load<Wave>(path));
+        Debug.Log(transform.name + ": LoadRow", gameObject);
+    }
+    protected virtual void LoadRow()
+    {
+        if (this.rows.Count > 0) return;
+        foreach (var row in this.waves[0].rows)
         {
-            this.currentRespawn = 0;
-            this.currentWave++;
+            this.rows.Add(row);
         }
-            ChickenPointSpawner.Instance.ClearPoint();
+        Debug.Log(transform.name + ": LoadRow", gameObject);
     }
 }

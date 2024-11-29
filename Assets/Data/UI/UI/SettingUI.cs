@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class SettingUI : MySingleton<SettingUI>,ISettingUI
 {
+    [SerializeField] protected Animator animator;
     protected override void Start()
     {
         base.Start();
-        this.Hide();
+        this.DisActive();
         SettingUIState.Instance.AddSettingUI(this);
     }
     public virtual void Show()
     {
         gameObject.SetActive(true);
+        this.animator.SetTrigger("Open");
     }
     public virtual void Hide()
+    {
+        this.animator.SetTrigger("Close");
+        Invoke(nameof(this.DisActive), 1f);
+    }
+    protected virtual void DisActive()
     {
         gameObject.SetActive(false);
     }
@@ -27,5 +34,18 @@ public class SettingUI : MySingleton<SettingUI>,ISettingUI
     public void Close()
     {
         this.Hide();
+    }
+
+
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        this.LoadAnim();
+    }
+    protected virtual void LoadAnim()
+    {
+        if (this.animator != null) return;
+        this.animator = GetComponent<Animator>();
+        Debug.LogWarning(transform.name + ": LoadAnim", gameObject);
     }
 }

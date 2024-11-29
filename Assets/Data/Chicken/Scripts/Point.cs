@@ -7,13 +7,8 @@ using UnityEngine;
 public class Point:MyMonoBehaviour
 {
     public Vector3 point;
-    public bool isUsed;
-    public Point(Vector3 point, bool isUsed)
-    {
-        this.point = point;
-        this.isUsed = isUsed;
-    }
-
+    public static bool isUsed;
+ 
 
     protected override void Start()
     {

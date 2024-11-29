@@ -3,45 +3,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenPoint : MyMonoBehaviour
+public class ChickenPoint : MySingleton<ChickenPoint>
 {
-    static private ChickenPoint _instance;
-    static public ChickenPoint Instance=> _instance;
-    [SerializeField] protected List<Point> poins = new List<Point>();
-    public List<Point> Points=>poins;
-
-    protected override void Awake()
+   
+    [SerializeField] protected  List<PointSO>points = new List<PointSO>();
+    [SerializeField] protected  List<IChickenMoveState >chickens = new List<IChickenMoveState>();
+    public List<PointSO> Points=>points;
+    int row = 0;
+    public int Row
     {
-        base.Awake();
-        this.LoadSingleton();
+        set => row = value;
+        get => row;
     }
-    protected virtual void LoadSingleton()
+    public virtual void AddPoint(List<PointSO> points)
     {
-        if(ChickenPoint.Instance!=null)
+        foreach (var point in points)
         {
-            Debug.LogError("There are already have a ChickenPoint", gameObject);
-            return;
+            this.points.Add(point);
         }
-        ChickenPoint._instance = this;   
-
     }
-    protected override void LoadComponent()
+    public virtual void RemoveLastPoint()
     {
-        base.LoadComponent();
-        this.LoadPoint();
-    }
-    protected virtual void LoadPoint()
-    {
-        if (poins.Count > 0) return;
-        foreach(Transform child in transform)
+        this.points.RemoveAt(points.Count - 1);
+        if(this.points.Count ==2)
         {
-            this.poins.Add(child.GetComponent<Point>());
+            this.points.Clear();
+       //     this.points.RemoveAt(0);
+            this.row++;
+            if (row > SpawnChickenManager.Instance.Rows.Count-1)
+            {
+                Invoke(nameof(this.AllEnter), 2f);
+                return;
+            }
+      
+            this.AddPoint(SpawnChickenManager.Instance.Rows[row].points);
+            SpawnChickenManager.Instance.RowUp(1);
         }
-        Debug.LogWarning(transform.name + ": LoadPoint", gameObject);
     }
-    public void CreatePoint()
+    public virtual void AddChicken(IChickenMoveState chickenMoveState)
     {
-
+        this.chickens.Add(chickenMoveState);
+    }
+    public virtual void RemoveChicken(IChickenMoveState chickenMoveState)
+    {
+        this.chickens.Remove(chickenMoveState);
+    }
+    protected virtual void AllEnter()
+    {
+        foreach(IChickenMoveState chickenMoveState in this.chickens)
+        {
+            chickenMoveState.MoveAround();
+        }
     }
  
 }

@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chickens:
   - {fileID: 11400000, guid: 808b546f9e50b8c44a953a5a21df0b69, type: 2}
-  respawn: 060000000c00000012000000
+  count: 24
+  rows:
+  - {fileID: 11400000, guid: 1a7925425030c964b8f0d78e422ed68f, type: 2}
+  - {fileID: 11400000, guid: afbaeefd2858ebb42a4e65a01870b52e, type: 2}
+  - {fileID: 11400000, guid: daf872262fc92c244acbec85e935fc9e, type: 2}
+  - {fileID: 11400000, guid: 3b076f0f65b9e14419daa59226c52de8, type: 2}

@@ -17,6 +17,10 @@ public class MyMonoBehaviour : MonoBehaviour
     {
         this.ResetValue();
     }
+    protected virtual void OnDisable()
+    {
+        this.ResetValue();
+    }
     protected virtual void ResetValue()
     {
 

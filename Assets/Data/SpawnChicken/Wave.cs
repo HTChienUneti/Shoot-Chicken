@@ -7,6 +7,7 @@ using UnityEngine;
 public class Wave : ScriptableObject
 {
     public List<ChickenSO> chickens;
-    public List<int> respawn;
+    public int count;
+    public List<RowSO> rows;
 }
 
