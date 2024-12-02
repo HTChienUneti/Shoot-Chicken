@@ -46,6 +46,7 @@ public class ChickenMovement : MyMonoBehaviour,IChickenMoveState
     }  
     protected virtual void Moving()
     {
+        if (this.points.Count == 0) return;
         switch (this.state)
         {
             case State.Idel:
