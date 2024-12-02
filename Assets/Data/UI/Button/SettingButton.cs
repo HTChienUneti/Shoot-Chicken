@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class SettingButton : ButtonAbstract,IHomeUI
+public class SettingButton : ButtonBase,IHomeUI
 {
     [SerializeField] protected Animator animator;
     protected override void Start()

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MissionBase : ButtonAbstract
+public class MissionBase : ButtonBase
 {
     [SerializeField] protected MissionSO missionSO;
     protected override void OnClick()

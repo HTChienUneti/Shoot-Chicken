@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75540b87ee9979e4d9fac0ec1296b0fd, type: 3}
   m_Name: Point_2_2
   m_EditorClassIdentifier: 
-  point: {x: -5.38, y: 2.5, z: 0}
+  point: {x: -5.38, y: 3, z: 0}

@@ -22,7 +22,11 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>,IUsingAllChi
     protected override void Awake()
     {
         base.Awake();
-        this.waves = DataManager.Instance.Mission.waves;
+        if(DataManager.Instance != null)
+        {
+            this.waves = DataManager.Instance.Mission.waves;
+        }
+        
         ChickenPoint.Instance.AddPoint(this.rows[0].points);
     }
     protected override void Start()
@@ -68,10 +72,18 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>,IUsingAllChi
         this.isAllChickenDead = true;
         this.spawnCount = 0;
         this.currentWave++;
+        if(this.currentWave >= this.waves.Count)
+        {
+            this.WinGame();
+        }
         this.currentRow = 0;
         ChickenPoint.Instance.Row = 0;
         ChickenPoint.Instance.AddPoint(this.rows[this.currentRow].points);
      //   ChickenPointSpawner.Instance.ClearPoint();
+    }
+    protected virtual void WinGame()
+    {
+        GameManager.Instance.WinGame();
     }
     protected override void LoadComponent()
     {

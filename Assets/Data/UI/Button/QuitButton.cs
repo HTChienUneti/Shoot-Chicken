@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class QuitButton : ButtonAbstract
+public class QuitButton : ButtonBase
 {
     protected override void OnClick()
     {

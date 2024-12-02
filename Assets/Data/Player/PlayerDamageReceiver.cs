@@ -6,7 +6,6 @@ public class PlayerDamageReceiver : DamageReceiver
 {
     protected override void OnDead()
     {
-        Debug.LogError("GAME OVER");
         GameManager.Instance.OverGame();
     }
   

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class AbilityUI : ButtonAbstract//, IUsingInventory
+public abstract class AbilityUI : ButtonBase//, IUsingInventory
 {
     [SerializeField] protected Image highlightImage;
     [SerializeField] protected TextMeshProUGUI countText;
