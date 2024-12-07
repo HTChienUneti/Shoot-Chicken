@@ -29,4 +29,4 @@ MonoBehaviour:
     rate: 10000
   - itemDrop: {fileID: 11400000, guid: 6fa441c83afb6114c9a95abaf9cfdd35, type: 2}
     rate: 50000
-  maxHp: 5
+  maxHp: 1

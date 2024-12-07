@@ -9,6 +9,6 @@ public class ResumeButton : ButtonBase
     }
     protected virtual void ResumeGame()
     {
-        GameManager.Instance.ActiveGame();
+        GameManager.Instance.BackPrevState();
     }
 }

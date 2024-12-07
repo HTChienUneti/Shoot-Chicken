@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinUI : MySingleton<WinUI>,IGameWinState
+public class WinUI : MySingleton<WinUI>
 {
     //[SerializeField] protected Animator animator;
     //public event EventHandler<EventArgs> OnOpened;
@@ -11,7 +11,6 @@ public class WinUI : MySingleton<WinUI>,IGameWinState
     protected override void Start()
     {
         base.Start();
-
         this.DisActive();
     }
     public void Show()
@@ -43,19 +42,4 @@ public class WinUI : MySingleton<WinUI>,IGameWinState
     //    this.animator = GetComponent<Animator>();
     //    Debug.LogWarning(transform.name + ": LoadAnim", gameObject);
     //}
-
-    public void EnterState()
-    {
-        this.Show();
-    }
-
-    public void ExcuseState()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void ExitState()
-    {
-        this.DisActive();
-    }
 }

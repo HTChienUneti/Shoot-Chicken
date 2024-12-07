@@ -5,16 +5,22 @@ using UnityEngine;
 public class GameSceneStateManager : MySingleton<GameSceneStateManager>
 {
     [SerializeField] protected IGameSceneState currentState;
+    [SerializeField] protected IGameSceneState prevState;
+    public IGameSceneState PrevState => prevState;
     protected override void Start()
     {
         base.Start();
-        currentState = GameActiveState.Instance;
-        this.SetState(currentState);
+        this.SetState(IntroGame.Instance);
     }
     public virtual void SetState(IGameSceneState state)
     {
         if (this.currentState == state) return;
-        this.currentState.ExitState();
+        if(this.currentState != null)
+        {
+            this.prevState = currentState;
+            Debug.Log("Prev: "+this.prevState);
+            this.currentState.ExitState();
+        }
         this.currentState = state;
         this.currentState.EnterState(); 
         

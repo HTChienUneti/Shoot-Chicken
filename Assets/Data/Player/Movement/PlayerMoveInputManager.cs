@@ -4,15 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerMoveInputManager : MySingleton<PlayerMoveInputManager>,IUsingMousePos,IUsingHoriVertiKey
+                                                                        ,IGameWinState
+                                                                        
 {
     [SerializeField] protected List<ObjParentMovement> inputs = new List<ObjParentMovement>();
     [SerializeField] protected PlayerFollowMouse followMouse;
     [SerializeField] protected PlayerMoveByKey moveByKey;
+    [SerializeField] protected bool isUseMouse = true;
     protected override void Start()
     {
         base.Start();
         InputManager.Instance.AddMousePosListener(this);
         InputManager.Instance.AddHoriVertiListener(this);
+        GameWinState.Instance.AddListener(this);
     }
 
     public virtual void SetInput(ObjParentMovement objParentMovement)
@@ -28,6 +32,7 @@ public class PlayerMoveInputManager : MySingleton<PlayerMoveInputManager>,IUsing
 
     public void OnMouseMove(Vector3 mousePos)
     {
+        if (!this.isUseMouse) return;
         this.followMouse.SetTargetPos(mousePos);
     }
     protected override void LoadComponent()
@@ -47,5 +52,27 @@ public class PlayerMoveInputManager : MySingleton<PlayerMoveInputManager>,IUsing
     public void OnValueChanged(float horizontal, float vertical)
     {
         this.moveByKey.SetKeyValue(horizontal, vertical);   
+    }
+
+    public void EnterState()
+    {
+       
+     
+    }
+
+    public void ExcuseState()
+    {
+        this.isUseMouse = false;
+        this.followMouse.SetSpeed(30);
+        this.followMouse.SetBoundY(30);
+        Debug.Log(followMouse.transform.parent.up);
+        this.followMouse.SetTargetPos(this.followMouse.transform.parent.position + new Vector3(0,1,0));
+    }
+
+    public void ExitState()
+    {
+        this.isUseMouse = true;
+   
+        this.followMouse.SetSpeed(10);
     }
 }

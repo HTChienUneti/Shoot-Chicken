@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePauseUI : MySingleton<GamePauseUI>,IGamePauseState,IUsingKeyDown
+public class GamePauseUI : MySingleton<GamePauseUI>,IUsingKeyDown,IGamePauseState
 {
     [SerializeField] protected bool isShowing = false;
     protected override void Start()
     {
         InputManager.Instance.AddKeyDownListener(KeyCode.Escape,this);
+        GamePauseState.Instance.AddListenter(this);
         this.Hide();
     }
     protected virtual void Hide()
@@ -19,10 +20,23 @@ public class GamePauseUI : MySingleton<GamePauseUI>,IGamePauseState,IUsingKeyDow
         gameObject.SetActive(true);
     }
 
+    public void OnKeyDown()
+    {
+        this.isShowing =! this.isShowing;
+        if(this.isShowing)
+        {
+            GameManager.Instance.PauseGame();
+        }
+        else
+        {
+            GameManager.Instance.BackPrevState();
+        }
+       
+    }
+
     public void EnterState()
     {
         this.Show();
-        Debug.Log("Gamepause state");
     }
 
     public void ExcuseState()
@@ -33,19 +47,5 @@ public class GamePauseUI : MySingleton<GamePauseUI>,IGamePauseState,IUsingKeyDow
     public void ExitState()
     {
         this.Hide();
-    }
-
-    public void OnKeyDown()
-    {
-        this.isShowing =! this.isShowing;
-        if(this.isShowing)
-        {
-            GameManager.Instance.PauseGame();
-        }
-        else
-        {
-            GameManager.Instance.ActiveGame();
-        }
-       
     }
 }

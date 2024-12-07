@@ -7,6 +7,10 @@ public abstract class ObjParentMovement : MyMonoBehaviour
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] protected float boundX = 100;
     [SerializeField] protected float boundY = 100f;
+    public virtual void SetSpeed(float speed)
+    {
+        this.moveSpeed = speed;
+    }
     protected virtual void FixedUpdate()
     {
         this.Moving();

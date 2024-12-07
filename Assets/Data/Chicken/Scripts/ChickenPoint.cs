@@ -32,7 +32,7 @@ public class ChickenPoint : MySingleton<ChickenPoint>
             this.row++;
             if (row > SpawnChickenManager.Instance.Rows.Count-1)
             {
-                Invoke(nameof(this.AllEnter), 2f);
+                Invoke(nameof(this.TriggChickenMove), 2f);
                 return;
             }
       
@@ -48,7 +48,7 @@ public class ChickenPoint : MySingleton<ChickenPoint>
     {
         this.chickens.Remove(chickenMoveState);
     }
-    protected virtual void AllEnter()
+    protected virtual void TriggChickenMove()
     {
         foreach(IChickenMoveState chickenMoveState in this.chickens)
         {

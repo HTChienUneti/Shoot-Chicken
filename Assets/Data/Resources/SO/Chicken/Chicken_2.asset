@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChickenCode: 2
   damaging: {fileID: 11400000, guid: da58a3e61ef9ddf41b7acbb7af418d38, type: 2}
-  _sprite: {fileID: 21300000, guid: 71bbabe684dba7947a3d9e665f4e7506, type: 3}
+  _sprite: {fileID: 21300000, guid: 9dec112af4e14ef4da3c5c60176d4ddf, type: 3}
   chickenName: Chicken_2
   itemDrop:
   - itemDrop: {fileID: 11400000, guid: a05b4f6ba4016d04a887d43b81490524, type: 2}

@@ -11,6 +11,13 @@ public class ChickenMovement : MyMonoBehaviour,IChickenMoveState
     [SerializeField] protected bool isMoveEnter = true;
     [SerializeField] protected Vector3 direction = Vector3.left;
     [SerializeField] protected float boundX = 8f;
+    [SerializeField] protected bool isMoving = true;
+    public bool IsMoving
+    {
+        set { isMoving = value; }
+        get => this.isMoving;
+    }
+
     public enum State
     {
         Idel,
@@ -27,11 +34,6 @@ public class ChickenMovement : MyMonoBehaviour,IChickenMoveState
         }
         ChickenPoint.Instance.RemoveLastPoint();
     }
-    protected override void ResetValue() 
-    {
-        base.ResetValue();
-    
-    }
     protected override void OnDisable()
     {
         base.OnDisable();
@@ -46,7 +48,8 @@ public class ChickenMovement : MyMonoBehaviour,IChickenMoveState
     }  
     protected virtual void Moving()
     {
-        if (this.points.Count == 0) return;
+
+        if (this.points.Count == 0 || !this.isMoving) return;
         switch (this.state)
         {
             case State.Idel:

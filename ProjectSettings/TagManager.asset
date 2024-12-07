@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Chicken
   layers:
   - Default
   - TransparentFX
@@ -58,4 +59,7 @@ TagManager:
     locked: 0
   - name: VFX
     uniqueID: 2611411177
+    locked: 0
+  - name: UI
+    uniqueID: 757910113
     locked: 0

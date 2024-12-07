@@ -50,6 +50,11 @@ public class ChickenDamageReceiver : DamageReceiver
         Transform prefab = VFXSpawner.Instance.Spawn(prefabName,transform.position,transform.rotation);
         if (prefab == null) return;
         prefab.gameObject.SetActive(true);
+
+    }
+    protected override void Despawn()
+    {
+        ChickenSpawner.Instance.Despawn(transform.parent);
     }
     protected override void LoadComponent()
     {
@@ -63,8 +68,5 @@ public class ChickenDamageReceiver : DamageReceiver
         Debug.LogWarning(transform.name + ": LoadChickenCtrl", gameObject);
     }
 
-    protected override void Despawn()
-    {
-        ChickenSpawner.Instance.Despawn(transform.parent);
-    }
+  
 }

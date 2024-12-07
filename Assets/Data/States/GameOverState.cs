@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameActiveState : MySingleton<GameActiveState>, IGameActiveState
+public class GameOverState : MySingleton<GameOverState>, IGameLoseState
 {
     public void EnterState()
     {
-        Debug.Log("Gameactive enter");
+        Debug.Log("Enter GameOverState");
     }
 
     public void ExcuseState()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void ExitState()
     {
-        Debug.Log("Gameactive exit");
+        Debug.Log("Exit GameOverState");
+
     }
 }
