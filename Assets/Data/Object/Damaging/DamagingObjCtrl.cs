@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamagingObjCtrl : MyMonoBehaviour,IGameActiveState
+public class DamagingObjCtrl : MyMonoBehaviour
 {
     [SerializeField] protected DamageSender damageSender;
     public DamageSender DamageSender=>damageSender;
@@ -14,7 +14,6 @@ public class DamagingObjCtrl : MyMonoBehaviour,IGameActiveState
     protected override void Start()
     {
         base.Start();
-        GameActiveState.Instance.Add(this);
     }
     public virtual void SetShooter(Transform shooter)
     {
@@ -48,20 +47,5 @@ public class DamagingObjCtrl : MyMonoBehaviour,IGameActiveState
         this.damagingSO = Resources.Load<DamagingSO>(path); 
       
         Debug.LogWarning(transform.name + " :LoadDamagingSO", gameObject);
-    }
-
-    public virtual void EnterState()
-    {
-        
-    }
-
-    public virtual void ExcuseState()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public virtual void ExitState()
-    {
-        
     }
 }

@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class GameOverState : MySingleton<GameOverState>, IGameLoseState
+public class GameOverState : GameState, IGameOverState
 {
-    public void EnterState()
+    
+    static private GameOverState _instance;
+    static public GameOverState Instance => _instance;
+    protected override void Awake()
     {
-        Debug.Log("Enter GameOverState");
+        base.Awake();
+        this.LoadSingleton();
     }
-
-    public void ExcuseState()
+    protected virtual void LoadSingleton()
     {
-        
-    }
-
-    public void ExitState()
-    {
-        Debug.Log("Exit GameOverState");
-
+        if (_instance != null)
+        {
+            Debug.LogWarning("There are already have a GameOverState", gameObject);
+            Destroy(gameObject);
+            Debug.LogWarning("Deleted new GameOverState", gameObject);
+            return;
+        }
+        _instance = this;
     }
 }

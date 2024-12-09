@@ -7,22 +7,26 @@ public class GameManager : MySingleton<GameManager>
     [SerializeField] private bool isGameActive = false;
     public virtual void PauseGame()
     {
-        Time.timeScale = 0f;
+  
         GameSceneStateManager.Instance.SetState(GamePauseState.Instance);
     }
     public virtual void ActiveGame()
     {
         this.isGameActive = true;  
-        Time.timeScale = 1f;
+  
         GameSceneStateManager.Instance.SetState(GameActiveState.Instance);
     }
     public virtual void OverGame()
     {
-        Time.timeScale = 0f;
         GameSceneStateManager.Instance.SetState(GameOverState.Instance);
     }
     public virtual void WinGame()
-    { 
+    {
+        Invoke(nameof(this.TriggerWin), 5f);
+        
+    }
+    protected virtual void TriggerWin()
+    {
         GameSceneStateManager.Instance.SetState(GameWinState.Instance);
     }
     public virtual void SettingGame()
@@ -31,7 +35,7 @@ public class GameManager : MySingleton<GameManager>
     }
     public virtual void StartIntroGame()
     {
-        GameSceneStateManager.Instance.SetState(IntroGame.Instance);
+        GameSceneStateManager.Instance.SetState(GameIntroState.Instance);
     }
     public virtual bool IsGameActive()
     {

@@ -8,18 +8,6 @@ public class ChickenCtrl : DamagingObjCtrl
     public ChickenMovement ChickenMovement => chickenMovement;
     [SerializeField] protected ChickenSO chickenSO;
     public ChickenSO ChickenSO=> chickenSO;
-
-
-    public override void EnterState()
-    {
-        base.EnterState();
-        this.SetActive(true);
-    }
-    public override void ExitState()
-    {
-        base.ExitState();
-        this.SetActive(false);
-    }
     protected virtual void SetActive(bool active)
     {
         this.chickenMovement.IsMoving = active;

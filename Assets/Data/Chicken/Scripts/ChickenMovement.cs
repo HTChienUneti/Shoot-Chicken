@@ -34,6 +34,22 @@ public class ChickenMovement : MyMonoBehaviour,IChickenMoveState
         }
         ChickenPoint.Instance.RemoveLastPoint();
     }
+    protected override void Start()
+    {
+        base.Start();
+        GameActiveState.Instance.OnEnterState += GameActiveState_OnEnterState;
+        GameActiveState.Instance.OnExitState += GameActiveState_OnExitState;
+    }
+
+    private void GameActiveState_OnEnterState(object sender, System.EventArgs e)
+    {
+        this.isMoving = true;
+    }
+    private void GameActiveState_OnExitState(object sender, System.EventArgs e)
+    {
+        this.isMoving = false;
+    }
+
     protected override void OnDisable()
     {
         base.OnDisable();

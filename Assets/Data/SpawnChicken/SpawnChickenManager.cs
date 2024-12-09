@@ -18,6 +18,7 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>,IUsingAllChi
     [SerializeField] protected float timer=0;
     [SerializeField] protected float delaySpawn= .3f;
     [SerializeField] protected bool isAllChickenDead = false;
+    [SerializeField] protected bool isSpawning = false;
  
     protected override void Awake()
     {
@@ -32,14 +33,26 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>,IUsingAllChi
     protected override void Start()
     {
         ChickenSpawner.Instance.AddListener(this);
+        GameActiveState.Instance.OnEnterState += ChickenActiveState_OnEnterState;
+        GameActiveState.Instance.OnExitState += ChickenActiveState_OnExitState;
     }
+
+    private void ChickenActiveState_OnEnterState(object sender, System.EventArgs e)
+    {
+       this.isSpawning = true;  
+    }
+    private void ChickenActiveState_OnExitState(object sender, System.EventArgs e)
+    {
+       this.isSpawning = false;  
+    }
+
     protected virtual void FixedUpdate()
     {
         this.Spawning();
     }
     protected virtual void Spawning()
     {
-        if (!GameManager.Instance.IsGameActive()) return;
+        if (!this.isSpawning) return;
         if (this.currentWave > this.waves.Count - 1) return;
         if (!this.CountdownTimer() || this.spawnCount >= this.waves[this.currentWave].count) return;
         ChickenSO chickenSO = this.waves[this.currentWave].chickens[0];

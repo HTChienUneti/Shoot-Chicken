@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GameActiveState : MySingleton<GameActiveState>, IGameActiveState
+public class GameState : MyMonoBehaviour
 {
     public event EventHandler OnEnterState;
     public event EventHandler OnExitState;
+
     public void EnterState()
     {
-        Debug.Log("GameActive enter");
+        Debug.Log(this.name+" enter");
         this.OnEnterState?.Invoke(this, EventArgs.Empty);
     }   
 

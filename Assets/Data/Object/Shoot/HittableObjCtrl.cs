@@ -2,30 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HittableObjCtrl : MyMonoBehaviour, IGameActiveState
+public class HittableObjCtrl : MyMonoBehaviour
 {
     [SerializeField] protected DamageReceiver damageReceiver;
     public DamageReceiver DamageReceiver => damageReceiver;
-    protected override void Start()
-    {
-        base.Start();
-        GameActiveState.Instance.Add(this);
-    }
-
-    public virtual void EnterState()
-    {
-        
-    }
-
-    public virtual void ExcuseState()
-    {
-    }
-
-
-    public virtual void ExitState()
-    {
-        
-    }
 
     protected override void LoadComponent()
     {

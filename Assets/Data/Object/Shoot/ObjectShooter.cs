@@ -9,8 +9,25 @@ public abstract class ObjectShooter : ObjectShooterAbstract
     [SerializeField] protected float shootTimer = 0f;
     [SerializeField] protected float distance = 0.5f;
     [SerializeField] protected bool isShooting = false;
+    [SerializeField] protected bool isBlockShoot = false;
     [SerializeField] protected bool autoShoot = false;
     protected List<IUsingObjDamaging> listeners = new List<IUsingObjDamaging>();
+    protected override void Start()
+    {
+        base.Start();
+        GameActiveState.Instance.OnEnterState += GameActiveState_OnEnterState;
+        GameActiveState.Instance.OnExitState += GameActiveState_OnExitState;
+    }
+
+    private void GameActiveState_OnExitState(object sender, System.EventArgs e)
+    {
+        this.isBlockShoot = true;
+    }
+
+    private void GameActiveState_OnEnterState(object sender, System.EventArgs e)
+    {
+        this.isBlockShoot = false;
+    }
 
     public virtual void SetDamaging(string damagingName)
     {
@@ -47,10 +64,9 @@ public abstract class ObjectShooter : ObjectShooterAbstract
     }
     protected virtual bool Shooting()
     {
+        if (this.isBlockShoot || !this.CountdownTime()) return false;
         if (!this.autoShoot)
             if (!this.isShooting) return false;
-
-        if (!this.CountdownTime()) return false;
 
         List<Transform> damagings = new List<Transform>();
         for (int i = 0; i < this.shooterLevel.CurrentLevel; i++)

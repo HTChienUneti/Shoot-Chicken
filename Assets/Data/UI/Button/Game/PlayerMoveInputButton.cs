@@ -9,7 +9,7 @@ public abstract class PlayerMoveInputButton : ButtonBase
     [SerializeField] protected ObjParentMovement objParentMovement;
     protected override void OnClick()
     {
-        PlayerMoveInputManager.Instance.SetInput(this.objParentMovement);
+        PlayerMoveManager.Instance.SetInput(this.objParentMovement);
         PlayerMoveInputUIManager.Instance.SetInput(this.button);
 
     }
