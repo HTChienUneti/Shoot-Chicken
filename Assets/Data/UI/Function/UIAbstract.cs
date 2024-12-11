@@ -8,11 +8,11 @@ public abstract class UIAbstract : MyMonoBehaviour
     {
         this.Hide();
     }
-    protected virtual void Hide()
+    public virtual void Hide()
     {
         gameObject.SetActive(false);
     }
-    protected virtual void Show()
+    public virtual void Show()
     {
         gameObject.SetActive(true);
     }

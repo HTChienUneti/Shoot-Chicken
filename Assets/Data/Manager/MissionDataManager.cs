@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager : MySingleton<DataManager>
+public class MissionDataManager : MySingleton<MissionDataManager>
 {
     [SerializeField] protected MissionSO missionSO;
     public MissionSO Mission

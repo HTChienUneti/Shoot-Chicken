@@ -9,15 +9,15 @@ public class GameState : MyMonoBehaviour
     public event EventHandler OnEnterState;
     public event EventHandler OnExitState;
 
-    public void EnterState()
+    public virtual void EnterState()
     {
         Debug.Log(this.name+" enter");
         this.OnEnterState?.Invoke(this, EventArgs.Empty);
     }   
 
-    public void ExitState()
+    public virtual void ExitState()
     {
-        Debug.Log("Gameactive exit");
+        Debug.Log(this.name +" exit");
         this.OnExitState?.Invoke(this, EventArgs.Empty);
     }
 }

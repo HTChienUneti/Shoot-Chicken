@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Despawn : MyMonoBehaviour
 {
- 
+
     protected virtual void FixedUpdate()
     {
           if(!this.TryingDespawn())return;

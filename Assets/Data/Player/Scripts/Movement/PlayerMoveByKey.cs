@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
 
-public class PlayerMoveByKey : ObjParentMovement
+public class PlayerMoveByKey : ObjParentMovement,IUsingHoriVertiKey
 {
     [SerializeField] protected float horizontal;
     [SerializeField] protected float vertical;
@@ -14,11 +14,6 @@ public class PlayerMoveByKey : ObjParentMovement
         this.boundY = 4;
         base.ResetValue();
     }
-    public void SetKeyValue(float horizontal, float vertical)
-    {
-        this.horizontal = horizontal;
-        this.vertical = vertical;
-    }
     protected override void Moving()
     {
         Vector3 input = new Vector3(this.horizontal, this.vertical, 0);
@@ -26,5 +21,11 @@ public class PlayerMoveByKey : ObjParentMovement
         transform.parent.Translate(input * this.moveSpeed * Time.deltaTime);
         this.isMoving = false;
         base.Moving();
+    }
+
+    public void OnValueChanged(float horizontal, float vertical)
+    {
+        this.horizontal = horizontal;
+        this.vertical = vertical;
     }
 }

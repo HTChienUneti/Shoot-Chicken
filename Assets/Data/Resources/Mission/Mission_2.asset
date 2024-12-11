@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a02051e46128d243b6d0a0e942b85f4, type: 3}
   m_Name: Mission_2
   m_EditorClassIdentifier: 
+  missionIndex: 2
   waves:
   - {fileID: 11400000, guid: 89e6066734e5f0747befc60c0c8c16c7, type: 2}
   map: {fileID: 21300000, guid: 28c51f93b6260224c867f45f411a0e85, type: 3}

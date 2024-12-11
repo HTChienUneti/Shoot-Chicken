@@ -15,11 +15,14 @@ public class BackgroundReaping : MyMonoBehaviour
         GameActiveState.Instance.OnExitState += GameActiveState_OnExitState;
         GameIntroState.Instance.OnEnterState += GameIntroState_OnEnterState;
         GameIntroState.Instance.OnExitState += GameIntroState_OnExitState;
+        GameWarningState.Instance.OnEnterState += GameWarningState_OnEnterState;
+        GameWarningState.Instance.OnExitState += GameWarningState_OnExitState;
     }
 
     private void GameIntroState_OnEnterState(object sender, System.EventArgs e)
     {
         this.isMoving = true;
+        this.speed = 30f;
     }
     private void GameIntroState_OnExitState(object sender, System.EventArgs e)
     {
@@ -33,8 +36,17 @@ public class BackgroundReaping : MyMonoBehaviour
     private void GameActiveState_OnEnterState(object sender, System.EventArgs e)
     {
         this.isMoving = true;
+        this.speed = 5f;
     }
-
+    private void GameWarningState_OnEnterState(object sender, System.EventArgs e)
+    {
+        this.isMoving = true;
+        this.speed = 5;
+    }
+    private void GameWarningState_OnExitState(object sender, System.EventArgs e)
+    {
+        this.isMoving = false;
+    }
 
     public virtual void SetSpeed(float speed)
     {

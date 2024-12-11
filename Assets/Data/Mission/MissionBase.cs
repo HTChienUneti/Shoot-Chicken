@@ -9,7 +9,7 @@ public class MissionBase : ButtonBase
     [SerializeField] protected MissionSO missionSO;
     protected override void OnClick()
     {
-        DataManager.Instance.Mission = this.missionSO;
+        MissionDataManager.Instance.Mission = this.missionSO;
         LoadSceneManager.Instance.LoadScene(LoadSceneManager.Scene.GameScene);
         
     }

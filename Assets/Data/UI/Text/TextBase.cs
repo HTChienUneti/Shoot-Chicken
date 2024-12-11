@@ -7,6 +7,10 @@ public class TextBase : MyMonoBehaviour
 {
     [Header("Text base")]
     [SerializeField] protected TextMeshProUGUI text;
+    public virtual void SetText(string text)
+    {
+        this.text.text = text;
+    }
     protected override void LoadComponent()
     {
         base.LoadComponent();

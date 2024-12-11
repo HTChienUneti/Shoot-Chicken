@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-public class GameIntroState : GameState, IIntroState
+
+public class GameWarningState : GameState,IGameWarningState
 {
-    static private GameIntroState _instance;
-    static public GameIntroState Instance => _instance;
-    private bool isEnter = false;
-   [SerializeField]private  float timeMax = 5f;
-    [SerializeField]  private float timer = 0f;
+
+    static private GameWarningState _instance;
+    static public GameWarningState Instance => _instance;
+    [SerializeField] private bool isEnter = false;
+    [SerializeField] private float timeMax = 5f;
+    [SerializeField] private float timer = 0f;
 
     protected override void Awake()
     {
@@ -35,15 +37,15 @@ public class GameIntroState : GameState, IIntroState
         this.timer += Time.fixedDeltaTime;
         if (this.timer < this.timeMax) return;
         this.timer = 0f;
-        GameManager.Instance.WarningGame();
+        GameManager.Instance.ActiveGame();
     }
     protected virtual void LoadSingleton()
     {
         if (_instance != null)
         {
-            Debug.LogWarning("There are already have a GameIntroState", gameObject);
+            Debug.LogWarning("There are already have a GameWarningState", gameObject);
             Destroy(gameObject);
-            Debug.LogWarning("Deleted new GameIntroState", gameObject);
+            Debug.LogWarning("Deleted new GameWarningState", gameObject);
             return;
         }
         _instance = this;
