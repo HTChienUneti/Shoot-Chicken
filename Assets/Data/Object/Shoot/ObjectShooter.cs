@@ -11,7 +11,7 @@ public abstract class ObjectShooter : ObjectShooterAbstract
     [SerializeField] protected bool isShooting = false;
     [SerializeField] protected bool isBlockShoot = false;
     [SerializeField] protected bool autoShoot = false;
-    protected List<IUsingObjDamaging> listeners = new List<IUsingObjDamaging>();
+    protected List<IShooterChangeDamaging> listeners = new List<IShooterChangeDamaging>();
     protected override void Start()
     {
         base.Start();
@@ -118,18 +118,18 @@ public abstract class ObjectShooter : ObjectShooterAbstract
         return true;
     }
 
-    public virtual void AddListener(IUsingObjDamaging listener)
+    public virtual void AddListener(IShooterChangeDamaging listener)
     {
         this.listeners.Add(listener);
     }
-    public virtual void RemoveListener(IUsingObjDamaging listener)
+    public virtual void RemoveListener(IShooterChangeDamaging listener)
     {
         this.listeners.Remove(listener);
     }
 
     public void OnChangedObjDamaging()
     {
-        foreach (IUsingObjDamaging listener in this.listeners)
+        foreach (IShooterChangeDamaging listener in this.listeners)
         {
             listener.OnChangedObjDamaging(this.currentDamaging);
         }

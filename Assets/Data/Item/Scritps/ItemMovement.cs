@@ -10,6 +10,7 @@ public class ItemMovement : ObjParentFollowTarget
     {
         base.ResetValue();
         this.haveTarget = true;
+        this.moveSpeed = 1f;
     }
     protected override Vector3 GetTargetPos()
     {

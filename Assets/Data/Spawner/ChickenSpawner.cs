@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,7 @@ public class ChickenSpawner : Spawner
     private static ChickenSpawner _instance;
     public static ChickenSpawner Instance => _instance;
     static public string chicken_1 = "Chicken_1";
-    protected List<IUsingAllChickenDead> listeners = new List<IUsingAllChickenDead>();
-
+    public event EventHandler<EventArgs> OnAllChikenDead;
     protected override void Awake()
     {
         base.Awake();
@@ -36,22 +36,7 @@ protected virtual void LoadSingleton()
     protected virtual void CheckAllChickenDead()
     {
         if (this.spawnCount > 0) return;
-        OnAllChickenDead();
+        this.OnAllChikenDead?.Invoke(this,EventArgs.Empty);
 
-    }
-    public virtual void AddListener(IUsingAllChickenDead listener)
-    {
-        this.listeners.Add(listener);
-    }
-    public virtual void RemoveListener(IUsingAllChickenDead listener)
-    {
-        this.listeners.Remove(listener);
-    }
-    public virtual void OnAllChickenDead()
-    {
-        foreach (IUsingAllChickenDead listener in this.listeners)
-        {
-            listener.OnAllChickenDead();
-        }
     }
 }

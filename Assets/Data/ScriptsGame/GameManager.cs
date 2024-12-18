@@ -15,7 +15,12 @@ public class GameManager : MySingleton<GameManager>
   
         GameSceneStateManager.Instance.SetState(GameActiveState.Instance);
     }
+  
     public virtual void WarningGame()
+    {
+        Invoke(nameof(this.TriggerWarning), 0f);
+    }
+    protected virtual void TriggerWarning()
     {
         GameSceneStateManager.Instance.SetState(GameWarningState.Instance);
     }

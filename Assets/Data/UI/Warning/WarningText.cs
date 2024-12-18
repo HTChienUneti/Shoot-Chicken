@@ -8,11 +8,11 @@ public class WarningText : TextBase
     {
         base.Start();
         SpawnChickenManager.Instance.OnWaveChanged += SpawnChickenManager_OnWaveChanged;
-        this.text.text = "Mission 1" + " Wave " + (SpawnChickenManager.Instance.CurrentWave+1);
+        this.text.text = "Mission "+SpawnChickenManager.Instance.Mission + " Wave " + (SpawnChickenManager.Instance.CurrentWave+1);
     }
 
     private void SpawnChickenManager_OnWaveChanged(object sender, SpawnChickenManager.OnWaveChangeEventArgs e)
     {
-        this.text.text = "Mission 1" + " Wave " + (e.wave+1);
+        this.text.text = "Mission " + SpawnChickenManager.Instance.Mission + " Wave " + (e.wave+1);
     }
 }

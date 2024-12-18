@@ -4325,6 +4325,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afbaeefd2858ebb42a4e65a01870b52e, type: 2}
   - {fileID: 11400000, guid: daf872262fc92c244acbec85e935fc9e, type: 2}
   - {fileID: 11400000, guid: 3b076f0f65b9e14419daa59226c52de8, type: 2}
+  mission: 0
   currentRow: 0
   currentWave: 0
   spawnCount: 0
@@ -5508,7 +5509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 820381108}
-  hp: 1
+  currentHp: 0
   hpMax: 1
   isDead: 0
   chickenCtrl: {fileID: 1738078616}
@@ -6421,9 +6422,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 937037085}
-  hp: 10
-  hpMax: 2
+  currentHp: 5
+  hpMax: 10
   isDead: 0
+  defaultPos: {x: 0, y: -3.43, z: 0}
 --- !u!135 &937037085
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9327,6 +9329,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2096694931}
   - {fileID: 2030081658}
   - {fileID: 1820568915}
   - {fileID: 807146392}
@@ -15944,7 +15947,6 @@ RectTransform:
   - {fileID: 1823358332}
   - {fileID: 1271240759}
   - {fileID: 2139321757}
-  - {fileID: 2096694931}
   m_Father: {fileID: 1319252752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -16761,7 +16763,7 @@ RectTransform:
   - {fileID: 531141847}
   - {fileID: 250157695}
   - {fileID: 1702831251}
-  m_Father: {fileID: 2030081658}
+  m_Father: {fileID: 1319252752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17248,11 +17250,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 2118462367}
-  hp: 1
+  currentHp: 0
   hpMax: 1
   isDead: 0
   chickenCtrl: {fileID: 7844008942643612919}
-  gameDropRate: 5
+  gameDropRate: 1
 --- !u!135 &2118462367
 SphereCollider:
   m_ObjectHideFlags: 0

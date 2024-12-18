@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletUI : InventoryUI, IUsingObjDamaging
+public class BulletUI : InventoryUI, IShooterChangeDamaging
 {
     protected override void Start()
     {

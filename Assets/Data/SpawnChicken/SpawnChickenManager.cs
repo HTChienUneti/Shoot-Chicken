@@ -6,12 +6,14 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpawnChickenManager : MySingleton<SpawnChickenManager>,IUsingAllChickenDead
+public class SpawnChickenManager : MySingleton<SpawnChickenManager>
 {
     [SerializeField] protected List<Wave> waves;
     public List<Wave> Waves => waves;
     [SerializeField] protected List<RowSO> rows = new List<RowSO>();
     public List<RowSO> Rows => rows;
+    [SerializeField] protected int mission;
+    public int Mission => mission;  
     [SerializeField] int currentRow = 0;
 
     [SerializeField] protected int currentWave = 0;
@@ -33,16 +35,21 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>,IUsingAllChi
         if(MissionDataManager.Instance != null)
         {
             this.waves = MissionDataManager.Instance.Mission.waves;
-
+            this.mission = MissionDataManager.Instance.Mission.missionIndex;
         }
         
         ChickenPoint.Instance.AddPoint(this.rows[0].points);
     }
     protected override void Start()
     {
-        ChickenSpawner.Instance.AddListener(this);
+        ChickenSpawner.Instance.OnAllChikenDead += ChickenSpawner_OnAllChikenDead;
         GameActiveState.Instance.OnEnterState += ChickenActiveState_OnEnterState;
         GameActiveState.Instance.OnExitState += ChickenActiveState_OnExitState;
+    }
+
+    private void ChickenSpawner_OnAllChikenDead(object sender, EventArgs e)
+    {
+        this.OnAllChickenDead();
     }
 
     private void ChickenActiveState_OnEnterState(object sender, System.EventArgs e)
@@ -94,20 +101,21 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>,IUsingAllChi
         this.isAllChickenDead = true;
         this.spawnCount = 0;
         this.currentWave++;
-        this.OnWaveChanged?.Invoke(this, new OnWaveChangeEventArgs
-        {
-            wave = this.currentWave,    
-        });
 
         if (this.currentWave >= this.waves.Count)
         {
             this.WinGame();
+            return;
         }
+        this.OnWaveChanged?.Invoke(this, new OnWaveChangeEventArgs
+        {
+            wave = this.currentWave,
+        });
         this.currentRow = 0;
         ChickenPoint.Instance.Row = 0;
         ChickenPoint.Instance.AddPoint(this.rows[this.currentRow].points);
         GameManager.Instance.WarningGame();
-     //   ChickenPointSpawner.Instance.ClearPoint();
+        //   ChickenPointSpawner.Instance.ClearPoint();
     }
     protected virtual void WinGame()
     {
