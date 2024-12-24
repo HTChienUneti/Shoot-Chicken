@@ -13,9 +13,9 @@ public class GameSceneStateManager : MySingleton<GameSceneStateManager>
     protected override void Start()
     {
         base.Start();
-        this.SetState(GameIntroState.Instance);
+        this.ChangeState(GameIntroState.Instance);
     }
-    public virtual void SetState(IGameSceneState state)
+    public virtual void ChangeState(IGameSceneState state)
     {
         if (this.currentState == state) return;
         if(this.currentState != null)

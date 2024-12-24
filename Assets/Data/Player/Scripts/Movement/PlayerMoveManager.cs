@@ -17,7 +17,7 @@ public class PlayerMoveManager : MySingleton<PlayerMoveManager>
     protected virtual void GameSceneStateManager_OnGameChangedState(object sender,OngameChangedStateArgs e)
     {
       
-        if (e.state.Equals(GameActiveState.Instance)|| e.state.Equals(GameWarningState.Instance))
+        if (e.state.Equals(PlayingGameState.Instance)|| e.state.Equals(GameWarningState.Instance))
         {
             this.SetMoveByKey(true);
             this.SetMoveByMouse(true);
@@ -25,16 +25,14 @@ public class PlayerMoveManager : MySingleton<PlayerMoveManager>
         }
         else if(e.state.Equals(GameWinState.Instance))
         {
-            this.SetMoveByKey(false);
-            this.SetMoveByMouse(false);
-            this.SetMoveUp(true);
+            Invoke(nameof(this.MoveUp), 1f);
         }
-        else
-        {
-            this.SetMoveByKey(false);
-            this.SetMoveByMouse(false);
-            this.SetMoveUp(false);
-        }
+    }
+    protected virtual void MoveUp()
+    {
+        this.SetMoveByKey(false);
+        this.SetMoveByMouse(false);
+        this.SetMoveUp(true);
     }
     protected virtual void SetMoveByMouse(bool active)
     {

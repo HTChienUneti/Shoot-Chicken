@@ -19,7 +19,7 @@ public class SettingUI : MySingleton<SettingUI>,ISettingUI
     public virtual void Hide()
     {
         this.animator.SetTrigger("Close");
-        Invoke(nameof(this.DisActive), 1f);
+        Invoke(nameof(this.DisActive), .5f);
     }
     protected virtual void DisActive()
     {

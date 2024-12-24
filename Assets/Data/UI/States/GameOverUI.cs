@@ -13,7 +13,7 @@ public class GameOverUI : GameUI
 
     private void GameOverState_OnEnterState(object sender, System.EventArgs e)
     {
-        this.Show();
+        Invoke(nameof(this.Show),2f);
     }
     private void GameOverState_OnExitState(object sender, System.EventArgs e)
     {

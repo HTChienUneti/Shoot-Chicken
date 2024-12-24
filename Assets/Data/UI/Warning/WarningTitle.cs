@@ -18,7 +18,7 @@ public class WarningTitle : UIAbstract
     }
     private void GameWarningState_OnEnterState(object sender, System.EventArgs e)
     {
-        this.Show();
+        Invoke(nameof(this.Show),1f);
     }
     private void GameWarningState_OnExitState(object sender, System.EventArgs e)
     {

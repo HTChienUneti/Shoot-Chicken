@@ -8,5 +8,6 @@ public enum ChickenCode
 {
     NoCode = 0,
     Chicken_1 = 1,  
-    Chicken_2 = 2
+    Chicken_2 = 2,
+    Boss_1
 }

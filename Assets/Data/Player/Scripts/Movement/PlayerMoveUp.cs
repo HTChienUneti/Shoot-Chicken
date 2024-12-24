@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class PlayerMoveUp : ObjMoveForward
 {
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        this.isMoving = true;
-    }
+ 
     protected override void ResetValue()
     {
         base.ResetValue();

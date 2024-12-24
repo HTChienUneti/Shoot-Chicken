@@ -22,28 +22,6 @@ public class PlayerCtrl : HittableObjCtrl
         this.LoadSingleton();
 
     }
-    protected override void Start()
-    {
-        base.Start();
-       // this.SetActive(false);
-    }
-    //public override void EnterState()
-    //{
-    //    base.EnterState();
-    //    this.SetActive(true);
-    //}
-    //public override void ExitState()
-    //{
-    //    base.ExitState();
-    //    this.SetActive(false);
-    //}
-    //protected virtual void SetActive(bool isActive)
-    //{
-    //     //gameObject.SetActive(isActive);  
-    //    this.playerMoveByKey.gameObject.SetActive(isActive);
-    //    this.PlayerFollowMouse.gameObject.SetActive(isActive);
-    //    this.shooter.gameObject.SetActive(isActive);
-    //}
     protected override void LoadComponent()
     {
         base.LoadComponent();

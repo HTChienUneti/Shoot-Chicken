@@ -8,10 +8,6 @@ public class ChickenCtrl : DamagingObjCtrl
     public ChickenMovement ChickenMovement => chickenMovement;
     [SerializeField] protected ChickenSO chickenSO;
     public ChickenSO ChickenSO=> chickenSO;
-    protected virtual void SetActive(bool active)
-    {
-        this.chickenMovement.IsMoving = active;
-    }
     protected override void LoadComponent()
     {
         base.LoadComponent();

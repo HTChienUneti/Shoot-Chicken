@@ -19,7 +19,7 @@ public class PlayerMoveByKey : ObjParentMovement,IUsingHoriVertiKey
         Vector3 input = new Vector3(this.horizontal, this.vertical, 0);
         input.Normalize();
         transform.parent.Translate(input * this.moveSpeed * Time.deltaTime);
-        this.isMoving = false;
+ 
         base.Moving();
     }
 

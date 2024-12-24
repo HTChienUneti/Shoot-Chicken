@@ -5,7 +5,7 @@ public class ExitSettingGameButton : ButtonBase
 {
     protected override void OnClick()
     {  
-        GameSceneStateManager.Instance.SetState(GamePauseState.Instance);
+        GameSceneStateManager.Instance.ChangeState(GamePauseState.Instance);
     }
  
 }

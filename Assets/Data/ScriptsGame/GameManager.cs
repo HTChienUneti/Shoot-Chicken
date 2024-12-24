@@ -7,43 +7,43 @@ public class GameManager : MySingleton<GameManager>
     [SerializeField] private bool isGameActive = false;
     public virtual void PauseGame()
     {
-        GameSceneStateManager.Instance.SetState(GamePauseState.Instance);
+        GameSceneStateManager.Instance.ChangeState(GamePauseState.Instance);
+        Time.timeScale = 0f;
     }
-    public virtual void ActiveGame()
+    public virtual void PlayingGame()
     {
-        this.isGameActive = true;  
-  
-        GameSceneStateManager.Instance.SetState(GameActiveState.Instance);
+        this.isGameActive = true;
+        Time.timeScale = 1f;
+        GameSceneStateManager.Instance.ChangeState(PlayingGameState.Instance);
     }
   
     public virtual void WarningGame()
     {
-        Invoke(nameof(this.TriggerWarning), 0f);
-    }
-    protected virtual void TriggerWarning()
-    {
-        GameSceneStateManager.Instance.SetState(GameWarningState.Instance);
+        GameSceneStateManager.Instance.ChangeState(GameWarningState.Instance);
+        Time.timeScale = 1f;
     }
     public virtual void OverGame()
     {
-        GameSceneStateManager.Instance.SetState(GameOverState.Instance);
+        GameSceneStateManager.Instance.ChangeState(GameOverState.Instance);
+        Invoke(nameof(this.PauseTime), 2f);
+    }
+    private void PauseTime()
+    {
+        Time.timeScale = 0f;
     }
     public virtual void WinGame()
     {
-        Invoke(nameof(this.TriggerWin), 5f);
-        
-    }
-    protected virtual void TriggerWin()
-    {
-        GameSceneStateManager.Instance.SetState(GameWinState.Instance);
+        GameSceneStateManager.Instance.ChangeState(GameWinState.Instance);
+        Invoke(nameof(this.PauseTime), 2f);
     }
     public virtual void SettingGame()
     {
-        GameSceneStateManager.Instance.SetState(GameSettingsState.Instance);
+        GameSceneStateManager.Instance.ChangeState(GameSettingsState.Instance);
     }
     public virtual void StartIntroGame()
     {
-        GameSceneStateManager.Instance.SetState(GameIntroState.Instance);
+        GameSceneStateManager.Instance.ChangeState(GameIntroState.Instance);
+        Time.timeScale = 1f;
     }
     public virtual bool IsGameActive()
     {
@@ -51,7 +51,7 @@ public class GameManager : MySingleton<GameManager>
     }
     public void BackPrevState()
     {
-        GameSceneStateManager.Instance.SetState(GameSceneStateManager.Instance.PrevState);
+        GameSceneStateManager.Instance.ChangeState(GameSceneStateManager.Instance.PrevState);
         Time.timeScale = 1f;
     }
 }

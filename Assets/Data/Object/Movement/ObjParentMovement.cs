@@ -8,27 +8,7 @@ public abstract class ObjParentMovement :MyMonoBehaviour
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] protected float boundX = 100;
     [SerializeField] protected float boundY = 100f;
-    [SerializeField] protected bool isMoving = false;
-    protected override void Start()
-    {
-        base.Start();
-        this.isMoving = true; 
-        GameSceneStateManager.Instance.OnGameChangedState += GameSceneStateManager_OnGameChangedState;
-    }
-    protected virtual void GameSceneStateManager_OnGameChangedState(object sender, OngameChangedStateArgs e)
-    {
-
-        if (e.state.Equals(GameActiveState.Instance) ||
-            e.state.Equals(GameWinState.Instance) ||
-            e.state.Equals(GameWarningState.Instance))
-        {
-            this.isMoving = true;
-        }
-        else
-        {
-            this.isMoving = false;
-        }
-    }
+   
     public virtual void SetSpeed(float speed)
     {
         this.moveSpeed = speed;
@@ -39,7 +19,7 @@ public abstract class ObjParentMovement :MyMonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-        if (!this.isMoving) return;
+      
         this.Moving();  
     }
     protected virtual void Moving()

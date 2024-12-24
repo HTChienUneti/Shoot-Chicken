@@ -382,8 +382,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 386730120}
   m_HandleRect: {fileID: 386730119}
   m_Direction: 2
-  m_Value: -0.0000068430377
-  m_Size: 0.686321
+  m_Value: 0
+  m_Size: 0.6863347
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1514,7 +1514,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1849594362}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999957
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1883,16 +1883,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 521047993}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.029850746, y: 0.029850746, z: 0.029850746}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1533890968}
   - {fileID: 1381383690}
   - {fileID: 77859072}
   - {fileID: 1052740688}
-  m_Father: {fileID: 1994491505}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2554,11 +2554,11 @@ Transform:
   m_GameObject: {fileID: 740346872}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2375.9998}
-  m_LocalScale: {x: 26.399998, y: 26.399998, z: 26.399998}
+  m_LocalPosition: {x: 0, y: 0, z: 19.074638}
+  m_LocalScale: {x: 0.7880596, y: 0.7880596, z: 0.7880596}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1994491505}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &743267129
 GameObject:
@@ -2941,7 +2941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00015258789, y: -76.834145}
+  m_AnchoredPosition: {x: 0.00018310547, y: -76.83503}
   m_SizeDelta: {x: 100, y: 412.32996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &946987806
@@ -6085,8 +6085,6 @@ RectTransform:
   - {fileID: 586226967}
   - {fileID: 1346874244}
   - {fileID: 432481353}
-  - {fileID: 740346875}
-  - {fileID: 521047994}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6438,54 +6436,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037853491}
   m_CullTransparentMesh: 1
---- !u!1 &2039711219
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2039711221}
-  - component: {fileID: 2039711220}
-  m_Layer: 0
-  m_Name: InputManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2039711220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2039711219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d374376376450e45ac5a7ee2a1bbf10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseWorldPos: {x: 0, y: 0, z: 0}
-  fire_1: 0
-  horizontal: 0
-  vertical: 0
---- !u!4 &2039711221
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2039711219}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2041388986
 GameObject:
   m_ObjectHideFlags: 0
@@ -6675,7 +6625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 916570893}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -7046,8 +6996,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 1242136992}
-  - {fileID: 2039711221}
+  - {fileID: 521047994}
   - {fileID: 1994491505}
+  - {fileID: 740346875}
   - {fileID: 250459744}
   - {fileID: 1987720040}
   - {fileID: 967352144}

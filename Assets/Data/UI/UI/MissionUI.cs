@@ -25,7 +25,7 @@ public class MissionUI : MySingleton<MissionUI>,IMissionUI
     {
 
         this.animator.SetTrigger("Close");
-        Invoke("DisActive", 1f);
+        Invoke("DisActive", .7f);
         this.OnClosed?.Invoke(this, EventArgs.Empty);
     }
     protected virtual void DisActive()

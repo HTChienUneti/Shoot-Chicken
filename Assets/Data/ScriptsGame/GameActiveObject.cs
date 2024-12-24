@@ -9,8 +9,8 @@ public class GameActiveObject : MyMonoBehaviour
     protected override void Start()
     {
         base.Start();
-        GameActiveState.Instance.OnEnterState += GameActiveState_OnEnterState;
-        GameActiveState.Instance.OnExitState += GameActiveState_OnExitState;
+        PlayingGameState.Instance.OnEnterState += GameActiveState_OnEnterState;
+        PlayingGameState.Instance.OnExitState += GameActiveState_OnExitState;
     }
 
     private void GameActiveState_OnEnterState(object sender, System.EventArgs e)

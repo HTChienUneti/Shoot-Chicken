@@ -8,6 +8,6 @@ public class NewGameButton : ButtonBase
     protected override void OnClick()
     {
         SceneManager.LoadScene("GameScene");
-        GameManager.Instance.ActiveGame();
+        GameManager.Instance.PlayingGame();
     }
 }

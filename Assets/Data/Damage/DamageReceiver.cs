@@ -15,6 +15,7 @@ public abstract class DamageReceiver : MyMonoBehaviour
     [SerializeField] protected SphereCollider _collider;
     public SphereCollider Collider => _collider;
     [SerializeField] protected int currentHp;
+    public int CurrentHp => currentHp;
     [SerializeField] protected int hpMax = 10;
     public int HpMax => hpMax;
     [SerializeField] protected bool isDead = false;

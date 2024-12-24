@@ -26,6 +26,7 @@ public class PlayerDamageReceiver : DamageReceiver
     }
     protected virtual void Revive()
     {
+        if (this.currentHp <= 0) return;
         transform.parent.gameObject.SetActive(true);
         transform.parent.position = this.defaultPos;
     }

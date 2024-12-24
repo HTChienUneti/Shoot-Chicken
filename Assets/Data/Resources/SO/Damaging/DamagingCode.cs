@@ -14,4 +14,5 @@ public enum DamagingCode
     Egg_Red,
     Chicken_1,
     Chicken_2,
+    Boss_1
 }

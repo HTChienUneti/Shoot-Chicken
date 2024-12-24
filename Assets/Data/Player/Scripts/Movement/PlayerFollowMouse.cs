@@ -9,7 +9,6 @@ public class PlayerFollowMouse : ObjParentFollowTarget,IUsingMousePos
     protected override void Start()
     {
         base.Start();
-        this.isMoving = false;
         InputManager.Instance.AddMousePosListener(this);
     }
     public void OnMouseMove(Vector3 mousePos)

@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class SpawnChickenManager : MySingleton<SpawnChickenManager>
 {
-    [SerializeField] protected List<Wave> waves;
+    [SerializeField] protected List<Wave> waves = new List<Wave>();
     public List<Wave> Waves => waves;
     [SerializeField] protected List<RowSO> rows = new List<RowSO>();
     public List<RowSO> Rows => rows;
@@ -43,8 +43,8 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
     protected override void Start()
     {
         ChickenSpawner.Instance.OnAllChikenDead += ChickenSpawner_OnAllChikenDead;
-        GameActiveState.Instance.OnEnterState += ChickenActiveState_OnEnterState;
-        GameActiveState.Instance.OnExitState += ChickenActiveState_OnExitState;
+         PlayingGameState.Instance.OnEnterState += ChickenActiveState_OnEnterState;
+        PlayingGameState.Instance.OnExitState += ChickenActiveState_OnExitState;
     }
 
     private void ChickenSpawner_OnAllChikenDead(object sender, EventArgs e)
@@ -115,7 +115,7 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
         ChickenPoint.Instance.Row = 0;
         ChickenPoint.Instance.AddPoint(this.rows[this.currentRow].points);
         GameManager.Instance.WarningGame();
-        //   ChickenPointSpawner.Instance.ClearPoint();
+     
     }
     protected virtual void WinGame()
     {

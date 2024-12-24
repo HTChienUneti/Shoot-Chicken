@@ -37,7 +37,7 @@ public class GameWarningState : GameState,IGameWarningState
         this.timer += Time.fixedDeltaTime;
         if (this.timer < this.timeMax) return;
         this.timer = 0f;
-        GameManager.Instance.ActiveGame();
+        GameManager.Instance.PlayingGame();
     }
     protected virtual void LoadSingleton()
     {
