@@ -6,16 +6,16 @@ using UnityEngine;
 public class GameSceneStateManager : MySingleton<GameSceneStateManager>
 {
     public  EventHandler<OngameChangedStateArgs> OnGameChangedState;
-    [SerializeField] protected IGameSceneState currentState;
-    [SerializeField] protected IGameSceneState prevState;
-    public IGameSceneState PrevState => prevState;
+    [SerializeField] protected GameState currentState;
+    [SerializeField] protected GameState prevState;
+    public GameState PrevState => prevState;
 
     protected override void Start()
     {
         base.Start();
         this.ChangeState(GameIntroState.Instance);
     }
-    public virtual void ChangeState(IGameSceneState state)
+    public virtual void ChangeState(GameState state)
     {
         if (this.currentState == state) return;
         if(this.currentState != null)

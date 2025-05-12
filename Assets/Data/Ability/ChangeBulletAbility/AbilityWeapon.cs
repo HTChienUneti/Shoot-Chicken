@@ -7,8 +7,8 @@ public abstract class AbilityWeapon : BulletAbilityByTime
 {
 
     [Header("Ability Weapon")]
-    [SerializeField] protected DamagingSO damagingSO;
-    [SerializeField] protected DamagingSO currentDamaging;
+    [SerializeField] protected WeaponSO damagingSO;
+    [SerializeField] protected WeaponSO currentDamaging;
     //-----------------Function--------------------/
     protected override void LoadComponent()
     {
@@ -19,7 +19,7 @@ public abstract class AbilityWeapon : BulletAbilityByTime
     {
         if (this.damagingSO != null) return;
         string path = "SO/Damaging/" + transform.name;
-        this.damagingSO = Resources.Load<DamagingSO>(path);
+        this.damagingSO = Resources.Load<WeaponSO>(path);
         Debug.LogWarning(transform.name + " LoadDamagingSO", gameObject);
 
     }

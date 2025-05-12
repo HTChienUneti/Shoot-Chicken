@@ -12,6 +12,6 @@ public class BulletPurpleAbilityUI : AbilityUI, IUsingBulletPurpleAbility
     }
     protected override void OnClick()
     {
-        BulletPurpleAbility.Instance.OnKeyDown();
+        BulletPurpleAbility.Instance.OnKeyDown(KeyCode.Alpha3);
     }
 }

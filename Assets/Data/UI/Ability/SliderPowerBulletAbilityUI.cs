@@ -9,7 +9,7 @@ public class SliderPowerBulletAbilityUI : MyMonoBehaviour, IUsingBulletAbility
     protected override void Start()
     {
         base.Start();
-        AbilityBulletManager.Instance.AddListener(this);
+        ChangeWeaponManager.Instance.AddListener(this);
         gameObject.SetActive(false);
     }
     public void Using(float time,float timeUse)

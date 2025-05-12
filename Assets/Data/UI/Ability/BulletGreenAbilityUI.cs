@@ -14,6 +14,6 @@ public class BulletGreenAbilityUI : AbilityUI, IUsingBulletGreenAbility
     }
     protected override void OnClick()
     {
-            BulletGreenAbility.Instance.OnKeyDown();
+            BulletGreenAbility.Instance.OnKeyDown(KeyCode.Alpha1);
     }
 }

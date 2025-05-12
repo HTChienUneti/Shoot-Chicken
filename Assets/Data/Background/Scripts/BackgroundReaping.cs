@@ -13,7 +13,7 @@ public class BackgroundReaping : MyMonoBehaviour
         base.Start();
  
         GameWarningState.Instance.OnEnterState += GameWarningState_OnEnterState;
-        GameIntroState.Instance.OnEnterState += GameIntroState_OnEnterState;
+      // GameIntroState.Instance.OnEnterState += GameIntroState_OnEnterState;
     }
 
     private void GameWarningState_OnEnterState(object sender, System.EventArgs e)

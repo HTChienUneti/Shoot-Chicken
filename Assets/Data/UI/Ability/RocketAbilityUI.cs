@@ -12,6 +12,6 @@ public class RocketAbilityUI : AbilityUI, IUsingRocketAbility
     }
     protected override void OnClick()
     {
-        RocketAbility.Instance.OnKeyDown();
+        RocketAbility.Instance.OnKeyDown(KeyCode.Alpha5);
     }
 }

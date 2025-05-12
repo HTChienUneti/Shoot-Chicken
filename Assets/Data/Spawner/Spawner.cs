@@ -85,7 +85,6 @@ public class Spawner : MyMonoBehaviour
     {
         if (this.holder != null) return;
         this.holder = transform.Find("Holder");
-
         Debug.LogWarning(transform.name + ": LoadHolder", gameObject);
     }
 }

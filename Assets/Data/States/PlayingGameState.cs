@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayingGameState : GameState, IGameActiveState
+public class PlayingGameState : GameState
 {
     static private PlayingGameState _instance;
     static public PlayingGameState Instance => _instance;

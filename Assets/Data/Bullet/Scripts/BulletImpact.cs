@@ -28,7 +28,7 @@ public class BulletImpact : DamagingObjImpact
     }
     protected virtual bool ImpactBullet(Collider collider)
     {
-        if (collider.transform.parent.GetComponent<EggCtrl>()) return true;
+        if (collider.transform.parent.GetComponent<EnemyBulletCtrl>()) return true;
         return false;
     }
 

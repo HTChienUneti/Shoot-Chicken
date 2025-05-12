@@ -20,7 +20,7 @@ public class GamePauseUI : GameUI,IUsingKeyDown
     {
         this.Hide();
     }
-    public void OnKeyDown()
+    public void OnKeyDown(KeyCode k)
     {
         this.isShowing =! this.isShowing;
         if(this.isShowing)

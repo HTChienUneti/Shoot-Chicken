@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class GameIntroState : GameState, IIntroState
+public class GameIntroState : GameState
 {
     static private GameIntroState _instance;
     static public GameIntroState Instance => _instance;
     private bool isEnter = false;
-   [SerializeField]private  float timeMax = 5f;
+    [SerializeField]private  float timeMax = 10f;
     [SerializeField]  private float timer = 0f;
 
     protected override void Awake()
@@ -19,6 +19,7 @@ public class GameIntroState : GameState, IIntroState
     {
         base.EnterState();
         this.isEnter = true;
+        StartCoroutine(CountdownState());
     }
     public override void ExitState()
     {
@@ -27,14 +28,15 @@ public class GameIntroState : GameState, IIntroState
     }
     private void FixedUpdate()
     {
-        this.CountdownState();
+        //this.CountdownState();
     }
-    private void CountdownState()
+    private IEnumerator CountdownState()
     {
-        if (!this.isEnter) return;
-        this.timer += Time.fixedDeltaTime;
-        if (this.timer < this.timeMax) return;
-        this.timer = 0f;
+        yield return new WaitForSeconds(this.timeMax);
+        //if (!this.isEnter) return;
+        //this.timer += Time.fixedDeltaTime;
+        //if (this.timer < this.timeMax) return;
+        //this.timer = 0f;
         GameManager.Instance.WarningGame();
     }
     protected virtual void LoadSingleton()

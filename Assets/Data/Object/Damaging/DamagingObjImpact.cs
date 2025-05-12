@@ -9,7 +9,7 @@ using UnityEngine;
 public abstract class DamagingObjImpact: ObjImpact
 {
     [Header("Damaging Obj Impact")]
-    [SerializeField] protected DamagingObjCtrl damagingObjCtrl;
+    [SerializeField] protected WeaponCtrl damagingObjCtrl;
   
     protected override bool ImpactExcluded(Collider collision)
     {
@@ -43,7 +43,7 @@ public abstract class DamagingObjImpact: ObjImpact
     protected virtual void LoadDamagingObjCtrl()
     {
         if (this.damagingObjCtrl != null) return;
-        this.damagingObjCtrl = transform.parent.GetComponent<DamagingObjCtrl>();
+        this.damagingObjCtrl = transform.parent.GetComponent<WeaponCtrl>();
         Debug.Log(transform.name + " :DamagingObjCtrl", gameObject);
     }
 }

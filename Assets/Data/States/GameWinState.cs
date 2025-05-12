@@ -3,24 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameWinState : MySingleton<GameWinState>, IGameWinState
+public class GameWinState : GameState
 {
-    public  event EventHandler OnEnterState;
-    public EventHandler<EventArgs> OnExitState;
-    public void EnterState()
+    static private GameWinState _instance;
+    static public GameWinState Instance => _instance;
+    protected override void Awake()
     {
-        Debug.Log("Enter GameWinState");
-
-        Invoke(nameof(this.TriggerEnterState), 0f);
+        base.Awake();
+        this.LoadSingleton();
     }
-    protected virtual void TriggerEnterState()
+    protected virtual void LoadSingleton()
     {
-        OnEnterState?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void ExitState()
-    {
-        Debug.Log("Exit GameWinState");
-        OnExitState?.Invoke(this, EventArgs.Empty);
+        if (_instance != null)
+        {
+            Debug.LogWarning("There are already have a GameWinState", gameObject);
+            Destroy(gameObject);
+            Debug.LogWarning("Deleted new GameWinState", gameObject);
+            return;
+        }
+        _instance = this;
     }
 }

@@ -8,18 +8,14 @@ using UnityEngine;
 
 public class SpawnChickenManager : MySingleton<SpawnChickenManager>
 {
-    [SerializeField] protected List<Wave> waves = new List<Wave>();
-    public List<Wave> Waves => waves;
-    [SerializeField] protected List<RowSO> rows = new List<RowSO>();
-    public List<RowSO> Rows => rows;
+    [SerializeField] protected List<WaveSO> waves = new List<WaveSO>();
+    public List<WaveSO> Waves => waves;
     [SerializeField] protected int mission;
     public int Mission => mission;  
-    [SerializeField] int currentRow = 0;
 
     [SerializeField] protected int currentWave = 0;
     public int CurrentWave => currentWave;
     [SerializeField] protected int spawnCount = 0; 
-    [SerializeField] protected int spawnRowCount = 0; 
     [SerializeField] protected float timer=0;
     [SerializeField] protected float delaySpawn= .3f;
     [SerializeField] protected bool isAllChickenDead = false;
@@ -37,12 +33,11 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
             this.waves = MissionDataManager.Instance.Mission.waves;
             this.mission = MissionDataManager.Instance.Mission.missionIndex;
         }
-        
-        ChickenPoint.Instance.AddPoint(this.rows[0].points);
+      
     }
     protected override void Start()
     {
-        ChickenSpawner.Instance.OnAllChikenDead += ChickenSpawner_OnAllChikenDead;
+        EnemySpawner.Instance.OnAllChikenDead += ChickenSpawner_OnAllChikenDead;
          PlayingGameState.Instance.OnEnterState += ChickenActiveState_OnEnterState;
         PlayingGameState.Instance.OnExitState += ChickenActiveState_OnExitState;
     }
@@ -70,19 +65,13 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
         if (!this.isSpawning) return;
         if (this.currentWave > this.waves.Count - 1) return;
         if (!this.CountdownTimer() || this.spawnCount >= this.waves[this.currentWave].count) return;
-        ChickenSO chickenSO = this.waves[this.currentWave].chickens[0];
-   
-        Vector3 spawnPos = this.GetFirstPoint();
-        Transform obj = ChickenSpawner.Instance.Spawn(chickenSO, spawnPos, Quaternion.identity);
+        EnemySO chickenSO = this.waves[this.currentWave].enemys[0];
+        Transform obj = EnemySpawner.Instance.Spawn(chickenSO, Vector3.zero, Quaternion.identity);
         if (obj == null) return;
         obj.gameObject.SetActive(true);
         this.spawnCount++;
 
 
-    }
-    protected virtual Vector3 GetFirstPoint()
-    {
-        return this.waves[this.currentWave].rows[currentRow].points[0].point;
     }
     protected virtual bool CountdownTimer()
     {
@@ -91,17 +80,13 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
         this.timer = 0f;
         return true;
     }
-    public virtual void RowUp(int up)
-    {
-        this.currentRow += up;
-    }
 
     public void OnAllChickenDead()
     {
         this.isAllChickenDead = true;
         this.spawnCount = 0;
         this.currentWave++;
-
+        WayPointSystem.Instance.SetFirstPoint();
         if (this.currentWave >= this.waves.Count)
         {
             this.WinGame();
@@ -111,9 +96,8 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
         {
             wave = this.currentWave,
         });
-        this.currentRow = 0;
-        ChickenPoint.Instance.Row = 0;
-        ChickenPoint.Instance.AddPoint(this.rows[this.currentRow].points);
+   
+     
         GameManager.Instance.WarningGame();
      
     }
@@ -124,23 +108,12 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadWaves();
-        this.LoadRow();
-    }
+        this.LoadWaves();    }
     protected virtual void LoadWaves()
     {
         if (this.waves.Count > 0) return;
         string path = "Wave/Wave_1";
-        this.waves.Add(Resources.Load<Wave>(path));
-        Debug.Log(transform.name + ": LoadRow", gameObject);
-    }
-    protected virtual void LoadRow()
-    {
-        if (this.rows.Count > 0) return;
-        foreach (var row in this.waves[0].rows)
-        {
-            this.rows.Add(row);
-        }
+        this.waves.Add(Resources.Load<WaveSO>(path));
         Debug.Log(transform.name + ": LoadRow", gameObject);
     }
 }

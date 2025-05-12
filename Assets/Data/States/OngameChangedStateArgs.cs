@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class OngameChangedStateArgs : EventArgs
 {
-    public IGameSceneState state;
+    public GameState state;
 }

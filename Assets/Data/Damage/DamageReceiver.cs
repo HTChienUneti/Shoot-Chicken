@@ -41,7 +41,14 @@ public abstract class DamageReceiver : MyMonoBehaviour
     }
     protected virtual void CreateVfXReceiveDamage()
     {
-
+        string prefabName = this.GetVfxName();
+        Transform prefab = VFXSpawner.Instance.Spawn(prefabName, transform.position, transform.rotation);
+        if (prefab == null) return;
+        prefab.gameObject.SetActive(true);
+    }
+    protected virtual string GetVfxName()
+    {
+        return "";
     }
     protected virtual void CheckDead()
     {

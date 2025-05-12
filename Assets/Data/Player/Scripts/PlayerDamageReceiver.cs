@@ -4,36 +4,40 @@ using UnityEngine;
 
 public class PlayerDamageReceiver : DamageReceiver
 {
-    //use for player revive
-    [SerializeField] protected Vector3 defaultPos = new Vector3(0, -3.43f, 0);
+    [SerializeField] PlayerCtrl playerCtrl;
     protected override void OnDead()
     {
         GameManager.Instance.OverGame();
     }
-    protected override void ResetValue()
+    public override void ReduceHp(int hp)
     {
-       this.defaultPos = new Vector3(0, -3.43f, 0);
-   
+        base.ReduceHp(hp);
+        if (this.currentHp <= 0) return;
+        this.Revive();
+    }
+    protected override string GetVfxName()
+    {
+        return VFXSpawner.impact_1;
     }
 
-    protected override void CreateVfXReceiveDamage()
-    {
-        Transform vfx = VFXSpawner.Instance.Spawn(VFXSpawner.impact_1, transform.parent.position, Quaternion.identity);
-        if (vfx == null) return;
-        vfx.gameObject.SetActive(true);
-        transform.parent.gameObject.SetActive(false);
-        Invoke(nameof(this.Revive), 2f);
-    }
     protected virtual void Revive()
     {
-        if (this.currentHp <= 0) return;
-        transform.parent.gameObject.SetActive(true);
-        transform.parent.position = this.defaultPos;
+        this.playerCtrl.PlayerRevive.Revive();
     }
-
     protected override void LoadCollider()
     {
         base.LoadCollider();
         this._collider.radius = 1f;
+    }
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        this.LoadPlayerCtrl();
+    }
+    protected virtual void LoadPlayerCtrl()
+    {
+        if (this.playerCtrl != null) return;
+        this.playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
+        Debug.LogWarning(transform.name + ": LoadPlayerCtrl", gameObject);
     }
 }

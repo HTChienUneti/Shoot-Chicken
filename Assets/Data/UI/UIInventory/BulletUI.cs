@@ -10,7 +10,7 @@ public class BulletUI : InventoryUI, IShooterChangeDamaging
         PlayerCtrl.Instance.Shooter.AddListener(this);
         this.OnChangedObjDamaging(PlayerCtrl.Instance.Shooter.CurrentDamaging);
     }
-    public void OnChangedObjDamaging(DamagingSO damagingSO)
+    public void OnChangedObjDamaging(WeaponSO damagingSO)
     {
         this.image.sprite = damagingSO._sprite;
     }

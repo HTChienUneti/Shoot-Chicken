@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IUsingKeyDown
 {
-    public void OnKeyDown();
+    public void OnKeyDown(KeyCode keycode );
 }

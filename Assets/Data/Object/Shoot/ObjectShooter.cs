@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ObjectShooter : ObjectShooterAbstract
+public abstract class ObjectShooter : ObjectShooterBase
 {
     [Header("Obj Shooter")]
     [SerializeField] protected float shootDelay = 1f;
@@ -36,20 +36,21 @@ public abstract class ObjectShooter : ObjectShooterAbstract
 
     public virtual void GetDamagingSOByName(string name)
     {
-        string path = "SO/Damaging/" + name;
-        this.damagingSO = Resources.Load<DamagingSO>(path);
-        this.SetDamaging(damagingSO);
-    }
+        foreach(WeaponSO  weapon in this.weapons)
+        {
+            if (weapon.name != name) continue;
+            this.SetWeapon(weapon);
+        }
+    }   
 
-    public virtual void SetDamaging(DamagingSO damagingSO)
+    public virtual void SetWeapon(WeaponSO weaponSO)
     {
-        this.damagingSO = damagingSO;
-        this.currentDamaging = this.damagingSO;
-        this.OnChangedObjDamaging();
+        this.currrenWeapon = weaponSO;
+        this.OnChangedWeapon();
     }
-    public virtual DamagingSO GetDamaging()
+    public virtual WeaponSO GetDamaging()
     {
-        return this.damagingSO;
+        return this.currrenWeapon;
     }
     protected override void ResetValue()
     {
@@ -127,14 +128,14 @@ public abstract class ObjectShooter : ObjectShooterAbstract
         this.listeners.Remove(listener);
     }
 
-    public void OnChangedObjDamaging()
+    public void OnChangedWeapon()
     {
         foreach (IShooterChangeDamaging listener in this.listeners)
         {
-            listener.OnChangedObjDamaging(this.currentDamaging);
+            listener.OnChangedObjDamaging(this.currrenWeapon);
         }
     }
-    public virtual void Shoot(DamagingSO damaging)
+    public virtual void Shoot(WeaponSO damaging)
     {
         Transform bullet = BulletSpawner.Instance.Spawn(damaging, this.startPos.position, Quaternion.identity);
         bullet.gameObject.SetActive(true);

@@ -13,7 +13,7 @@ public class GameState : MyMonoBehaviour
     {
         Debug.Log(this.name+" enter");
         this.OnEnterState?.Invoke(this, EventArgs.Empty);
-    }   
+    }
 
     public virtual void ExitState()
     {

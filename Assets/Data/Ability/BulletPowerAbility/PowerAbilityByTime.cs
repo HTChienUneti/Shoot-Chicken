@@ -12,10 +12,10 @@ public abstract class PowerAbilityByTime : BulletAbilityByTime
     [SerializeField]static private bool isUsing = false;
     [SerializeField] protected ItemPower itemPower;
 
-    public override void OnKeyDown()
+    public override void OnKeyDown(KeyCode k)
     {
         if (PowerAbilityByTime.isUsing) return;
-        base.OnKeyDown();
+        base.OnKeyDown(k);
     }
     protected override void OnStartUse()
     {
@@ -26,7 +26,7 @@ public abstract class PowerAbilityByTime : BulletAbilityByTime
     }
     protected override void OnUsing()
     {
-        AbilityBulletManager.Instance.SetUsing(this.timeRemaining, this.timeUse);
+     //   ChangeWeaponManager.Instance.SetUsing(this.timeRemaining, this.timeUse);
     }
     protected override void OnUsed()
     {

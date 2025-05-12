@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class NewGameButton : ButtonBase
 {
     protected override void OnClick()
-    {
-        SceneManager.LoadScene("GameScene");
-        GameManager.Instance.PlayingGame();
+    { 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.PlayGame();
     }
 }

@@ -15,7 +15,12 @@ public class PlayerCtrl : HittableObjCtrl
     public PlayerMoveByKey PlayerMoveByKey=> playerMoveByKey;
     [SerializeField] protected PlayerFollowMouse playerFollowMouse;
     public PlayerFollowMouse PlayerFollowMouse => playerFollowMouse;
-
+    [SerializeField] protected PlayerRevive playerRevive;
+    public PlayerRevive PlayerRevive =>playerRevive;
+    [SerializeField] protected Transform model;
+    public Transform Model => model;
+    [SerializeField] protected PlayerSO playerSO;
+    public PlayerSO PlayerSO =>playerSO;
     protected override void Awake()
     {
         base.Awake();
@@ -29,31 +34,55 @@ public class PlayerCtrl : HittableObjCtrl
         this.LoadShooter();
         this.LoadPlayerMoveByKey();
         this.LoadPlayerFollowMouse();
+        this.LoadPlayerRevive();
+        this.LoadModel();
+        this.LoadPlayerSO();
       
+    }
+    protected virtual void LoadPlayerSO()
+    {
+        if (this.playerSO != null) return;
+        string path = "SO/Player/"+transform.name;
+        this.playerSO = Resources.Load<PlayerSO>(path); 
+        Debug.LogWarning(transform.name + ": LoadPlayerSO", gameObject);
+    }
+
+    protected virtual void LoadModel()
+    {
+        if (this.model != null) return;
+        this.model = transform.Find("Model");
+        Debug.LogWarning(transform.name + ": LoadModel", gameObject);
+    }
+
+    protected virtual void LoadPlayerRevive()
+    {
+        if (this.playerRevive != null) return;
+        this.playerRevive = GetComponentInChildren<PlayerRevive>();
+        Debug.LogWarning(transform.name + ": LoadPlayerRevive", gameObject);
     }
     protected virtual void LoadPlayerFollowMouse()
     {
         if (this.playerFollowMouse != null) return;
         this.playerFollowMouse = GetComponentInChildren<PlayerFollowMouse>();
-        Debug.Log(transform.name + ": LoadPlayerFollowMouse", gameObject);
+        Debug.LogWarning(transform.name + ": LoadPlayerFollowMouse", gameObject);
     }
     protected virtual void LoadPlayerMoveByKey()
     {
         if (this.playerMoveByKey != null) return;
         this.playerMoveByKey = GetComponentInChildren<PlayerMoveByKey>();
-        Debug.Log(transform.name + ": LoadPlayerMoveByKey", gameObject);
+        Debug.LogWarning(transform.name + ": LoadPlayerMoveByKey", gameObject);
     }
     protected virtual void LoadShooter()
     {
         if (this.shooter != null) return;
         this.shooter = GetComponentInChildren<PlayerShooter>();
-        Debug.Log(transform.name + ": LoadShooter", gameObject);
+        Debug.LogWarning(transform.name + ": LoadShooter", gameObject);
     }
     protected virtual void LoadInventory()
     {
         if (this.inventory != null) return;
         this.inventory = GetComponentInChildren<Inventory>();
-        Debug.Log(transform.name + ": LoadInventory", gameObject);
+        Debug.LogWarning(transform.name + ": LoadInventory", gameObject);
     }
     protected virtual void LoadSingleton()
     {

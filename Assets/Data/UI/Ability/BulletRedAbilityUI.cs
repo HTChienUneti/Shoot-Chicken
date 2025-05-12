@@ -8,7 +8,7 @@ public class BulletRedAbilityUI : AbilityUI, IUsingBulletRedAbility
     protected override void OnClick()
     {
      
-        BulletRedAbility.Instance.OnKeyDown();
+        BulletRedAbility.Instance.OnKeyDown(KeyCode.Alpha4);
     }
 
     protected override void Start()

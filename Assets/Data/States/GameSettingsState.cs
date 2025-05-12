@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSettingsState : GameState,ISettingState
+public class GameSettingsState : GameState
 {
-
     static private GameSettingsState _instance;
     static public GameSettingsState Instance => _instance;
     protected override void Awake()

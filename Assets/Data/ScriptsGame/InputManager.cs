@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public sealed class InputManager : MySingleton<InputManager>
@@ -21,6 +22,17 @@ public sealed class InputManager : MySingleton<InputManager>
         this.GetHoriVerti();
         this.GetKeyDown();
         this.GetKeyHold();
+    }
+    public void AddKeyDownListener(List<KeyCode> keys, IUsingKeyDown listener)
+    {
+        foreach(KeyCode key in keys)
+        {
+            if (!this.keyDownlisteners.ContainsKey(key))
+            {
+                keyDownlisteners[key] = new List<IUsingKeyDown>();
+            }
+            this.keyDownlisteners[key].Add(listener);
+        }
     }
     public void AddKeyDownListener(KeyCode key, IUsingKeyDown listener)
     {
@@ -89,7 +101,7 @@ public sealed class InputManager : MySingleton<InputManager>
     {
         foreach (IUsingKeyDown listener in this.keyDownlisteners[key])
         {
-            listener.OnKeyDown();
+            listener.OnKeyDown(key);   
         }
     }
     private void OnKeyHold(KeyCode key)

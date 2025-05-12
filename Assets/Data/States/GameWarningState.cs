@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameWarningState : GameState,IGameWarningState
+public class GameWarningState : GameState
 {
 
     static private GameWarningState _instance;
@@ -37,7 +37,7 @@ public class GameWarningState : GameState,IGameWarningState
         this.timer += Time.fixedDeltaTime;
         if (this.timer < this.timeMax) return;
         this.timer = 0f;
-        GameManager.Instance.PlayingGame();
+        GameManager.Instance.PlayGame();
     }
     protected virtual void LoadSingleton()
     {

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IShooterChangeDamaging
 {
-    public void OnChangedObjDamaging(DamagingSO damagingSO);
+    public void OnChangedObjDamaging(WeaponSO damagingSO);
 }

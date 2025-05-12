@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePauseState :GameState, IGamePauseState
+public class GamePauseState : GameState
 {
     static private GamePauseState _instance;
     static public GamePauseState Instance => _instance;

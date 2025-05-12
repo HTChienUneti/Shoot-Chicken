@@ -14,8 +14,12 @@ public abstract class PlayerAbstract : MyMonoBehaviour
     protected virtual void LoadPlayerCtrl()
     {
         if (this.playerCtrl != null) return;
-        this.playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
+        this.playerCtrl = this.GetPlayCtrlComponent();
         Debug.Log(transform.name + ": LoadPlayerCtrl", gameObject);
+    }
+    protected virtual PlayerCtrl GetPlayCtrlComponent()
+    {
+        return transform.parent.GetComponent<PlayerCtrl>();
     }
 
 }

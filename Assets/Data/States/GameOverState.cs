@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class GameOverState : GameState, IGameOverState
+public class GameOverState : GameState
 {
     
     static private GameOverState _instance;

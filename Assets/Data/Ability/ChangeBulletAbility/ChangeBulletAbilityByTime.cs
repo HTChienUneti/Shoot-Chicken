@@ -10,10 +10,10 @@ public abstract class ChangeBulletAbilityByTime : AbilityWeapon
     [SerializeField] static private bool isUsing = false;
     //-----------------Function--------------------//
  
-    public override void OnKeyDown()
+    public override void OnKeyDown(KeyCode k)
     {
         if (ChangeBulletAbilityByTime.isUsing) return;
-        base.OnKeyDown();
+        base.OnKeyDown(k);
     }
     protected override void OnStartUse()
     {
@@ -24,7 +24,7 @@ public abstract class ChangeBulletAbilityByTime : AbilityWeapon
     }
     protected override IEnumerator UsingAbility()
     {
-        PlayerCtrl.Instance.Shooter.SetDamaging(this.damagingSO);
+        PlayerCtrl.Instance.Shooter.SetWeapon(this.damagingSO);
         return base.UsingAbility();
     }
     protected override void OnUsed()

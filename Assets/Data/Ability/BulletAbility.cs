@@ -24,7 +24,7 @@ public abstract class BulletAbility : MyMonoBehaviour, IUsingKeyDown
     {
         this.listeners.Add(listener);
     }
-    public virtual void OnKeyDown()
+    public virtual void OnKeyDown(KeyCode k)
     {
         if (!this.HaveEnoughItem() || this.timeCountdown < this.timeDelay) return;
         this.OnStartUse();

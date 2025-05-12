@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HittableObjCtrl : MyMonoBehaviour
+public class HittableObjCtrl : ShootAbleObjCtrl
 {
     [SerializeField] protected DamageReceiver damageReceiver;
     public DamageReceiver DamageReceiver => damageReceiver;

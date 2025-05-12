@@ -5,8 +5,8 @@ using UnityEngine;
 public class ShooterAbilitiesAbtract : MyMonoBehaviour
 {
     [Header("Shooter Abilities Abstact")]
-    [SerializeField] protected AbilityBulletManager shooterAbilities;
-    public AbilityBulletManager ShooterAbilities =>shooterAbilities;
+    [SerializeField] protected ChangeWeaponManager shooterAbilities;
+    public ChangeWeaponManager ShooterAbilities =>shooterAbilities;
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -15,7 +15,7 @@ public class ShooterAbilitiesAbtract : MyMonoBehaviour
     protected virtual void LoadShooterAbilities()
     {
         if (this.shooterAbilities != null) return;
-        this.shooterAbilities = transform.parent.GetComponent<AbilityBulletManager>();
+        this.shooterAbilities = transform.parent.GetComponent<ChangeWeaponManager>();
         Debug.LogWarning(transform.name + ": LoadShooterAbilities", gameObject);
     }
 

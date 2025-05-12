@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -11,10 +12,6 @@ public class PlayerShooter : ObjectShooter
     public event EventHandler<EventArgs> OnShooting;
     [SerializeField] protected PlayerCtrl playerCtrl;
     public PlayerCtrl PlayerCtrl => playerCtrl;
-    [SerializeField] protected PlayerShootByMouse shooterByMouse;
-    public PlayerShootByMouse ShooterByMouse => shooterByMouse;
-    [SerializeField] protected PlayerShootByKey shooterByKey;
-    public PlayerShootByKey PlayerShooterByKey => shooterByKey;
 
     protected override void Awake()
     {
@@ -23,21 +20,17 @@ public class PlayerShooter : ObjectShooter
     }
     protected override Transform GetPrefab()
     {
-        Transform newBullet = BulletSpawner.Instance.Spawn(this.damagingSO, this.startPos.position, Quaternion.identity);
+        Transform newBullet = BulletSpawner.Instance.Spawn(this.currrenWeapon, this.startPos.position, Quaternion.identity);
         if(newBullet == null) return newBullet;
         newBullet.GetComponent<BulletCtrl>().SetShooter(transform.parent);
         return newBullet;
     }
 
-    protected override string GetDamagingName()
+    protected override string GetWeaponName()
     {
         return "Bullet_Blue";
     }
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadPlayerCtrl();
-    }
+
     protected override bool Shooting()
     {
         if(!base.Shooting()) return false;
@@ -45,24 +38,11 @@ public class PlayerShooter : ObjectShooter
         this.isShooting = false;
         return true;
     }
-    protected virtual void LoadPlayerCtrl()
-    {
-        if (this.playerCtrl != null) return;
-        this.playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
-        Debug.LogWarning(transform.name + ": LoadPlayerCtrl", gameObject);
-    }
-
+ 
     public void SetShooting(bool isShooting)
     {
         this.isShooting = isShooting;
     }
-    protected virtual void LoadShooterByKey()
-    {
-        if (this.shooterByKey != null) return;
-        this.shooterByKey = GetComponentInChildren<PlayerShootByKey>();
-        Debug.Log(transform.name + ": LoadShooterByKey", gameObject);
-    }
-
     private void LoadSingleton()
     {
         if(PlayerShooter._instance != null)
@@ -72,4 +52,24 @@ public class PlayerShooter : ObjectShooter
         }
         PlayerShooter._instance = this;
     }
+
+    protected override List<WeaponSO> GetWeaponSO()
+    {
+        return this.playerCtrl.PlayerSO.weapons.Cast<WeaponSO>().ToList();
+    }
+
+    #region LoadComponent
+    protected override void LoadComponent()
+    {
+        this.LoadPlayerCtrl();
+        base.LoadComponent();
+
+    }
+    protected virtual void LoadPlayerCtrl()
+    {
+        if (this.playerCtrl != null) return;
+        this.playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
+        Debug.LogWarning(transform.name + ": LoadPlayerCtrl", gameObject);
+    }
+    #endregion
 }

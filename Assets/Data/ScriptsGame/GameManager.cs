@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class GameManager : MySingleton<GameManager>
 {
-    [SerializeField] private bool isGameActive = false;
+  
     public virtual void PauseGame()
     {
-        GameSceneStateManager.Instance.ChangeState(GamePauseState.Instance);
+        GameSceneStateManager.Instance.ChangeState (GamePauseState.Instance);
         Time.timeScale = 0f;
     }
-    public virtual void PlayingGame()
+    public virtual void PlayGame()
     {
-        this.isGameActive = true;
         Time.timeScale = 1f;
         GameSceneStateManager.Instance.ChangeState(PlayingGameState.Instance);
     }
@@ -44,10 +43,6 @@ public class GameManager : MySingleton<GameManager>
     {
         GameSceneStateManager.Instance.ChangeState(GameIntroState.Instance);
         Time.timeScale = 1f;
-    }
-    public virtual bool IsGameActive()
-    {
-        return this.isGameActive;
     }
     public void BackPrevState()
     {
