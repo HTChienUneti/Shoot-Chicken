@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
-public class PlayerShooterAbstract : MyMonoBehaviour
+public abstract class PlayerShooterAbstract : MyMonoBehaviour
 {
-    [SerializeField] protected PlayerShooter playerShooter;
-    [SerializeField] protected PlayerShooter ShooterplayerShooter;
-    //protected virtual void LoadPlayerCtrl()
-    //{
-    //    if (this.playerCtrl != null) return;
-    //    this.playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
-    //    Debug.LogWarning(transform.name + ": LoadPlayerCtrl", gameObject);
-    //}
+    [Header("PlayerShooter Abstract")]
+    [SerializeField]protected  PlayerShooter playerShooter;
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        this.LoadPlayerShooterAbtract();
+    }
+    protected virtual void LoadPlayerShooterAbtract()
+    {
+        if (this.playerShooter != null) return;
+        this.playerShooter = this.GetComponentInParent<PlayerShooter>();
+        Debug.Log(transform.name + ": LoadPlayerCtrl", gameObject);
+    }
+    
 
 }

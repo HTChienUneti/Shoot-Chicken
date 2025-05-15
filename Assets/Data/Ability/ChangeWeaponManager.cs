@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class ChangeWeaponManager : PlayerAbstract,IUsingKeyDown
+public sealed class ChangeWeaponManager : PlayerShooterAbstract,IUsingKeyDown
 {
     static private ChangeWeaponManager _instance;
     static public ChangeWeaponManager Instance => _instance;
@@ -26,7 +26,7 @@ public sealed class ChangeWeaponManager : PlayerAbstract,IUsingKeyDown
     protected override void Start()
     {
         base.Start();
-        foreach(PlayerWeaponSO weapon in this.playerCtrl.PlayerSO.weapons)
+        foreach(PlayerWeaponSO weapon in this.shooter.PlayerShooterSO.weapons)
         {
             InputManager.Instance.AddKeyDownListener(weapon.keycode, this);
         }
@@ -42,7 +42,7 @@ public sealed class ChangeWeaponManager : PlayerAbstract,IUsingKeyDown
     }
     public void OnKeyDown(KeyCode keycode)
     {
-        foreach(PlayerWeaponSO weapon in this.playerCtrl.PlayerSO.weapons)
+        foreach(PlayerWeaponSO weapon in this.shooter.PlayerShooterSO.weapons)
         {
             if (weapon.keycode != keycode) continue;
             Debug.Log(keycode.ToString());
@@ -53,15 +53,27 @@ public sealed class ChangeWeaponManager : PlayerAbstract,IUsingKeyDown
     {
         this.shooter.SetWeapon(weapon);
     }
+    public void ChangeWeaponByItemProfile(Profile itemProfile)
+    {
+        PlayerWeaponSO playerWeaponSO = this.GetPlayerWeaponSOByProfile(itemProfile);
+        if (playerWeaponSO == null) return;
+                
+        this.ChangeWeapon(playerWeaponSO);
+    }
+    private  PlayerWeaponSO GetPlayerWeaponSOByProfile(Profile itemProfile)
+    {
+        foreach(PlayerWeaponSO weapon in this.shooter.PlayerShooterSO.weapons)
+        {
+            if (weapon.itemProfile != itemProfile) continue;
+            return weapon;
+        }
+        return null;
+    }
     #region LoadComponent
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadShooter();
-    }
-    protected override PlayerCtrl GetPlayCtrlComponent()
-    {
-        return GetComponentInParent<PlayerCtrl>();
     }
     private void LoadShooter()
     {

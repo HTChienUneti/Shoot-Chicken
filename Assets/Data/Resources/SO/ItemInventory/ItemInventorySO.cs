@@ -7,6 +7,6 @@ using UnityEngine;
 [Serializable]
 public class ItemInventorySO : ScriptableObject
 {
-    public ItemProfile itemProfile;
+    public Profile itemProfile;
     public int maxStack;
 }

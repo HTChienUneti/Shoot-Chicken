@@ -10,10 +10,10 @@ public class X2Ability : PowerAbilityByTime
     {
         base.ResetValue();
         this.keyCode = KeyCode.R;
-    }
+    }   
     protected override void OnStartUse()
     {
         base.OnStartUse();
-        PlayerCtrl.Instance.Shooter.ShooterLevel.LevelUp(ItemTypePowerup.Time, 2);
+        //PlayerCtrl.Instance.Shooter.ShooterLevel.Upgrade(ItemTypePowerup.Time, 2);
     }
 }

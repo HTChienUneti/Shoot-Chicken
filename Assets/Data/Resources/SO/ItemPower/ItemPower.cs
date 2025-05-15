@@ -5,10 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="ItemPower",menuName ="SO/ItemPower")]
 public class ItemPower : ScriptableObject
 {
-    public Sprite _sprite;
+    public Profile profile;
     public PowerCode powerCode;
-    public List<Ingredient> ingredients;
     public int power;
-    public string damagingName;
-
+    
 }

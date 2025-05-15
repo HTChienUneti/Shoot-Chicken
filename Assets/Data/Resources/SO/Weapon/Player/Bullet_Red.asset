@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2098d42cefe1bf54cbccd6183b39cc06, type: 3}
   m_Name: Bullet_Red
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: b903492db4e935f42b0048b5be61efca, type: 3}
+  itemProfile: {fileID: 11400000, guid: 8066a8aa7778b2e4c94286acbfc066a9, type: 2}
   damage: 1
-  _name: Bullet_Red
   maxHp: 1
   weapons: []
   itemDrop: []

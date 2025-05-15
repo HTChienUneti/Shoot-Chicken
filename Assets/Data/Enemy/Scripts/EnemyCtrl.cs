@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Jobs;
 
 public class EnemyCtrl : WeaponCtrl
 {
@@ -15,12 +16,11 @@ public class EnemyCtrl : WeaponCtrl
     {
         if (this.enemyMovement != null) return;
         this.enemyMovement = GetComponentInChildren<EnemyMovement>();
-
         Debug.LogWarning(transform.name + ": LoadEnemyMovement", gameObject);
     }
 
     protected override string GetPathToLoadWeaponSO()
     {
-        return "SO/Weapon/Enemy/";
+        return "SO/Enemy/";
     }
 }

@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2098d42cefe1bf54cbccd6183b39cc06, type: 3}
   m_Name: Bullet_Purple
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: 991b306784c0b6847baa37d2aad591b2, type: 3}
+  itemProfile: {fileID: 11400000, guid: d047f34dbffd6314ea75ed5ff204bfd2, type: 2}
   damage: 1
-  _name: Bullet_Purple
   maxHp: 1
   weapons: []
   itemDrop: []

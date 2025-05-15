@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -8,41 +9,15 @@ public class Inventory : PlayerAbstract
     [SerializeField] protected List<ItemInventory> items;
     public List<ItemInventory> Items=>items;
     protected List<IUsingInventory> listeners = new List<IUsingInventory>();
-    protected override void Start()
+    public event EventHandler<OnInventoryChangedEventArgs> OnInventoryChanged;
+    public class OnInventoryChangedEventArgs: EventArgs
     {
-        base.Start();
-      
+        public ItemInventory Item;  
     }
-    public virtual ItemInventory GetItemInventory(ItemProfile itemProfile)
+    public virtual void AddItem(Profile itemProfile, int count)
     {
-        foreach (ItemInventory item in items)
-        {
-            if (item.itemSO.itemProfile != itemProfile) continue;
-            return item;
-        }
-        return null;
-    }
-    public virtual ItemInventory GetItemInventory(ItemInventory itemInventory)
-    {
-        foreach (ItemInventory item in items)
-        {
-            if (item != itemInventory) continue;
-            return item;
-        }
-        return null;
-    }
-    protected virtual void Test()
-    {
-        //this.RemoveItem(ItemCode.ChickenWing, 1);
-    }
-    //public virtual void AddItem(ItemCode itemCode, int count)
-    //{
-    //    ItemInventory inventoryItem = this.GetItemFromListByCode(itemCode);
-    //    this.AddItem(inventoryItem, count);
-    //}
-    public virtual void AddItem(ItemProfile itemProfile, int count)
-    {
-        ItemInventory inventoryItem = this.GetItemFromListByProfile(itemProfile);
+        ItemInventory inventoryItem = this.GetItemFromInventoryByProfile(itemProfile);
+        //if inventory haven't have this item yet
         if(inventoryItem == null)
         {
             inventoryItem= this.CreateItemInventory(itemProfile,count);
@@ -51,29 +26,21 @@ public class Inventory : PlayerAbstract
         }
         this.AddItem(inventoryItem, count);
     }
-    //public virtual void AddItem(InventoryItem inventoryItem, int count)
-    //{
-    //    this.AddItem(inventoryItem, count);    
-    //}
     public virtual void AddItem(ItemInventory itemInventory, int count)
     {
         itemInventory.stack += count;
         if (itemInventory.stack > itemInventory.itemSO.maxStack)
         {
             itemInventory.stack = itemInventory.itemSO.maxStack;
-        } 
-        this.OnInventoryChanged();
-    }
-    protected virtual ItemInventory GetItemFromList(ItemInventory itemInventory)
-    {
-        foreach (ItemInventory itemInv in this.items)
-        {
-            if (itemInv != itemInventory) continue;
-            return itemInv;
         }
-        return null;
+        this.InventoryChanged(itemInventory);
+        this.DistributeItem(itemInventory);
     }
-    protected virtual ItemInventory CreateItemInventory(ItemProfile itemProfile, int count)
+    protected virtual void DistributeItem(ItemInventory itemInventory)
+    {
+        this.playerCtrl.Shooter.ChangeWeaponManager.ChangeWeaponByItemProfile(itemInventory.itemSO.itemProfile);
+    }
+    protected virtual ItemInventory CreateItemInventory(Profile itemProfile, int count)
     {
         ItemInventorySO itemInventorySO = this.GetItemInventorySOByProfile(itemProfile);
 
@@ -86,7 +53,7 @@ public class Inventory : PlayerAbstract
 
         return newItem;
     }
-    protected virtual ItemInventorySO GetItemInventorySOByProfile(ItemProfile itemProfile)
+    protected virtual ItemInventorySO GetItemInventorySOByProfile(Profile itemProfile)
     {
         string path = "SO/ItemInventory/";
         ItemInventorySO[] itemSO = Resources.LoadAll<ItemInventorySO>(path);    
@@ -96,23 +63,6 @@ public class Inventory : PlayerAbstract
             return itemInventorySO;
         }
         return null;    
-    }
-    public virtual void RemoveItem(string itemName, int count)
-    {
-        ItemCode itemCode = Parse.StringToItemCode(itemName);
-        this.RemoveItem(itemCode, count);
-    }
-    public virtual void RemoveItem(ItemCode itemCode, int count)
-    {
-       ItemInventory inventoryItem = this.GetItemFromListByCode(itemCode);
-        if (inventoryItem == null) return;
-       this.RemoveItem(inventoryItem, count);
-    }
-    public virtual void RemoveItem(ItemProfile itemProfile, int count)
-    {
-        ItemInventory inventoryItem = this.GetItemFromListByProfile(itemProfile);
-        if (inventoryItem == null) return;
-        this.RemoveItem(inventoryItem, count);  
     }
 
     public virtual void RemoveItem(ItemInventorySO itemSO, int count)
@@ -124,7 +74,7 @@ public class Inventory : PlayerAbstract
     public virtual void RemoveItem(ItemInventory item, int count)
     {
         item.stack -= count;
-        this.OnInventoryChanged();
+        this.InventoryChanged(item);
         if (item.stack > 0) return;
         this.items.Remove(item);
     }
@@ -137,16 +87,16 @@ public class Inventory : PlayerAbstract
         }
         return null;
     }
-    protected virtual ItemInventory GetItemFromListByCode(ItemCode itemCode)
+    protected virtual ItemInventory GetItemFromListByCode(Id itemCode)
     {
         foreach (ItemInventory itemInv in this.items)
         {
-            if (itemInv.itemSO.itemProfile.itemCode != itemCode) continue;
+            if (itemInv.itemSO.itemProfile.id != itemCode) continue;
             return itemInv;
         }
         return null;
     }
-    protected virtual ItemInventory GetItemFromListByProfile(ItemProfile itemProfile)
+    protected virtual ItemInventory GetItemFromInventoryByProfile(Profile itemProfile)
     {
         foreach (ItemInventory itemInv in this.items)
         {
@@ -164,16 +114,11 @@ public class Inventory : PlayerAbstract
     {
         this.listeners.Remove(listener);
     }
-
-    public void OnInventoryChanged()
+    public void InventoryChanged(ItemInventory itemInventory)
     {
-        
-
-        foreach (IUsingInventory listener in this.listeners)
+        this.OnInventoryChanged?.Invoke(this, new OnInventoryChangedEventArgs()
         {
-          
-            listener.OnInventoryChanged(this.items);
-        }
-       
+            Item = itemInventory
+        });
     }
 }

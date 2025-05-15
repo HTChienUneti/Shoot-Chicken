@@ -12,6 +12,11 @@ public class PlayerShooter : ObjectShooter
     public event EventHandler<EventArgs> OnShooting;
     [SerializeField] protected PlayerCtrl playerCtrl;
     public PlayerCtrl PlayerCtrl => playerCtrl;
+    [SerializeField] protected ChangeWeaponManager changeWeaponManager;
+    public ChangeWeaponManager ChangeWeaponManager => changeWeaponManager;
+
+    [SerializeField] protected PlayerShooterSO playerShooterSO;
+    public PlayerShooterSO PlayerShooterSO => playerShooterSO;
 
     protected override void Awake()
     {
@@ -22,6 +27,7 @@ public class PlayerShooter : ObjectShooter
     {
         base.ResetValue();
         this.shootDelay = .3f;
+        this.shootTimer = 0;
     }
     protected override Transform GetPrefab()
     {
@@ -60,7 +66,7 @@ public class PlayerShooter : ObjectShooter
 
     protected override List<WeaponSO> GetWeaponSO()
     {
-        return this.playerCtrl.PlayerSO.weapons.Cast<WeaponSO>().ToList();
+        return this.playerShooterSO.weapons.Cast<WeaponSO>().ToList();
     }
 
     #region LoadComponent
@@ -68,7 +74,23 @@ public class PlayerShooter : ObjectShooter
     {
         this.LoadPlayerCtrl();
         base.LoadComponent();
+        this.LoadChangeWeaponManager();
+        this.LoadPlayerShooterSO();
 
+    }
+    protected virtual void LoadPlayerShooterSO()
+    {
+        if (this.playerShooterSO != null) return;
+        string path = "SO/Player/Shooter/" + transform.name;
+        this.playerShooterSO = Resources.Load<PlayerShooterSO>(path);
+        Debug.LogWarning(transform.name + ": LoadPlayerShooterSO", gameObject);
+    }
+
+    protected virtual void LoadChangeWeaponManager()
+    {
+        if (this.changeWeaponManager != null) return;
+        this.changeWeaponManager = GetComponentInChildren<ChangeWeaponManager>();   
+        Debug.LogWarning(transform.name + ": LoadChangeWeaponManager", gameObject);
     }
     protected virtual void LoadPlayerCtrl()
     {

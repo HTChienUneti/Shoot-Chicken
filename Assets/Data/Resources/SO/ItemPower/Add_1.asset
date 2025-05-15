@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d8cf5723c3fc3459235ec7807e05ea, type: 3}
   m_Name: Add_1
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: a422b430911342b44b3a65939ec939aa, type: 3}
+  profile: {fileID: 11400000, guid: 2a61af06eefd00c42bc933db4941fd4c, type: 2}
   powerCode: 1
-  ingredients:
-  - profile: {fileID: 11400000, guid: be6efd4417e79f8448943c5a13c00636, type: 2}
-    count: 1
   power: 1
-  damagingName: Add_1

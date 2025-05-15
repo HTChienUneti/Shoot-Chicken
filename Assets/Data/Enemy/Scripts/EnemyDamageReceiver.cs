@@ -32,7 +32,7 @@ public class EnemyDamageReceiver : DamageReceiver
         {
             dropRate = (drop.rate/100000) * this.gameDropRate;
             if (dropRate < rate) continue;
-            Transform item = ItemSpawner.Instance.Spawn(drop.itemDrop.itemProfile.itemCode.ToString(), transform.position, transform.rotation);
+            Transform item = ItemSpawner.Instance.Spawn(drop.itemDrop.itemProfile.id.ToString(), transform.position, transform.rotation);
             if (item == null) return;
             item.gameObject.SetActive(true);
             break;

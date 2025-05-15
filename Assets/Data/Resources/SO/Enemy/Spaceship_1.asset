@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82314c5b2f2f3c47a5fd19fdcf3cd9b, type: 3}
+  m_Name: Spaceship_1
+  m_EditorClassIdentifier: 
+  itemProfile: {fileID: 11400000, guid: 91aa8d8081fb2404b8e7fb3defc4099a, type: 2}
+  damage: 0
+  maxHp: 1
+  weapons:
+  - {fileID: 11400000, guid: 3231ef19d85d927428cc37ae933f675a, type: 2}
+  itemDrop:
+  - itemDrop: {fileID: 11400000, guid: 3ae07703f97bd204f85da08c05353cea, type: 2}
+    rate: 60000
+  - itemDrop: {fileID: 11400000, guid: f1aa1fc664d2d7f468b37f8204e339f8, type: 2}
+    rate: 50000
+  - itemDrop: {fileID: 11400000, guid: cf33a55a2a87adf4ba10e4009f00786b, type: 2}
+    rate: 70000
+  EnemyCode: 1

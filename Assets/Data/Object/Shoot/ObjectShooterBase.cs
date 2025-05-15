@@ -7,8 +7,8 @@ public abstract class ObjectShooterBase : MyMonoBehaviour
     [Header("ObjectShooter Base")]
     [SerializeField] protected Transform startPos;
 
-    [SerializeField] protected ShooterLevel shooterLevel;
-    public ShooterLevel ShooterLevel => shooterLevel;
+    [SerializeField] protected UpdateShooter shooterLevel;
+    public UpdateShooter ShooterLevel => shooterLevel;
 
     [SerializeField]protected List<WeaponSO> weapons;
     // [SerializeField] protected string damagingName;
@@ -35,7 +35,7 @@ public abstract class ObjectShooterBase : MyMonoBehaviour
     protected virtual void LoadShooterLevel()
     {
         if (this.shooterLevel != null) return;
-        this.shooterLevel = GetComponentInChildren<ShooterLevel>();
+        this.shooterLevel = GetComponentInChildren<UpdateShooter>();
         Debug.LogWarning(transform.name + ": LoadShooterLevel", gameObject);
     }
 

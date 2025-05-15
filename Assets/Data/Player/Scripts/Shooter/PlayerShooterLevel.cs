@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public  class PlayerShooterLevel : ShooterLevel
+public  class PlayerShooterLevel : UpdateShooter
 {
     static private PlayerShooterLevel _instance;
     static public PlayerShooterLevel Instance=>_instance;

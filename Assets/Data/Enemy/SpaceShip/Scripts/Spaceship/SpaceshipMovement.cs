@@ -8,22 +8,21 @@ public class SpaceshipMovement : EnemyMovement
     protected override void OnEnable()
     {
         base.OnEnable();
-        currentpoint = WayPointSystem.Instance.GetNextPoint(currentpoint);
+        currentpoint = EnemyMovementManager.Instance.GetNextPoint(currentpoint);
         Debug.Log(currentpoint);
-        transform.parent.position = currentpoint.position;
+        transform.parent.position = currentpoint;
     }
-    protected override void OnDisable()
+    protected  override  void OnDisable()
     {
-        base.OnDisable();
-        this.currentpoint = null;
+        this.currentpoint = Vector2.zero;
     }
     private void FixedUpdate()
     {
 
-        transform.parent.position = Vector3.MoveTowards(transform.parent.position, currentpoint.position, this.speed * Time.fixedDeltaTime);
-        if (Vector3.Distance(transform.parent.position, currentpoint.position) < this.minDisToPoint)
+        transform.parent.position = Vector2.MoveTowards(transform.parent.position, currentpoint, this.speed * Time.fixedDeltaTime);
+        if (Vector2.Distance(transform.parent.position, currentpoint) < this.minDisToPoint)
         {
-            currentpoint = WayPointSystem.Instance.GetNextPoint(currentpoint);
+            currentpoint = EnemyMovementManager.Instance.GetNextPoint(currentpoint);
         }
     }
 }

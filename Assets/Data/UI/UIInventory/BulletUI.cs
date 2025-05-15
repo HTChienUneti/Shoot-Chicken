@@ -12,6 +12,6 @@ public class BulletUI : InventoryUI, IShooterChangeDamaging
     }
     public void OnChangedObjDamaging(WeaponSO damagingSO)
     {
-        this.image.sprite = damagingSO._sprite;
+        this.image.sprite = damagingSO.itemProfile.sprite;
     }
 }

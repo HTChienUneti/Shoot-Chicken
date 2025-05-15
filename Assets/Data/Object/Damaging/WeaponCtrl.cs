@@ -26,7 +26,7 @@ public abstract class WeaponCtrl : MyMonoBehaviour
     {
         if (this.model != null) return;
         this.model = GetComponentInChildren<SpriteRenderer>();
-        this.model.sprite = this.WeaponSO._sprite;
+        this.model.sprite = this.WeaponSO.itemProfile.sprite;   
         Debug.LogWarning(transform.name + ": LoadModel", gameObject);
     }
     protected virtual void LoadDamageSender()
