@@ -19,7 +19,7 @@ public class EnemySpawner : Spawner
     {
        return base.Spawn(chickenSO.name, pos, rot);
     }
-protected virtual void LoadSingleton()
+    protected virtual void LoadSingleton()
     {
         if (EnemySpawner._instance != null)
         {
@@ -37,6 +37,5 @@ protected virtual void LoadSingleton()
     {
         if (this.spawnCount > 0) return;
         this.OnAllChikenDead?.Invoke(this,EventArgs.Empty);
-
     }
 }

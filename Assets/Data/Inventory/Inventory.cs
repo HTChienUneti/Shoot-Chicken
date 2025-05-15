@@ -11,17 +11,8 @@ public class Inventory : PlayerAbstract
     protected override void Start()
     {
         base.Start();
-        // InvokeRepeating(nameof(this.Test),5,5);
+      
     }
-    //public virtual bool Contains(string itemName )
-    //{
-    //    foreach( InventoryItem item in items )
-    //    {
-    //        if (item.itemDrop.itemCode.ToString() != itemName) continue;
-    //        return true;
-    //    }
-    //    return false;
-    //}
     public virtual ItemInventory GetItemInventory(ItemProfile itemProfile)
     {
         foreach (ItemInventory item in items)
@@ -70,8 +61,7 @@ public class Inventory : PlayerAbstract
         if (itemInventory.stack > itemInventory.itemSO.maxStack)
         {
             itemInventory.stack = itemInventory.itemSO.maxStack;
-        }
-     
+        } 
         this.OnInventoryChanged();
     }
     protected virtual ItemInventory GetItemFromList(ItemInventory itemInventory)

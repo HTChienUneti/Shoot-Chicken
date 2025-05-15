@@ -7,12 +7,12 @@ public class WarningText : TextBase
     protected override void Start()
     {
         base.Start();
-        SpawnChickenManager.Instance.OnWaveChanged += SpawnChickenManager_OnWaveChanged;
-        this.text.text = "Mission "+SpawnChickenManager.Instance.Mission + " Wave " + (SpawnChickenManager.Instance.CurrentWave+1);
+        SpawnEnemyManager.Instance.OnWaveChanged += SpawnChickenManager_OnWaveChanged;
+        this.text.text = "Mission "+SpawnEnemyManager.Instance.Mission + " Wave " + (SpawnEnemyManager.Instance.CurrentWave+1);
     }
 
-    private void SpawnChickenManager_OnWaveChanged(object sender, SpawnChickenManager.OnWaveChangeEventArgs e)
+    private void SpawnChickenManager_OnWaveChanged(object sender, SpawnEnemyManager.OnWaveChangeEventArgs e)
     {
-        this.text.text = "Mission " + SpawnChickenManager.Instance.Mission + " Wave " + (e.wave+1);
+        this.text.text = "Mission " + SpawnEnemyManager.Instance.Mission + " Wave " + (e.wave+1);
     }
 }

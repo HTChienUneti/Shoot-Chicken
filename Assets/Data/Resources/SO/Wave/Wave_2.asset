@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8bae4bc9a02324497b350a6d097b1e, type: 3}
   m_Name: Wave_2
   m_EditorClassIdentifier: 
-  chickens:
-  - {fileID: 11400000, guid: 808b546f9e50b8c44a953a5a21df0b69, type: 2}
+  enemys:
+  - {fileID: 11400000, guid: aba2fb0e2daf9914997d12327f516efd, type: 2}
   count: 12
+  wayName: Way_2

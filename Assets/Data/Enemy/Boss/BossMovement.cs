@@ -25,7 +25,7 @@ public class BossMovement : EnemyMovement
     {
 
         transform.parent.position = Vector3.MoveTowards(transform.parent.position, currentpoint.position, this.speed * Time.fixedDeltaTime);
-        if (Vector3.Distance(transform.parent.position, currentpoint.position) < this.distance)
+        if (Vector3.Distance(transform.parent.position, currentpoint.position) < this.minDisToPoint)
         {
             currentpoint = BosWayPointSystem.Instance.GetNextPoint(currentpoint);
         }

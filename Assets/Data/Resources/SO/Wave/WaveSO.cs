@@ -8,5 +8,6 @@ public class WaveSO : ScriptableObject
 {
     public List<EnemySO> enemys;
     public int count;
+    public string wayName;
 }
 

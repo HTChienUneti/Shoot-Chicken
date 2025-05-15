@@ -22,6 +22,6 @@ public class PlayerShooterInputManager : MySingleton<PlayerShooterInputManager>,
     }
     public virtual void SetShooting()
     {
-        PlayerCtrl.Instance.Shooter.SetShooting(true);
+        PlayerCtrl.Instance.Shooter.CanShoot();
     }
 }

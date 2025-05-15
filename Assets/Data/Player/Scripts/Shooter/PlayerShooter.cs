@@ -18,6 +18,11 @@ public class PlayerShooter : ObjectShooter
         base.Awake();
         this.LoadSingleton();
     }
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        this.shootDelay = .3f;
+    }
     protected override Transform GetPrefab()
     {
         Transform newBullet = BulletSpawner.Instance.Spawn(this.currrenWeapon, this.startPos.position, Quaternion.identity);
@@ -35,7 +40,7 @@ public class PlayerShooter : ObjectShooter
     {
         if(!base.Shooting()) return false;
         this.OnShooting?.Invoke(this, EventArgs.Empty);
-        this.isShooting = false;
+        base.BlockShoot();
         return true;
     }
  

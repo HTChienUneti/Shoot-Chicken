@@ -7,6 +7,6 @@ public class EnemyMovement : MyMonoBehaviour
 {
     [SerializeField] protected float speed = 5f;
     [SerializeField] protected Transform currentpoint;
-    [SerializeField] protected float distance = 0.1f;
+    [SerializeField] protected float minDisToPoint = 0.1f;
    
 }

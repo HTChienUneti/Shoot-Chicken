@@ -6,7 +6,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpawnChickenManager : MySingleton<SpawnChickenManager>
+public class SpawnEnemyManager : MySingleton<SpawnEnemyManager>
 {
     [SerializeField] protected List<WaveSO> waves = new List<WaveSO>();
     public List<WaveSO> Waves => waves;
@@ -18,7 +18,7 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
     [SerializeField] protected int spawnCount = 0; 
     [SerializeField] protected float timer=0;
     [SerializeField] protected float delaySpawn= .3f;
-    [SerializeField] protected bool isAllChickenDead = false;
+    [SerializeField] protected bool isAllEnemyDead = false;
     [SerializeField] protected bool isSpawning = false;
     public event EventHandler<OnWaveChangeEventArgs> OnWaveChanged;
     public class OnWaveChangeEventArgs: EventArgs
@@ -37,6 +37,7 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
     }
     protected override void Start()
     {
+     
         EnemySpawner.Instance.OnAllChikenDead += ChickenSpawner_OnAllChikenDead;
          PlayingGameState.Instance.OnEnterState += ChickenActiveState_OnEnterState;
         PlayingGameState.Instance.OnExitState += ChickenActiveState_OnExitState;
@@ -44,7 +45,7 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
 
     private void ChickenSpawner_OnAllChikenDead(object sender, EventArgs e)
     {
-        this.OnAllChickenDead();
+        this.OnAllEnemyDead();
     }
 
     private void ChickenActiveState_OnEnterState(object sender, System.EventArgs e)
@@ -65,9 +66,10 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
         if (!this.isSpawning) return;
         if (this.currentWave > this.waves.Count - 1) return;
         if (!this.CountdownTimer() || this.spawnCount >= this.waves[this.currentWave].count) return;
-        EnemySO chickenSO = this.waves[this.currentWave].enemys[0];
-        Transform obj = EnemySpawner.Instance.Spawn(chickenSO, Vector3.zero, Quaternion.identity);
+        EnemySO enemySO = this.waves[this.currentWave].enemys[0];
+        Transform obj = EnemySpawner.Instance.Spawn(enemySO, Vector3.zero, Quaternion.identity);
         if (obj == null) return;
+        
         obj.gameObject.SetActive(true);
         this.spawnCount++;
 
@@ -81,34 +83,29 @@ public class SpawnChickenManager : MySingleton<SpawnChickenManager>
         return true;
     }
 
-    public void OnAllChickenDead()
+    public void OnAllEnemyDead()
     {
-        this.isAllChickenDead = true;
+        this.isAllEnemyDead = true;
         this.spawnCount = 0;
         this.currentWave++;
-        WayPointSystem.Instance.SetFirstPoint();
+        WayPointSystem.Instance.CurrentWayIndex++;
         if (this.currentWave >= this.waves.Count)
         {
-            this.WinGame();
+            GameManager.Instance.WinGame();
             return;
         }
         this.OnWaveChanged?.Invoke(this, new OnWaveChangeEventArgs
         {
             wave = this.currentWave,
         });
-   
-     
         GameManager.Instance.WarningGame();
      
-    }
-    protected virtual void WinGame()
-    {
-        GameManager.Instance.WinGame();
     }
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadWaves();    }
+        this.LoadWaves(); 
+    }
     protected virtual void LoadWaves()
     {
         if (this.waves.Count > 0) return;

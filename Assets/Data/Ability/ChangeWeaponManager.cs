@@ -45,6 +45,7 @@ public sealed class ChangeWeaponManager : PlayerAbstract,IUsingKeyDown
         foreach(PlayerWeaponSO weapon in this.playerCtrl.PlayerSO.weapons)
         {
             if (weapon.keycode != keycode) continue;
+            Debug.Log(keycode.ToString());
             this.ChangeWeapon(weapon);  
         }
     }

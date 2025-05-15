@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Player_1
   m_EditorClassIdentifier: 
   weapons:
+  - {fileID: 11400000, guid: 355e6e77de57eec4d9845d4fb74ce319, type: 2}
   - {fileID: 11400000, guid: b48756d594b10bb4fb7410b95fcca13f, type: 2}
+  - {fileID: 11400000, guid: aea10686c9e0f784ca1af494454fac64, type: 2}
   - {fileID: 11400000, guid: 1b049e0f29b2e9847b1577d75130d9e6, type: 2}
+  - {fileID: 11400000, guid: 0c1ec903604160449bc03fa485288af9, type: 2}
   _sprite: {fileID: 21300000, guid: cd82491a1562f894bb043cae1a9a8392, type: 3}
   maxHp: 1

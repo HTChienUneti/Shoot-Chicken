@@ -15,3 +15,4 @@ MonoBehaviour:
   enemys:
   - {fileID: 11400000, guid: aba2fb0e2daf9914997d12327f516efd, type: 2}
   count: 6
+  wayName: Way_1

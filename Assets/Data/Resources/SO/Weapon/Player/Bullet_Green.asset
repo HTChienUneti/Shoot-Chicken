@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2098d42cefe1bf54cbccd6183b39cc06, type: 3}
   m_Name: Bullet_Green
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: ae5b0c7ee4a140c4483a777e88ce8586, type: 3}
+  _sprite: {fileID: 21300000, guid: e2bbad9185f495c438efd8653ef6128d, type: 3}
   damage: 1
-  name: Bullet_Green
+  _name: Bullet_Green
   maxHp: 1
   weapons: []
   itemDrop: []
+  isDefault: 0
+  timeUse: 10
+  keycode: 49

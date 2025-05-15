@@ -15,16 +15,24 @@ public abstract class ObjectShooter : ObjectShooterBase
     protected override void Start()
     {
         base.Start();
-        PlayingGameState.Instance.OnEnterState += GameActiveState_OnEnterState;
-        PlayingGameState.Instance.OnExitState += GameActiveState_OnExitState;
+        PlayingGameState.Instance.OnEnterState += GamePlayingState_OnEnterState;
+        PlayingGameState.Instance.OnExitState += GamePlaying_OnExitState;
+        this.isBlockShoot = true;
     }
-
-    private void GameActiveState_OnExitState(object sender, System.EventArgs e)
+    public virtual void BlockShoot()
     {
         this.isBlockShoot = true;
     }
+    public virtual void CanShoot()
+    {
+        this.isBlockShoot = false;
+    }
+    private void GamePlaying_OnExitState(object sender, System.EventArgs e)
+    {
+        this.isBlockShoot = true;
 
-    private void GameActiveState_OnEnterState(object sender, System.EventArgs e)
+    }
+    private void GamePlayingState_OnEnterState(object sender, System.EventArgs e)
     {
         this.isBlockShoot = false;
     }
@@ -61,24 +69,28 @@ public abstract class ObjectShooter : ObjectShooterBase
     protected virtual void FixedUpdate()
     {
         this.Shooting();
-    //    this.CountdownTime();
     }
     protected virtual bool Shooting()
     {
-        if (this.isBlockShoot || !this.CountdownTime()) return false;
-        if (!this.autoShoot)
-            if (!this.isShooting) return false;
-
-        List<Transform> damagings = new List<Transform>();
+        if(autoShoot)
+        {
+            this.isBlockShoot = false;
+        }
+        else
+        {
+            if (this.isBlockShoot) return false;
+        }
+        if (!this.ReloadingBullet()) return false;
+        List<Transform> bullets = new List<Transform>();
         for (int i = 0; i < this.shooterLevel.CurrentLevel; i++)
         {
             Transform damaging = this.GetPrefab();
             if(damaging == null) continue;
-            damagings.Add(this.GetPrefab());
+            bullets.Add(this.GetPrefab());
         }
-        if (damagings == null || damagings.Count == 0) return false;
-        this.SetPrefabPos(damagings);
-        foreach (Transform prefab in damagings)
+        if (bullets == null || bullets.Count == 0) return false;
+        this.SetPrefabPos(bullets);
+        foreach (Transform prefab in bullets)
         {
             if (prefab == null) continue;
             prefab.gameObject.SetActive(true);
@@ -110,9 +122,8 @@ public abstract class ObjectShooter : ObjectShooterBase
         }
     }
     protected abstract Transform GetPrefab();
-    protected virtual bool CountdownTime()
+    protected virtual bool ReloadingBullet()
     {
-        
         this.shootTimer += Time.fixedDeltaTime;
         if (this.shootTimer < this.shootDelay) return false;
         this.shootTimer = 0f;

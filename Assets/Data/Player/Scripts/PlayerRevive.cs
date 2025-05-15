@@ -24,7 +24,9 @@ public class PlayerRevive : PlayerAbstract
     protected IEnumerator DelayRevive()
     {
         this.Hide();
+        this.playerCtrl.Shooter.BlockShoot();
         yield return new WaitForSeconds(this.delayRevive);
+        this.playerCtrl.Shooter.CanShoot();
         this.isReviving = true;
         transform.parent.position = this.defaultPos;
      

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2098d42cefe1bf54cbccd6183b39cc06, type: 3}
-  m_Name: Bullet_Red
+  m_Name: Bullet_Blue
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: b903492db4e935f42b0048b5be61efca, type: 3}
+  _sprite: {fileID: 21300000, guid: f00878956de7d1749ac23778473a63b0, type: 3}
   damage: 1
-  _name: Bullet_Red
-  maxHp: 1
+  _name: Bullet_Blue
+  maxHp: 0
   weapons: []
   itemDrop: []
-  isDefault: 0
-  timeUse: 20
-  keycode: 51
+  isDefault: 1
+  timeUse: 0
+  keycode: 0

@@ -8,9 +8,7 @@ public class GameWarningState : GameState
 
     static private GameWarningState _instance;
     static public GameWarningState Instance => _instance;
-    [SerializeField] private bool isEnter = false;
-    [SerializeField] private float timeMax = 5f;
-    [SerializeField] private float timer = 0f;
+    [SerializeField] private float timeWarning = 5f;
 
     protected override void Awake()
     {
@@ -20,23 +18,12 @@ public class GameWarningState : GameState
     public override void EnterState()
     {
         base.EnterState();
-        this.isEnter = true;
+        StartCoroutine(CountdownState());
     }
-    public override void ExitState()
+
+    private IEnumerator CountdownState()
     {
-        base.ExitState();
-        this.isEnter = false;
-    }
-    private void FixedUpdate()
-    {
-        this.CountdownState();
-    }
-    private void CountdownState()
-    {
-        if (!this.isEnter) return;
-        this.timer += Time.fixedDeltaTime;
-        if (this.timer < this.timeMax) return;
-        this.timer = 0f;
+        yield return new WaitForSeconds(this.timeWarning);
         GameManager.Instance.PlayGame();
     }
     protected virtual void LoadSingleton()
