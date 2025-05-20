@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8bae4bc9a02324497b350a6d097b1e, type: 3}
+  m_Name: Wave_1
+  m_EditorClassIdentifier: 
+  enemys:
+  - {fileID: 11400000, guid: c698a10674f16cd488fbb4fccc58b1ed, type: 2}
+  numberOfEnemy: 12
+  wayName: 
+  points:
+  - {fileID: 11400000, guid: c4ee77f3eeeecf044a6ae95a2973120e, type: 2}
+  - {fileID: 11400000, guid: 64a9835986ade0d4ba7b1c4529dbeb5e, type: 2}
+  - {fileID: 11400000, guid: a0eca736b63c8c545bef745ca436bd96, type: 2}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82314c5b2f2f3c47a5fd19fdcf3cd9b, type: 3}
+  m_Name: Enemy_2
+  m_EditorClassIdentifier: 
+  EnemyProfile: {fileID: 11400000, guid: 8bc7eae64fa6461459fbfd021a73af2b, type: 2}
+  itemDrop:
+  - itemDrop: {fileID: 11400000, guid: d7e312245b14aa34a82adbb32b163a8b, type: 2}
+    rate: 50000
+  weapons:
+  - {fileID: 11400000, guid: 3231ef19d85d927428cc37ae933f675a, type: 2}
+  maxHp: 2

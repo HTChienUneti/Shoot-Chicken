@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5c8ef95493c9c4282017c71450532c, type: 3}
+  m_Name: EnemyProfile_2
+  m_EditorClassIdentifier: 
+  enemyCode: 0
+  mesh: {fileID: -3907833751807807751, guid: c5368bd78c9178e40a082fca0a396b0e, type: 3}
+  material: {fileID: 2100000, guid: 52c7e4a3296d35d48b56b7e43f0df249, type: 2}
+  enemyName: Enemy_2
